@@ -1,15 +1,30 @@
 \contentsline {chapter}{\numberline {1}Introduction}{4}
 \contentsline {section}{\numberline {1.1}P\^{o}le Universitaire Fran\c {c}ais}{4}
-\contentsline {subsection}{\numberline {1.1.1}P\^{o}le Universitaire Fran\c {c}ais de l'Universite National\'{e} du Vietnam - Ha Noi}{4}
-\contentsline {subsection}{\numberline {1.1.2}P\^{o}le Universitaire Fran\c {c}ais de l'Universite National\'{e} du Vietnam - Ho Chi Minh Ville}{4}
+\contentsline {subsection}{\numberline {1.1.1}PUF-Ha Noi}{4}
+\contentsline {subsection}{\numberline {1.1.2}PUF-HCM}{4}
 \contentsline {section}{\numberline {1.2}Laboratoire Bordelais de Recherche en Informatique}{5}
-\contentsline {section}{\numberline {1.3}Overview about the problem}{5}
-\contentsline {chapter}{\numberline {2}Theorical base}{6}
-\contentsline {section}{\numberline {2.1}Overview}{6}
-\contentsline {section}{\numberline {2.2}Classical segmentation}{6}
-\contentsline {chapter}{\numberline {3}Implementation}{7}
-\contentsline {section}{\numberline {3.1}Software architecture}{7}
-\contentsline {section}{\numberline {3.2}Preprocessing image}{7}
-\contentsline {section}{\numberline {3.3}Automatic classification }{7}
-\contentsline {section}{\numberline {3.4}Result}{7}
-\contentsline {chapter}{\numberline {4}Conclusion}{8}
+\contentsline {section}{\numberline {1.3}The Internship}{5}
+\contentsline {subsection}{\numberline {1.3.1}Overview about my task}{5}
+\contentsline {subsection}{\numberline {1.3.2}Origanization of the document}{5}
+\contentsline {chapter}{\numberline {2}Background}{6}
+\contentsline {section}{\numberline {2.1}Overview about image processing}{6}
+\contentsline {section}{\numberline {2.2}Smoothing image}{6}
+\contentsline {section}{\numberline {2.3}Image transformation}{6}
+\contentsline {section}{\numberline {2.4}Histogram}{6}
+\contentsline {section}{\numberline {2.5}Segmentation}{6}
+\contentsline {section}{\numberline {2.6}Color processing}{6}
+\contentsline {chapter}{\numberline {3}Preprocessing image}{7}
+\contentsline {section}{\numberline {3.1}Problem}{7}
+\contentsline {section}{\numberline {3.2}Solution}{7}
+\contentsline {section}{\numberline {3.3}Algorithm}{7}
+\contentsline {chapter}{\numberline {4}Classification methods }{8}
+\contentsline {section}{\numberline {4.1}Detect the structure}{8}
+\contentsline {section}{\numberline {4.2}Pairwise geometric histogram}{8}
+\contentsline {section}{\numberline {4.3}Probabilistic Hough Transform}{8}
+\contentsline {section}{\numberline {4.4}Solution}{8}
+\contentsline {chapter}{\numberline {5}The project}{9}
+\contentsline {section}{\numberline {5.1}Software architecture}{9}
+\contentsline {section}{\numberline {5.2}Image preprocessing}{9}
+\contentsline {section}{\numberline {5.3}Automatic classification }{9}
+\contentsline {section}{\numberline {5.4}Result}{9}
+\contentsline {chapter}{\numberline {6}Conclusion}{10}

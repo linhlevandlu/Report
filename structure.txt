@@ -19,7 +19,6 @@ Contents
 --- Pairwise geometric histogram (PGH)
 --- Probabilistic Hough Transform
 - The project
--- Overview
 -- Software architecture
 -- Image preprocessing: clear the yellow grid
 -- Program the classification methods

@@ -14,10 +14,10 @@ Contents
 -- Histogram
 -- Segmentation
 -- Color processing (Color space base segmentation)
--- ...
 -- Classification methods
---- ...
---- ...
+--- Detect the structure
+--- Pairwise geometric histogram (PGH)
+--- Probabilistic Hough Transform
 - The project
 -- Overview
 -- Software architecture
