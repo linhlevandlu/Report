@@ -19,14 +19,14 @@
 \contentsline {chapter}{\numberline {3}Preprocessing image}{8}
 \contentsline {section}{\numberline {3.1}Problem}{8}
 \contentsline {section}{\numberline {3.2}Analysis}{8}
-\contentsline {section}{\numberline {3.3}Algorithm}{8}
-\contentsline {chapter}{\numberline {4}Classification methods }{9}
-\contentsline {section}{\numberline {4.1}Detect the structure}{9}
-\contentsline {section}{\numberline {4.2}Pairwise geometric histogram}{9}
-\contentsline {section}{\numberline {4.3}Probabilistic Hough Transform}{9}
-\contentsline {chapter}{\numberline {5}Implementation}{10}
-\contentsline {section}{\numberline {5.1}Software architecture}{10}
-\contentsline {section}{\numberline {5.2}Image preprocessing}{10}
-\contentsline {section}{\numberline {5.3}Automatic classification }{10}
-\contentsline {section}{\numberline {5.4}Result}{10}
-\contentsline {chapter}{\numberline {6}Conclusion}{11}
+\contentsline {section}{\numberline {3.3}Method}{9}
+\contentsline {chapter}{\numberline {4}Classification methods }{10}
+\contentsline {section}{\numberline {4.1}Detect the structure}{10}
+\contentsline {section}{\numberline {4.2}Pairwise geometric histogram}{10}
+\contentsline {section}{\numberline {4.3}Probabilistic Hough Transform}{10}
+\contentsline {chapter}{\numberline {5}Implementation}{11}
+\contentsline {section}{\numberline {5.1}Software architecture}{11}
+\contentsline {section}{\numberline {5.2}Image preprocessing}{11}
+\contentsline {section}{\numberline {5.3}Automatic classification }{11}
+\contentsline {section}{\numberline {5.4}Result}{11}
+\contentsline {chapter}{\numberline {6}Conclusion}{12}
