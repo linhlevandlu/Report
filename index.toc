@@ -21,7 +21,7 @@
 \contentsline {section}{\numberline {3.2}Analysis}{8}
 \contentsline {subsection}{\numberline {3.2.1}Finding the limit points}{9}
 \contentsline {subsection}{\numberline {3.2.2}Replacing the grid}{9}
-\contentsline {section}{\numberline {3.3}Method}{9}
+\contentsline {section}{\numberline {3.3}Algorithm}{9}
 \contentsline {chapter}{\numberline {4}Classification methods }{10}
 \contentsline {section}{\numberline {4.1}Detect the structure}{10}
 \contentsline {section}{\numberline {4.2}Pairwise geometric histogram}{10}
