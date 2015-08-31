@@ -3,7 +3,7 @@ In previous chapter, we introduce a method to remove the unexpected object. In t
 \section{Preprocessing image and feature extraction}
 Feature extraction stage is duration that we extract essential information from the digital images and retaining only these features that we are interested in. To obtain the good result, before extracting the features in the image, we need to pre-process the image with a appropriate technique to reduce the noise as well as enhance the features that we care. The expect result in this result is list of pairwise lines which use to construct the pairwise histogram in the next step.
 \subsection{Preprocess image}
-In this application, we use the threshold technique to preprocess the image. With a threshold value ``t", we can decrease the noise and obtain the interested in features. The threshold value was indicated by the histogram analysis. Based on the histogram of the image, we compute the mean and median of this histogram. After that, we split the histogram into two parts: the first part begin from the bin 0 to the limit value (the limit value is smallest value between mean and median); the second part, starting from the limit value to the end of histogram. For each part, we find the maximum and minimum value and calculating the mean of it. The value ``t" obtained by the mean of two mean value in two parts of histogram.\\
+In this application, we use the threshold technique to preprocess the image. With a threshold value ``t", we can decrease the noise and obtain the interested in features. The threshold value was indicated by the histogram analysis. Based on the histogram of the image, we compute the mean and median of this histogram. After that, we split the histogram into two parts: the first part begin from the bin 0 to the limit value (the limit value is smallest value between mean and median); the second part, starting from the limit value to the end of histogram. For each part, we find the maximum and minimum value and calculating the mean of it. The value ``t" obtained by the mean of two mean values in two parts of histogram.\\
 With the threshold value ``t", we apply the threshold technique to pre-process image in the CV\_THRESH\_BINARY mode.\\
 \IncMargin{1em}
 \begin{algorithm}[H]
@@ -29,8 +29,21 @@ Apply the threshold with threshold value is $middle$\;
 \caption{Algorithm to preprocess image}
 \end{algorithm}\DecMargin{1em}
 \subsection{Feature extraction}
-In this stage, we apply the Canny algorithm to detect the step edges, which incorporates non-maximal suppression and hysteresis thresholding. But, the Canny algorithm is not aware of actual edges, the edge detecting was based on the Sobel operator, extracted with non-maximal suppression. Canny does not connect pixels into chains or segments. So, after using the Canny, we apply another technique – find contours,  to get the set of edges. After apply the \textbf{findContours}, we will have a set of edges, it was presented by a vector of the edges, and each edge was presented by a vector of the points.
-\subsection{Segmentation edge}
+In this stage, we apply the Canny algorithm to detect the step edges, which incorporates non-maximal suppression and hysteresis thresholding. The threshold value used in Canny algorithm also the value used in the previous step, and the ratio between lower threshold and upper threshold is 1.5 : 3 (follows the article \cite{palaniswamy2010automatic}).\\
+The Canny algorithm is not aware of actual edges, the edge detecting was based on the Sobel operator, extracted with non-maximal suppression. So, to obtain the expect result, we  need to apply another technique to obtain the step edges. The \textbf{findContours} was chosen for this aim, the result is a vector of the edges, and each edge was presented by a vector of the points.
+
+\subsection{Algorithm}
+The process to extract the features can be summerised as follows:
+\begin{enumerate}
+\item Calculating the histogram of image (in gray-scale mode)
+\item Computing the mean and median value.
+\item Computing the threshold value t.
+\item Applying the thresholding technique
+\item Applying the Canny and findContours to obtained the step edges.
+\end{enumerate}
+\section{Pairwise geometric histogram}
+The pairwise histogram was constructed based on the lines relative
+\subsection{Edge segmentation}
 Now, in this step, we will segment the edges which obtain from the previous step. It mean, we will separate the edge into many straight line. To do that, we apply an algorithm is similar with algorithm proposed by Lowe.\\
 \IncMargin{1em}
 \begin{algorithm}[H]
@@ -59,15 +72,4 @@ ratio $ \leftarrow $ maxDistance$/$length(p0-imax)\;
 }
 \caption{Algorithm to segment an edge}
 \end{algorithm}\DecMargin{1em}
-\subsection{Algorithm}
-The process to extract the features can be summerised as follows:
-\begin{enumerate}
-\item Calculating the histogram of image (in gray-scale mode)
-\item Computing the mean and median value.
-\item Computing the threshold value t.
-\item Applying the thresholding technique
-\item Applying the Canny and findContours to obtained the step edges.
-\item Segmentation the edges.
-\end{enumerate}
-\section{Pairwise geometric histogram}
 \section{Probabilistic Hough Transform}
