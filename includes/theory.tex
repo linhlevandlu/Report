@@ -6,6 +6,24 @@ Smoothing filters are used for blurring and noise reduction. This technique is u
 \subsection{Order-Statistics filter}By ordering the pixels in the image and then replacing the value of the center pixel with the value determined by the ranking result. This is the idea of the median filter is the best example used this technique.
 \section{Image transformation}
 \section{Histogram}
+Histogram is a representation about distribution of data on the regions (we called bin) in the data range. The bins are the number of sub-range when we divide the entire data range into several small interval (i.e. With the range from 0 - 255 and the size of each sub-range (bin) is 16, the number of bins is $256/16 = 16$ bins. The first bin range is 0 - 15, the second range is 15 - 30, and so on). The value at each bin is the numbers of data which have value belong to this bin. Normally, histogram represented by the columns chart with x-axis represented for the number of bins, and y-axis represented for the value of each bin.\\
+Histogram can be used effectively for image enhancement, also useful in many image processing applications, such as image compression and segmentation.\\
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=2]{images/histogram}
+\caption{An example about histogram}
+\label{fig:figure_31}
+\end{figure}
 \section{Segmentation}
+Segmentation subdivides an image into its regions. The size of regions is depend on the problem being solved. This mean, segmentation should stop when the regions of interest in application have been detected. In the real, the segmentation was applied into many fields such as machine vision, medical imaging, object detection, etc. The most of segmentation algorithms are based on the basic properties of intensity values: discontinuity and similarity. In the first case, the segmentation based on abrupt changes in intensity. The second case, the image segmentation based on a predefined criteria. It means the image was segmented into regions that are similar according to a set of criteria. And, we have many the method to segment an image such as thresholding method, region growing, clustering method, histogram-based method, etc.\\[0.5 cm]
+\textbf{Thresholding} is a simplest method of image segmentation. Thresholding use a particular threshold value ``t", we split the image into two parts: the first part includes pixels which have the value greater than t, and the second part contains the pixels vice versa. With this technique, thresholding can be used to create an binary image from a gray scale image. In fact, we have many type of threshold, as follows:
+\begin{itemize}
+\item \textit{Global thresholding}, when t is a constant over an entire image
+\item \textit{Variable thresholding}, when t changes over an image
+\item \textit{Local or regional thresholding}, is variable threshoding in a region of an image
+\item \textit{Dynamic or adaptive thresholding}, if t depends on the spatial coordinates.
+\item \textit{Multiple thresholding}, thresholding on 3 dominant modes (color image)
+\end{itemize}
 \section{Color processing}\label{color_model}
+The use of color in image processing do not just identify or extract an objects from scene, it also a factor for image analysis.
 
