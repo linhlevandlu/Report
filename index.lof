@@ -1,13 +1,16 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces An example about histogram\relax }}{8}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces An example about histogram\relax }}{9}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces The images with color transformation from BGR to Gray\relax }}{11}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {An image in BGR mode}}}{11}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {An image in Gray mode}}}{11}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces The input images with yellow grid\relax }}{10}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The yellow gird on the left of insect}}}{10}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The insect overlap the yellow grid}}}{10}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces The input images with yellow grid\relax }}{12}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The yellow gird on the left of insect}}}{12}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The insect overlap the yellow grid}}}{12}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces The geometric features and the PGH\relax }}{20}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The geometric relationship between two lines}}}{20}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The pairwise geometric histogram }}}{20}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The geometric features and the PGH\relax }}{22}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The geometric relationship between two lines}}}{22}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The pairwise geometric histogram }}}{22}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

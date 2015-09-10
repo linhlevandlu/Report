@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.23)  9 SEP 2015 18:12
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.23)  10 SEP 2015 17:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -214,8 +214,23 @@ Package caption3 Info: TeX engine: e-TeX on input line 57.
 \sf@bottom=\skip69
 ) (./index.aux
 (./includes/cover.aux) (./includes/acknowledgement.aux)
-(./includes/abstract.aux) (./includes/introduction.aux) (./includes/theory.aux)
-(./includes/preprocessing.aux
+(./includes/abstract.aux) (./includes/introduction.aux) (./includes/theory.aux
+
+LaTeX Warning: Label `fig:figure_31' multiply defined.
+
+) (./includes/preprocessing.aux
+
+LaTeX Warning: Label `fig:example_1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:example_1' multiply defined.
+
+
+LaTeX Warning: Label `fig:example_2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:example_2' multiply defined.
+
 
 LaTeX Warning: Label `fig:figure_31' multiply defined.
 
@@ -390,35 +405,52 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
  [5
 
 
-]) [6]
+] [6]) [7]
 \openout2 = `includes/theory.aux'.
 
 
 (./includes/theory.tex
 Chapter 2.
-<images/histogram.png, id=50, 84.37523pt x 73.53473pt>
+<images/histogram.png, id=53, 84.37523pt x 73.53473pt>
 File: images/histogram.png Graphic file (type png)
 
 <use images/histogram.png>
-Package pdftex.def Info: images/histogram.png used on input line 13.
+Package pdftex.def Info: images/histogram.png used on input line 12.
 (pdftex.def)             Requested size: 168.75003pt x 147.06906pt.
- [7
+ [8
 
 
 
-] [8 <./images/histogram.png>]) [9]
+] [9 <./images/histogram.png>]
+<./images/lenna.png, id=65, 513.92pt x 513.92pt>
+File: ./images/lenna.png Graphic file (type png)
+ <use ./images/lenna.png>
+Package pdftex.def Info: ./images/lenna.png used on input line 47.
+(pdftex.def)             Requested size: 181.18439pt x 181.18427pt.
+
+<./images/lenna_gray.jpg, id=66, 385.44pt x 385.44pt>
+File: ./images/lenna_gray.jpg Graphic file (type jpg)
+
+<use ./images/lenna_gray.jpg>
+Package pdftex.def Info: ./images/lenna_gray.jpg used on input line 48.
+(pdftex.def)             Requested size: 181.18439pt x 181.18034pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) [10] [11 <./images/lenna.png> <./images/lenna_gray.jpg>]
 \openout2 = `includes/preprocessing.aux'.
 
 
 (./includes/preprocessing.tex
 Chapter 3.
-<./images/input1.JPG, id=65, 655.248pt x 491.436pt>
+<./images/input1.JPG, id=73, 655.248pt x 491.436pt>
 File: ./images/input1.JPG Graphic file (type jpg)
  <use ./images/input1.JPG>
 Package pdftex.def Info: ./images/input1.JPG used on input line 6.
 (pdftex.def)             Requested size: 181.18439pt x 135.88393pt.
 
-<./images/input2.JPG, id=66, 655.248pt x 491.436pt>
+<./images/input2.JPG, id=74, 655.248pt x 491.436pt>
 File: ./images/input2.JPG Graphic file (type jpg)
  <use ./images/input2.JPG>
 Package pdftex.def Info: ./images/input2.JPG used on input line 7.
@@ -426,39 +458,39 @@ Package pdftex.def Info: ./images/input2.JPG used on input line 7.
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 52.
 
-[10
+[12
 
 
 
- <./images/input1.JPG> <./images/input2.JPG>] [11] [12] [13] [14] [15])
-[16]
+ <./images/input1.JPG> <./images/input2.JPG>] [13] [14] [15] [16] [17])
+[18]
 \openout2 = `includes/classification_method.aux'.
 
  (./includes/classification_method.tex
 Chapter 4.
-[17
+[19
 
 
 
-] [18] [19] <./images/PGH_geo.png, id=100, 386.44376pt x 244.915pt>
+] [20] [21] <./images/PGH_geo.png, id=109, 386.44376pt x 244.915pt>
 File: ./images/PGH_geo.png Graphic file (type png)
 
 <use ./images/PGH_geo.png>
 Package pdftex.def Info: ./images/PGH_geo.png used on input line 93.
 (pdftex.def)             Requested size: 181.18439pt x 114.82977pt.
- <./images/PGH.png, id=101, 570.13pt x 442.65375pt>
+ <./images/PGH.png, id=110, 570.13pt x 442.65375pt>
 File: ./images/PGH.png Graphic file (type png)
 
 <use ./images/PGH.png>
 Package pdftex.def Info: ./images/PGH.png used on input line 94.
 (pdftex.def)             Requested size: 181.18439pt x 140.6727pt.
-) [20 <./images/PGH_geo.png> <./images/PGH.png>]
+) [22 <./images/PGH_geo.png> <./images/PGH.png>]
 \openout2 = `includes/implementation.aux'.
 
 
 (./includes/implementation.tex
 Chapter 5.
-) [21
+) [23
 
 
 
@@ -467,11 +499,11 @@ Chapter 5.
 
  (./includes/conclusion.tex
 Chapter 6.
-) [22
+) [24
 
 
 
-] (./index.bbl) [23
+] (./index.bbl) [25
 
 
 ] (./index.aux (./includes/cover.aux)
@@ -487,13 +519,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5025 strings out of 493304
- 74548 string characters out of 6139871
- 171205 words of memory out of 5000000
- 8341 multiletter control sequences out of 15000+600000
+ 5035 strings out of 493304
+ 74773 string characters out of 6139871
+ 171206 words of memory out of 5000000
+ 8349 multiletter control sequences out of 15000+600000
  16450 words of font info for 58 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 44i,26n,49p,972b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,26n,49p,971b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texli
@@ -506,10 +538,10 @@ ic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 msy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on index.pdf (28 pages, 1631854 bytes).
+Output written on index.pdf (30 pages, 2405513 bytes).
 PDF statistics:
- 158 PDF objects out of 1000 (max. 8388607)
- 103 compressed objects within 2 object streams
+ 166 PDF objects out of 1000 (max. 8388607)
+ 107 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 
