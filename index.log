@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.23)  10 SEP 2015 17:14
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.23)  15 SEP 2015 19:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -476,34 +476,50 @@ Chapter 4.
 File: ./images/PGH_geo.png Graphic file (type png)
 
 <use ./images/PGH_geo.png>
-Package pdftex.def Info: ./images/PGH_geo.png used on input line 93.
+Package pdftex.def Info: ./images/PGH_geo.png used on input line 108.
 (pdftex.def)             Requested size: 181.18439pt x 114.82977pt.
  <./images/PGH.png, id=110, 570.13pt x 442.65375pt>
 File: ./images/PGH.png Graphic file (type png)
 
 <use ./images/PGH.png>
-Package pdftex.def Info: ./images/PGH.png used on input line 94.
+Package pdftex.def Info: ./images/PGH.png used on input line 109.
 (pdftex.def)             Requested size: 181.18439pt x 140.6727pt.
-) [22 <./images/PGH_geo.png> <./images/PGH.png>]
+ [22 <./images/PGH_geo.png> <./images/PGH.png>]
+Overfull \hbox (46.49445pt too wide) in paragraph at lines 133--141
+ [] 
+ []
+
+[23]) [24]
 \openout2 = `includes/implementation.aux'.
 
-
-(./includes/implementation.tex
+ (./includes/implementation.tex
 Chapter 5.
-) [23
+<images/cdiagram.png, id=124, 1175.14032pt x 831.85782pt>
+File: images/cdiagram.png Graphic file (type png)
+
+<use images/cdiagram.png>
+Package pdftex.def Info: images/cdiagram.png used on input line 6.
+(pdftex.def)             Requested size: 407.66833pt x 288.5779pt.
+ [25
 
 
 
-]
+ <./images/cdiagram.png>]
+Overfull \hbox (0.1954pt too wide) in paragraph at lines 29--30
+[]\OT1/cmr/bx/n/10.95 perpendicularDistance(point:Point)\OT1/cmr/m/n/10.95 : Co
+m-pute the per-pen-dic-u-lar dis-tance from point
+ []
+
+[26]) [27]
 \openout2 = `includes/conclusion.aux'.
 
  (./includes/conclusion.tex
 Chapter 6.
-) [24
+) [28
 
 
 
-] (./index.bbl) [25
+] (./index.bbl) [29
 
 
 ] (./index.aux (./includes/cover.aux)
@@ -519,10 +535,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5035 strings out of 493304
- 74773 string characters out of 6139871
- 171206 words of memory out of 5000000
- 8349 multiletter control sequences out of 15000+600000
+ 5044 strings out of 493304
+ 74912 string characters out of 6139871
+ 171250 words of memory out of 5000000
+ 8357 multiletter control sequences out of 15000+600000
  16450 words of font info for 58 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  44i,26n,49p,971b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -531,17 +547,21 @@ r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on index.pdf (30 pages, 2405513 bytes).
+dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on index.pdf (34 pages, 2705208 bytes).
 PDF statistics:
- 166 PDF objects out of 1000 (max. 8388607)
- 107 compressed objects within 2 object streams
+ 196 PDF objects out of 1000 (max. 8388607)
+ 128 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
