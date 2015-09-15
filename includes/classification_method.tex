@@ -55,9 +55,6 @@ Apply the threshold with threshold value is $middle$\;
 After apply the threshold to pre-process image, we apply the Canny algorithm to detect the step edges, which incorporates non-maximal suppression and hysteresis thresholding. The threshold value used in Canny algorithm also the value used in the previous step, and the ratio between lower threshold and upper threshold is 1.5 : 3 (follows the article \cite{palaniswamy2010automatic}).\\
 The Canny algorithm is not aware of actual edges, the edge detecting was based on the Sobel operator, extracted with non-maximal suppression. So, to obtain the expect result, we  need to apply another technique to obtain the step edges. The \textbf{findContours} was chosen for this aim, the result is a vector of the edges, and each edge was presented by a vector of the points.\\[0.3cm]
 Based on the description, the process to extract the features can be summerised as follow steps:
-
-\section{Pairwise geometric histogram}
-Pairwise geometric histogram(PGH) is used to encode the relative information between a line and a set of lines in an object. Therefore, an object can represented by a set of PGH. From the set of PGH, we can reconstructed the object or compare with another object. In this section, we will mention the constructing a PGH for an object based on the geometrical relationship and compute the similar distance between two objects.
 \subsection{Edge segmentation}
 In fact, any arbitrary edge can be represented by a set approximate lines. Morever, the PGH can not constructed based on the edge, it constructed from the geometrical relationship of geometric object, specifically the lines. This way also useful when we want presentation the edges or describe the relation between it. With the set of step edges was obtained from find contours (the image structure). In this step, we will segment it to approximated lines. The method to segment the edges is a recursive algorithm$^{\cite{riocreux1994analysis}}$ but it have some change to easy process, as follows:
 \begin{itemize}
@@ -93,6 +90,9 @@ Split point: $imax \leftarrow -1$ \;
 }
 \caption{Algorithm to segment an edge}
 \end{algorithm}\DecMargin{1em}
+\section{Pairwise geometric histogram}
+Pairwise geometric histogram(PGH) is used to encode the relative information between a line and a set of lines in an object. Therefore, an object can represented by a set of PGH. From the set of PGH, we can reconstructed the object or compare with another object. In this section, we will mention the constructing a PGH for an object based on the geometrical relationship and compute the similar distance between two objects.
+
 \subsection{Pairwise geometric histogram}
 The PGH is constructed on the geometric features between lines relative. The geometric features are characteristic which can describe the geometric shape such as angle, the length of line, perpendicular between two lines,.... For the shape representation, the relative angle and perpendicular distance is geometrical features useful. \\
 The proceed to construct the PGH was described in below:
