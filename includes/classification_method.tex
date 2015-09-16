@@ -52,11 +52,25 @@ Apply the threshold with threshold value is $middle$\;
 \caption{Algorithm to preprocess image}
 \end{algorithm}\DecMargin{1em}
 \subsection{Feature extraction}
-After apply the threshold to pre-process image, we apply the Canny algorithm to detect the step edges, which incorporates non-maximal suppression and hysteresis thresholding. The threshold value used in Canny algorithm also the value used in the previous step, and the ratio between lower threshold and upper threshold is 1.5 : 3 (follows the article \cite{palaniswamy2010automatic}).\\
-The Canny algorithm is not aware of actual edges, the edge detecting was based on the Sobel operator, extracted with non-maximal suppression. So, to obtain the expect result, we  need to apply another technique to obtain the step edges. The \textbf{findContours} was chosen for this aim, the result is a vector of the edges, and each edge was presented by a vector of the points.\\[0.3cm]
-Based on the description, the process to extract the features can be summerised as follow steps:
+After apply the threshold to pre-process image, we apply the Canny algorithm to detect the step edges, which incorporates non-maximal suppression and hysteresis thresholding. In Canny, the importance parameters are two threshold values and aperture size for the Sobel operator, it decides the pixels kept. The threshold value used in Canny algorithm also the value used in the previous step, and the ratio between lower threshold and upper threshold is 1.5 : 3 (follows the article \cite{palaniswamy2010automatic}). In implementation, the Canny operation used from OpenCV library\footnote{http://docs.opencv.org/modules/imgproc/doc/feature\_detection.html\#canny}, and the parameters need to put into Canny are:
+\begin{itemize}
+\item source: the input image (in grayscale mode)
+\item destination: the output image
+\item low\_thresh: the first (lower) threshold value
+\item hight\_thresh: the second (upper) threshold value
+\item kernel\_size: size of kernel, aperture for the Sobel operator
+\end{itemize}
+The Canny algorithm is not aware of actual edges, the edge detecting was based on the Sobel operator, extracted with non-maximal suppression. So, to obtain the expect result, we  need to apply another technique to obtain the step edges. The \textbf{findContours} was chosen for this aim, the result is a vector of the edges, and each edge was presented by a vector of the points. Like the Canny, the \textbf{findContours} also used from OpenCV library \footnote{http://docs.opencv.org/modules/imgproc/doc/structural\_analysis\_and\_shape\_descriptors.html\#findcontours} and the parameters used in this operation as follows:
+\begin{itemize}
+\item source: the binary input image
+\item contours: the output. Each contours is stored in a vector of points.
+\item hierarchy: optional output vector, containing information about the image topology.
+\item mode: contours retrieve mode
+\item method: contours approximation method
+\item offset: optional offset by which every contour point is shifted.
+\end{itemize}
 \subsection{Edge segmentation}
-In fact, any arbitrary edge can be represented by a set approximate lines. Morever, the PGH can not constructed based on the edge, it constructed from the geometrical relationship of geometric object, specifically the lines. This way also useful when we want presentation the edges or describe the relation between it. With the set of step edges was obtained from find contours (the image structure). In this step, we will segment it to approximated lines. The method to segment the edges is a recursive algorithm$^{\cite{riocreux1994analysis}}$ but it have some change to easy process, as follows:
+The geometric relation can not constructed from the edges, it always construct from the relation of basic geometric objects, such as the lines.  In fact, any arbitrary edge can be represented by a set approximate lines. Instead of representing an edge, we can represent a set of approximate lines of it. This way also useful when we want presentation the edges or describe the relation between it. With the set of step edges was obtained from find contours (the image structure). In this step, we will segment it to approximated lines. The method to segment the edges is a recursive algorithm$^{\cite{riocreux1994analysis}}$ but it have some change in the ``stop condition" of algorithm to easy process, as follows:
 \begin{itemize}
 \item Establish a line \textit{``l"} between two endpoints of edge.
 \item For each point on edge, we compute the perpendicular distance from it to the line l and keep the point which has the maximum perpendicular distance.
@@ -71,22 +85,30 @@ The algorithm is presented as follows:\\
 \KwData{listPoints: list of points which presented the edge}
 \KwResult{Queue of ``step" points on the edge}
 \Indp
-Set up a straight line between the endpoints of the edges (line d)\;
+Declare the first endpoint: $p0 \leftarrow listPoints[0]$\;
+Declare the second endpoint: $pend \leftarrow listPoints[size - 1]$, \textit{size} is the size of \textit{listPoints}\;
+Set up a straight line between the two endpoints $p0, pend$ (line $d$)\;
 Initialization the max value: $maxDistance  \leftarrow 0 $\;
-Split point: $imax \leftarrow -1$ \; 
-\For{ point $p$ on edges}{
-	distance $\leftarrow$ from $p$ to line $d$\;
+Declare a ``split point": $imax \leftarrow 0$ \; 
+Declare a variable: $distance \leftarrow 0$\;
+
+\For{ point $p$ in $listPoints$}{
+	$distance \leftarrow$ from $p$ to line $d$\;
 	\If{distance $>$ max\_distance}{
 		$maxDistance$ $\leftarrow$ $distance$\;
 		$imax$ $\leftarrow$ position of $p$\;
 	}
 }
 \If{$maxDistance$ $>$ 3 }{
-	split the list of points into 2 parts\;
-	preprocess on each part\;
+	split the list of points at $imax$ and put into 2 parts $(part1, part2)$\;
+	Pre-process on $part1$\;	
+	Pre-process on $part2$\;
 }
-\If {$imax$ $ = -1$}{
-	push imax into queue\;\tcp{queue is a variable of class}
+\If {$p0$ does not exist in result queue}{
+	push $p0$ into queue\;\tcp{queue is a variable of class}
+}
+\If {$pend$ does not exist in result queue}{
+	push $pend$ into queue\;\tcp{queue is a variable of class}
 }
 \caption{Algorithm to segment an edge}
 \end{algorithm}\DecMargin{1em}
@@ -132,11 +154,11 @@ The table below show the result when calculating Bhattacharyya distance between 
 \begin{center}
 \begin{tabular}{|l|l|c|c|c|c|c|c|}
 \hline
-Reference image & Scene image & 180 bins & 360 bins & 720 bins & 1080 bins & 2160 bins & 10800 bins \\ \hline
-Md 028.JPG & Md 001.JPG & 0.977953 & 0.964167 & 0.93861 & 0.91471 & 0.852625 & 0.557934 \\ \hline
-Md 028.JPG & Md 005.JPG & 0.96479 & 0.943657 & 0.906444 & 0.871756 & 0.778451 & 0.412251 \\ \hline
-Md 028.JPG & Md 010.JPG & 0.976241 & 0.958061 & 0.925943 & 0.896445 & 0.817279 & 0.467558 \\ \hline
-Md 028.JPG & Md 027.JPG & 0.980728 & 0.968233 & 0.945442 & 0.92485 & 0.870985 & 0.615097 \\ \hline
+Reference image & Scene image & 180 bins & 360 bins & 720 bins & 1080 bins \\ \hline
+Md 028.JPG & Md 001.JPG & 0.977953 & 0.964167 & 0.93861 & 0.91471 \\ \hline
+Md 028.JPG & Md 005.JPG & 0.96479 & 0.943657 & 0.906444 & 0.871756  \\ \hline
+Md 028.JPG & Md 010.JPG & 0.976241 & 0.958061 & 0.925943 & 0.896445 \\ \hline
+Md 028.JPG & Md 027.JPG & 0.980728 & 0.968233 & 0.945442 & 0.92485 \\ \hline
 \end{tabular}
 \end{center}
 Besides the Bhattacharyya metric, we can also choose another metric to matching the histograms, such as: \textbf{Chi-squared} metric and \textbf{Intersection} metric. The forms was presented as below:\\
