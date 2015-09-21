@@ -1,6 +1,7 @@
 \chapter{Preprocessing image}
 \section{Problem}
-The propriety of an algorithm or a program often based on a good input set. To obtain the good result when applying the automatic classification methods. In this chapter, we suggest the algorithm preprocessing image. With the input images contains the parts of insect and an unexpected object, specifically yellow grid (figure \ref{fig:figure_31}), we need remove the yellow grid to have only insect and just keep the insect.
+Preprocessing data is a stage that we remove the noises and unexpected objects on image. To obtain the good result when applying the automatic classification methods. In this chapter, we suggest a method preprocessing image.\\[0.2cm]
+With the input is a set of 293 images. Each image contains the parts of insect and an unexpected object, specifically yellow grid (figure \ref{fig:figure_31}). The method proposed to remove the yellow grid and keep the insect on the image.
 \begin{figure}[h!]
 \centering
 \subfloat[The yellow gird on the left of insect]{\label{fig:example_1}\includegraphics[width=0.4\textwidth]{./images/input1}}~~
@@ -12,36 +13,32 @@ The propriety of an algorithm or a program often based on a good input set. To o
 Each input image contains the two objects: a part of insect (called insect) and the yellow grid (called grid). About the relative position, the grid always stayed in the left of insect, and insect can either overlap the grid. About the color, image is presented in BGR model with three main color groups: the background color, the yellow color of grid and the color of insect.\\[0.2cm]
 The method proposed to remove the grid based on the color processing. If we process the image in BGR model, the algorithm may be complex because the color at each pixel is combined of three values (blue, green, red). While HSV model has a specific channel to present the colors with clear range. We can apply this property for detecting and removing the gird. The proposed process to remove  the grid as follows:
 \begin{enumerate}
-\item Convert image from BGR to HSV
 \item Find the ``\textit{limit}" point of grid: the points stay nearest outside grid.
 \item Find the ``\textit{replace}" point: location that its value used to replace for grid.
 \item Replace the grid by the value at ``\textit{replace}" point.
 \end{enumerate}
 \subsection{Finding the limiting and the replacing point}
-To decrease the browsing time to check all pixels and replace the pixels in grid. Before process, we should be limit the range to process. In this step, we find the limit points of gird. These are the points which located on the right of grid and gird nearest.\\
-Finding the limit points will solve the above problem. Instance of checking on all pixel, we just check the pixels stay on the left of limit points. As we know, the width of grid usually less than a two-thirds of width of image. So, to reduce the time to finding the limit point, we also check from the begin of image to two-thirds of image. The result of this step is the limit points, these used for limiting the length when we check the pixels on yellow grid.\\
+Browsing image to check and replace the pixels in gird need a long time. To reduce the time to do that, we should find the limit range of grid. The limit of gird is the points located out of gird and its closest. Instance of checking on all pixel, we just check the pixels stay on the left of limit points.\\
+As we know, the width of grid usually less than a two-thirds of width of image. So, to reduce the time to finding the limit point, we also check from the begin of image to two-thirds of image. The result of this step is the limit points, these used for limiting the length when we check the pixels on yellow grid.\\
 \textbf{The algorithm to find the limit points are followed:}\\
 \begin{algorithm}[H]
 \Indm
-\KwData{inputImage: The input image (contains the insect and grid)}
+\KwData{$inputImage$: The input image (contains the insect and grid)}
 \KwResult{The coordinate of limit point}
 \Indp
-Declare the variables\;
-Convert image from BGR to HSV\;
-Split HSV image into several channel
-Set up initial \textit{limit\_point} and assign with the left-top corner.\;
+Declare some variables: $Mat$ $hsvImage$; $vector<Mat> hsv\_channel$\;
+Convert image from BGR to HSV: $cv:cvtColor(inputImage, hsvImage, COLOR\_BGR2HSV)$ \;
+Split HSV image into several channel: $cv::split(hsvImage, hsv\_channels)$\;
+Set up initial \textit{limit\_point} and assign with the left-top corner: $Point$ $limit\_point = Point(0,0)$\;
 Declare a variable $yellow\_count$ to count the number yellow points on each columns when processing. An column become a limit line if the number of yellow points on this column less than a constant value.\;
-\For{$j \leftarrow 10 $ \KwTo $inputImage.columns$}{
-	\If{H value at $(5,j) > $ 100 \\
-		\textbar \textbar (H  value at $(5,j) > 70$\\
-				$\&\&$ H value at $(5,j) < 100$\\
-				$\&\&$ S value at $(5,j) < 10 $\\
-				$\&\&$ V value at $(5,j) > 175$ )
+\For{$j \leftarrow 10 $ \KwTo $hsv\_channel[0].cols$}{
+	\If{H value at $(5,j) > $ 100 \textbar \textbar (H  value at $(5,j) > 70$ $\&\&$ H value at $(5,j) < 100$\\
+				$\&\&$ S value at $(5,j) < 10 $ $\&\&$ V value at $(5,j) > 175$ )
 		}{
 		$limit\_point.x \leftarrow j$\;
 		$limit\_point.y \leftarrow 0$\;
 		$yellow\_count \leftarrow 0 $\; 
-		\For{$i \leftarrow 1 $ \KwTo $grayImage.rows * 2/3$}{
+		\For{$i \leftarrow 1 $ \KwTo $hsv\_channel[0].rows * 2/3$}{
 			\If{H value at $(i,j) <= 38 $}{
 				$yellow\_count++$\;
 				\If{$yellow\_count >= 8$}{
@@ -57,11 +54,11 @@ Declare a variable $yellow\_count$ to count the number yellow points on each col
 	}
 }
 \If{$limit\_point.x == 0$}{
-	$limit\_point.x \leftarrow inputImage.columns/3 + 200$\;
+	$limit\_point.x \leftarrow hsv\_channel[0].columns/3 + 200$\;
 	$limit\_point.y \leftarrow 0$\;	
 }
 \caption{Algorithm to find the limiting points}
-\end{algorithm}
+\end{algorithm}~~\\
 Now, we indicate which is the color used to replace the yellow points. Hence, we choose the points having the value nearest with the background color. The histogram is ideal for choosing the position to replace, but we also have some conditions to obtain a good value.\\
 The algorithm to find the replacing points are 
 followed:\\
@@ -73,7 +70,7 @@ followed:\\
 \Indp
 Convert image to gray scale image\;
 Calculate the histogram on gray scale image and mean of histogram\;
-Find the limit point:\;
+Split the HSV image into channels\;
 \For{$i \leftarrow 0 $ \KwTo $grayImage.rows$}{
 		\For{$j \leftarrow 0 $ \KwTo $grayImage.columns$}{
 		\If{value at $(i,j) > $mean of histogram\\
