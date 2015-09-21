@@ -149,12 +149,11 @@ The significance of parameters in the formula \ref{eq:1}, as follows:
 \item $H_{i}(\theta,d)$ is an entry at row $\theta$ and column d in histogram of image \textit{i}
 \item $H_{j}(\theta,d)$ is an entry at row $\theta$ and column d in histogram of image \textit{j}
 \end{itemize}
-By the default, we choose the value for each bin of angle axis is one degree, it means that each bin for each degree and the height of pairwise histogram is 180 bins (correspondence with 180 degree). Based on the accuracy of program, we can increase the bins of angle axis. For my design, the accuracy of angle axis can increase to minutes, such as thirty minutes (360 bins for angle axis), fifteen minutes (720 bins for angle axis), ten minutes (1080 bins for angle axis), five minutes (2160 bins for angle axis) or one minute (10800 bins for angle axis) for each bin.\\[0.2cm]
-The table below show the result when calculating Bhattacharyya distance between some images with difference accuracy:
+By the default, the range of angle axis from 0 to 180 degree (correspondence with 180 degree). Based on the accuracy of program, we can increase the range of angle axis. This design allow increase the range of angle axis to several time with default value. Example, the table below show the result when calculating Bhattacharyya distance between image \textit{Md 028.JPG} and some images with difference accuracy:
 \begin{center}
 \begin{tabular}{|l|l|c|c|c|c|c|c|}
 \hline
-Reference image & Scene image & 180 bins & 360 bins & 720 bins & 1080 bins \\ \hline
+Reference image & Scene image & 180 & 2 * 180 & 4 * 180 & 6 * 180 \\ \hline
 Md 028.JPG & Md 001.JPG & 0.977953 & 0.964167 & 0.93861 & 0.91471 \\ \hline
 Md 028.JPG & Md 005.JPG & 0.96479 & 0.943657 & 0.906444 & 0.871756  \\ \hline
 Md 028.JPG & Md 010.JPG & 0.976241 & 0.958061 & 0.925943 & 0.896445 \\ \hline

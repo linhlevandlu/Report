@@ -9,10 +9,16 @@ The propriety of an algorithm or a program often based on a good input set. To o
 \label{fig:figure_31}
 \end{figure}
 \section{Analysis}
-Each input image contains the two objects: the part of insect and the yellow grid (called grid). Addition, the grid always stayed in the left of image, and the insect can either overlap the grid or not. About the color, we can see three main groups color: the background color, the yellow color of grid and the color of insect. The image is presented in BGR model. So, the color at each pixel must be combine among three values (blue, green, red). If we process the image in BGR model, the algorithm may be complex. While, the HSV model just has a channel to present the value of color and each color has a clear range. We can apply this property for detecting and removing the gird. So, in this stage, we suggest that we convert the image to HSV model where has a clear range for each color and try to remove the yellow grid.\\
-The analysis system is constructed from two main stages: finding the limiting and replacing points, replacing the yellow point from the begin to the limit point.
+Each input image contains the two objects: a part of insect (called insect) and the yellow grid (called grid). About the relative position, the grid always stayed in the left of insect, and insect can either overlap the grid. About the color, image is presented in BGR model with three main color groups: the background color, the yellow color of grid and the color of insect.\\[0.2cm]
+The method proposed to remove the grid based on the color processing. If we process the image in BGR model, the algorithm may be complex because the color at each pixel is combined of three values (blue, green, red). While HSV model has a specific channel to present the colors with clear range. We can apply this property for detecting and removing the gird. The proposed process to remove  the grid as follows:
+\begin{enumerate}
+\item Convert image from BGR to HSV
+\item Find the ``\textit{limit}" point of grid: the points stay nearest outside grid.
+\item Find the ``\textit{replace}" point: location that its value used to replace for grid.
+\item Replace the grid by the value at ``\textit{replace}" point.
+\end{enumerate}
 \subsection{Finding the limiting and the replacing point}
-Browsing all of pixels to checking its color and replacing it if the color of pixel is yellow, we must process on all image. If we do that, it will be waste time. To decreasing the browsing time, in this step we find the limit points. These are the points which located on the right of grid and gird closest.\\
+To decrease the browsing time to check all pixels and replace the pixels in grid. Before process, we should be limit the range to process. In this step, we find the limit points of gird. These are the points which located on the right of grid and gird nearest.\\
 Finding the limit points will solve the above problem. Instance of checking on all pixel, we just check the pixels stay on the left of limit points. As we know, the width of grid usually less than a two-thirds of width of image. So, to reduce the time to finding the limit point, we also check from the begin of image to two-thirds of image. The result of this step is the limit points, these used for limiting the length when we check the pixels on yellow grid.\\
 \textbf{The algorithm to find the limit points are followed:}\\
 \begin{algorithm}[H]
