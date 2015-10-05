@@ -116,14 +116,14 @@ Declare a variable: $distance \leftarrow 0$\;
 \section{Pairwise geometric histogram}
 Pairwise geometric histogram(PGH) is used to encode the relative information between a line and a set of lines in an object. Therefore, an object can represented by a set of PGH. From the set of PGH, we can reconstructed the object or compare with another object. In this section, we will mention the constructing a PGH for an object based on the geometrical relationship and compute the similar distance between two objects.
 
-\subsection{Pairwise geometric histogram}
+\subsection{Local pairwise geometric histogram}
 The PGH is constructed on the geometric features between lines relative. The geometric features are characteristic which can describe the geometric shape such as angle, the length of line, perpendicular between two lines,.... For the shape representation, the relative angle and perpendicular distance is geometrical features useful. \\
-The proceed to construct the PGH was described in below:
+The Local PGH presented the relationship between a reference line with another lines. The proceed to construct the PGH between two lines was described in below:
 \begin{itemize}
-\item Choose the reference line (called reference line, another called object line)
-\item Compute the angle between two lines
-\item Calculate the perpendicular distance from two endpoints of object line to the reference line (assigned dmin and dmax).
-\item Recording the perpendicular distance and angle relative between two lines.
+\item Choose the reference line (other lines called object lines)
+\item Compute the angle between reference line and the object lines
+\item Calculate the perpendicular distance from two endpoints of object lines to the reference line (assigned dmin and dmax).
+\item Recording the perpendicular distance and angle relative between reference line and the object lines into the two dimensional histogram.
 \end{itemize}
 Example \footnote{Images extract from the article \cite{palaniswamy2010automatic}}:\\
 \begin{figure}[h!]
@@ -133,7 +133,7 @@ Example \footnote{Images extract from the article \cite{palaniswamy2010automatic
 \caption{The geometric features and the PGH}
 \label{fig:figure_31}
 \end{figure}
-\\[0.3cm]The frequency of the geometric features is recorded as a two dimensional histogram with an angle axis (0 - $\pi$) and distance axis (range of perpendicular distance, $d_{max}$ is the maximum distance on all distance of two arbitrary lines). The entries on PGH describe the geometric relationship between the reference line and the object lines. The blurring of entry along the axis regarding the true position and orientation of each object lines for reference line.
+\\[0.3cm]The frequency of the geometric features is recorded as a two dimensional histogram with an angle axis (0 - $\pi$) and distance axis (range of perpendicular distance, $d_{max}$ is the maximum distance on all distance of two arbitrary lines). The entries on PGH describe the geometric relationship between the reference line and the object lines. The blurring of entry along the axis regarding the true position and orientation of each object lines for reference line. Following the accuracy, we can indicate the size of histogram and normalize the value to match with size of histogram.
 \\The full object representation is constructed by recording the PGH for each line within object. If the object is defined by n lines, the full shape representation will composed of n pairwise geometric histograms.\\
 This method still good when we apply some variants on the image, such as translate or rotate the image because the angle and perpendicular distance between a pair of lines is invariant.
 \subsection{Histogram matching}
