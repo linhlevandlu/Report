@@ -178,20 +178,26 @@ d_{Intersection} (H_{i}H_{j}) = \sum\limits_{\theta}^{\pi}\sum\limits_{d}^{d_{ma
 The significance of parameters in equation (\ref{eq:2}) and (\ref{eq:3}) is similar with (\ref{eq:1}). For the Bhattacharyya and Intersection metric, the perfect match is 1 and the total mismatch is 0. The result is opposite to Chi-squared metric (0 for perfect match and 1 for total mismatch).\\[0.2cm]
 Hence, depend on the purpose of comparison will choose a suitable comparing method. In this program, we want to try on three method to have a general view result when matching the histograms.
 \subsection{Probabilistic Hough transform}
-The probabilistic Hough transform (PHT) used to estimate the global shape. Based on a group of features within the scene, identifying the present of a model image in a scene image. The hypothesised location of the model in scene is indicated based on the conditional probability that any pair scene lines agreement about a position in model.\\[0.3cm]
-The progress has two stages. Firstly, training process begin by recording the perpendicular distance and the angle from a reference point to each pair of model lines. Secondly, predicting the pose of scene difference from the model, then we estimate the location of the landmarks. By creating a Hough space to store value when exist a pairs
-
-
-
- The process to estimate the global pose is described as follows:
+The probabilistic Hough transform (PHT) used to estimate the global shape. Based on a group of features within the scene, identifying the present of a model image in a scene image. The hypothesised location of the model in the scene is indicated based on the conditional probability that any pair scene lines agreement about a position in model.\\[0.3cm]
+Estimating the global shape has two main stages. Firstly, training process begin by recording the perpendicular distance and the angle from a reference point to each pair of model lines. Secondly, predicting the pose of scene difference from the model, then we estimate the location of the landmarks. We create a Hough space to store value when exist a pair of scene lines match with the entry in training process. The peak in Hough space is assumed of the reference point of the model in the scene. From this reference point, we can estimate the landmarks of the scene.
+The process to estimate the global pose is described as follows:
 \begin{itemize}
 \item Choose a arbitrary point in model as reference point
 \item For each pair lines in model, calculating and recording the perpendicular distance and angle from the reference point to each line.
-\item Create an two dimensional accumulator, one dimension presented for the angle, another presented for the perpendicular distance.
+\item Create an two dimensional accumulator, one dimension for the angle and another for the perpendicular distance.
 \item For each pair lines in scene, finding the entry correspond about position, orientation and scale. Increase the value at correlative cell in the accumulator (indicate by the angle and distance).
 \item Compute the maximum value in accumulator.
-\item Indicating the pair of scene lines and the entry with max
+\item Indicating the pair of scene lines and the entry with maximal value of accumulator.
+\item Extending the perpendicular lines of the pair of scene lines at the appropriate position. The intersection of them is the location of reference point in the scene.
 \end{itemize}
+In the example below, we apply the PHT to estimate the landmarks of model in the scene. The image in figure \ref{fig:pht_1} as the model. In the model, the small red circle and large red circles are the reference point and the landmarks in model, respectively. The image in figure \ref{fig:pht_2} as scene. By applying the PHT, we can estimate the reference point (green circle) in the scene and the location of the landmarks (the yellow circles).
+\begin{figure}[h!]
+\centering
+\subfloat[The model image]{\label{fig:pht_1}\includegraphics[width=0.35\textwidth]{./images/pht_1}}~~
+\subfloat[The scene image ]{\label{fig:pht_2}\includegraphics[width=0.35\textwidth]{./images/pht_2}}
+\caption{The landmarks estimated by probabilistic Hough transform}
+\label{fig:figure_31}
+\end{figure}
 
 
 

@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.23)  6 OCT 2015 18:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.7.10)  6 OCT 2015 22:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **index.tex
 (./index.tex
 LaTeX2e <2011/06/27>
-Babel <3.9h> and hyphenation patterns for 78 languages loaded.
+Babel <3.9h> and hyphenation patterns for 4 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
@@ -250,6 +250,9 @@ LaTeX Warning: Label `sub@fig:example_2' multiply defined.
 
 LaTeX Warning: Label `fig:figure_31' multiply defined.
 
+
+LaTeX Warning: Label `fig:figure_31' multiply defined.
+
 ) (./includes/implementation.aux) (./includes/conclusion.aux))
 \openout1 = `index.aux'.
 
@@ -485,13 +488,25 @@ File: ./images/PGH.png Graphic file (type png)
 <use ./images/PGH.png>
 Package pdftex.def Info: ./images/PGH.png used on input line 132.
 (pdftex.def)             Requested size: 181.18439pt x 140.6727pt.
- [23 <./images/PGH_geo.png> <./images/PGH.png>] [24])
-[25]
+ [23 <./images/PGH_geo.png> <./images/PGH.png>] [24]
+<./images/pht_1.png, id=124, 485.815pt x 388.45125pt>
+File: ./images/pht_1.png Graphic file (type png)
+ <use ./images/pht_1.png>
+Package pdftex.def Info: ./images/pht_1.png used on input line 196.
+(pdftex.def)             Requested size: 158.54152pt x 126.76675pt.
+
+<./images/pht_2.png, id=125, 618.31pt x 371.3875pt>
+File: ./images/pht_2.png Graphic file (type png)
+ <use ./images/pht_2.png>
+Package pdftex.def Info: ./images/pht_2.png used on input line 197.
+(pdftex.def)             Requested size: 158.54152pt x 95.22675pt.
+)
+[25 <./images/pht_1.png> <./images/pht_2.png>]
 \openout2 = `includes/implementation.aux'.
 
  (./includes/implementation.tex
 Chapter 5.
-<images/cdiagram.png, id=127, 1175.14032pt x 831.85782pt>
+<images/cdiagram.png, id=129, 1175.14032pt x 831.85782pt>
 File: images/cdiagram.png Graphic file (type png)
 
 <use images/cdiagram.png>
@@ -532,12 +547,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5044 strings out of 493304
- 74912 string characters out of 6139871
- 170250 words of memory out of 5000000
- 8357 multiletter control sequences out of 15000+600000
+ 5058 strings out of 494985
+ 75164 string characters out of 6180356
+ 166158 words of memory out of 5000000
+ 8127 multiletter control sequences out of 15000+600000
  16450 words of font info for 58 fonts, out of 8000000 for 9000
- 957 hyphenation exceptions out of 8191
+ 36 hyphenation exceptions out of 8191
  44i,26n,49p,971b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
@@ -555,10 +570,10 @@ r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on index.pdf (35 pages, 2713459 bytes).
+Output written on index.pdf (35 pages, 2758624 bytes).
 PDF statistics:
- 199 PDF objects out of 1000 (max. 8388607)
+ 201 PDF objects out of 1000 (max. 8388607)
  130 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
