@@ -27,7 +27,7 @@
 \contentsline {subsection}{\numberline {4.2.1}Local pairwise geometric histogram}{22}
 \contentsline {subsection}{\numberline {4.2.2}Global pairwise histogram}{23}
 \contentsline {subsection}{\numberline {4.2.3}Histogram matching}{23}
-\contentsline {subsection}{\numberline {4.2.4}Statistical the matching result}{25}
+\contentsline {subsection}{\numberline {4.2.4}Probabilistic Hough transform}{25}
 \contentsline {chapter}{\numberline {5}Implementation}{26}
 \contentsline {section}{\numberline {5.1}Software architecture}{26}
 \contentsline {section}{\numberline {5.2}Image preprocessing}{27}
