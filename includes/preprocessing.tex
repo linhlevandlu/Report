@@ -1,7 +1,7 @@
 \chapter{Preprocessing image}
+Preprocessing image is a process that reducing the noises or removing the unexpected objects on image. It is used to enhance the quality of input dataset (images) when do a test for a algorithm or a method. Following the requests, we can apply one or more operations to pre-process image. In this chapter, we will discuss about a method to pre-process image within this internship. The method suggested base on the basic knowledge about the operations in image processing.
 \section{Problem}
-Preprocessing data is a stage that we remove the noises and unexpected objects on image. To obtain the good result when applying the automatic classification methods. In this chapter, we suggest a method preprocessing image.\\[0.2cm]
-With the input is a set of 293 images. Each image contains the parts of insect and an unexpected object, specifically yellow grid (figure \ref{fig:figure_31}). The method proposed to remove the yellow grid and keep the insect on the image.
+With the input dataset is a set of 293 insect images. Each image contains the parts of insect(body, head,...) and an unexpected object, specifically yellow grid (figure \ref{fig:figure_31}). To enhance the accuracy of classify method, we need to remove the grid and just keep the insect on each input image.
 \begin{figure}[h!]
 \centering
 \subfloat[The yellow gird on the left of insect]{\label{fig:example_1}\includegraphics[width=0.4\textwidth]{./images/input1}}~~
