@@ -8,8 +8,8 @@
 \contentsline {subsection}{\numberline {1.3.2}Origanization of the document}{7}
 \contentsline {chapter}{\numberline {2}Background}{8}
 \contentsline {section}{\numberline {2.1}Overview about image processing}{8}
-\contentsline {section}{\numberline {2.2}Smoothing filters}{8}
-\contentsline {section}{\numberline {2.3}Histogram}{8}
+\contentsline {section}{\numberline {2.2}Image filtering}{8}
+\contentsline {section}{\numberline {2.3}Histogram}{9}
 \contentsline {section}{\numberline {2.4}Segmentation}{9}
 \contentsline {section}{\numberline {2.5}Color processing}{10}
 \contentsline {chapter}{\numberline {3}Preprocessing image}{12}
