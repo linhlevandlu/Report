@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.7.10)  8 OCT 2015 21:59
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.23)  9 OCT 2015 13:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **index.tex
 (./index.tex
 LaTeX2e <2011/06/27>
-Babel <3.9h> and hyphenation patterns for 4 languages loaded.
+Babel <3.9h> and hyphenation patterns for 78 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
@@ -253,6 +253,9 @@ LaTeX Warning: Label `fig:figure_31' multiply defined.
 
 LaTeX Warning: Label `fig:figure_31' multiply defined.
 
+
+LaTeX Warning: Label `eq:cross-correlation' multiply defined.
+
 ) (./includes/implementation.aux) (./includes/conclusion.aux))
 \openout1 = `index.aux'.
 
@@ -495,19 +498,30 @@ File: ./images/pht_2.png Graphic file (type png)
  <use ./images/pht_2.png>
 Package pdftex.def Info: ./images/pht_2.png used on input line 197.
 (pdftex.def)             Requested size: 158.54152pt x 95.22675pt.
-)
-[25 <./images/pht_1.png> <./images/pht_2.png>]
+
+[25 <./images/pht_1.png> <./images/pht_2.png>] [26]
+Overfull \hbox (17.09436pt too wide) in paragraph at lines 252--252
+[][]\OT1/cmr/m/n/9 http://docs.opencv.org/modules/imgproc/doc/object[]detection
+.html?highlight=matchtemplate#matchtemplate| 
+ []
+
+[27]
+Underfull \hbox (badness 10000) in paragraph at lines 276--277
+
+ []
+
+) [28]
 \openout2 = `includes/implementation.aux'.
 
  (./includes/implementation.tex
 Chapter 5.
-<images/cdiagram.png, id=129, 1175.14032pt x 831.85782pt>
+<images/cdiagram.png, id=140, 1175.14032pt x 831.85782pt>
 File: images/cdiagram.png Graphic file (type png)
 
 <use images/cdiagram.png>
 Package pdftex.def Info: images/cdiagram.png used on input line 6.
 (pdftex.def)             Requested size: 407.66833pt x 288.5779pt.
- [26
+ [29
 
 
 
@@ -517,16 +531,16 @@ Overfull \hbox (0.1954pt too wide) in paragraph at lines 29--30
 m-pute the per-pen-dic-u-lar dis-tance from point
  []
 
-[27]) [28]
+[30]) [31]
 \openout2 = `includes/conclusion.aux'.
 
  (./includes/conclusion.tex
 Chapter 6.
-) [29
+) [32
 
 
 
-] (./index.bbl) [30
+] (./index.bbl) [33
 
 
 ] (./index.aux (./includes/cover.aux)
@@ -542,12 +556,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5058 strings out of 494985
- 75164 string characters out of 6180356
- 167158 words of memory out of 5000000
- 8127 multiletter control sequences out of 15000+600000
+ 5061 strings out of 493304
+ 75214 string characters out of 6139871
+ 171325 words of memory out of 5000000
+ 8372 multiletter control sequences out of 15000+600000
  16450 words of font info for 58 fonts, out of 8000000 for 9000
- 36 hyphenation exceptions out of 8191
+ 957 hyphenation exceptions out of 8191
  44i,26n,49p,1075b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
@@ -562,13 +576,14 @@ sfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on index.pdf (35 pages, 2759797 bytes).
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on index.pdf (38 pages, 2780399 bytes).
 PDF statistics:
- 201 PDF objects out of 1000 (max. 8388607)
- 130 compressed objects within 2 object streams
+ 217 PDF objects out of 1000 (max. 8388607)
+ 142 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

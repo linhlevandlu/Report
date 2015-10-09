@@ -198,6 +198,84 @@ In the example below, we apply the PHT to estimate the landmarks of model in the
 \caption{The landmarks estimated by probabilistic Hough transform}
 \label{fig:figure_31}
 \end{figure}
+\subsection{Template matching}
+\subsubsection{Cross-correlation}
+Cross-correlation is a method of estimating the similarity between two signals. By computing the sum of product between 2 signals when sliding, and choose the maximal value. It is used for searching a short signal in a longer signal. In image processing, it used to detect the present of an object (template) in a large object (image). The equation of cross-correlation as follows (equation \ref{eq:cross-correlation}):
+\begin{center}
+\begin{equation}\label{eq:cross-correlation}
+R_{ccorr}(x,y) = \sum\limits_{x',y'}[T(x'.y').I(x + x', y + y')]
+\end{equation}
+\end{center}
+Where:
+\begin{itemize}
+\item T is template which use to slide and find the exist in other image.
+\item I is image which we expect to find the template image
+\item $(x', y')$ are coordinates in template where we get the value to compute.
+\item $(x + x', y + y')$ are coordinates in image where we get the value to compute when template $T$ sliding.
+\end{itemize}
+By sliding the template on image by each pixel from left to right and top to down. At each position, we compute the $R_{ccorr}(x,y)$. The position have maximal $R_{ccorr}(x,y)$ is position that best similar of template in image.\\[0.2cm]
+However, if we use the original image to compute and find the similarity, the brightness of template and image can change the conditions and the result. So, we can be normalize the image before apply the cross-correlation to reduce the effect of lighting difference between them. The normalization coefficient is:
+\begin{center}
+\begin{equation}\label{eq:normalizeCoff}
+Z(x,y) = \sqrt{\sum\limits_{x',y'}T(x'.y')^{2}.\sum\limits_{x',y'}I(x + x', y + y')^{2}}
+\end{equation}
+\end{center}
+The value of this method when we normalized computation as below:
+\begin{center}
+\begin{equation}\label{eq:cross-correlation}
+R_{ccorr\_norm}(x,y) =\frac{R_{ccorr}(x,y)}{Z(x,y)} = \frac{\sum\limits_{x',y'}[T(x'.y').I(x + x', y + y')]}{\sqrt{\sum\limits_{x',y'}T(x'.y')^{2}.\sum\limits_{x',y'}I(x + x', y + y')^{2}}}
+\end{equation}
+\end{center}
+\subsubsection{Estimating the landmarks by applying cross-correlation}
+Now, back to the our problem. With a reference image and its set of landmarks. We need to find the landmarks position on a set of scene image by using cross-correlation. In this case, the template is a region around each landmark in reference image and the image is each scene image.\\[0.2cm]
+For each landmarks in reference image, we create a bounding box around the landmarks with an arbitrary size and use landmark as center point. When create the bounding box, we also need to keep the distance between left corner to the landmarks, because sometime, with the landmark position, the size of bounding box can be over the size of image. Use this box as template and do the cross-correlation with each scene image. The results obtained store the location where template match with image. From these position, we can indicate the position of each landmark of reference image on scene image. The algorithms to create the bounding box and apply the cross-correlation to detect reference landmarks in scene described follows:\\[0.2cm]
+\begin{algorithm}[H]
+\Indm 
+\KwData{image (reference image), landmark (location of a reference landmark), tsize (size of bounding box), distance (to keep the distance from the landmark to bounding box)}
+\KwResult{A matrix represented for bounding box of landmark}
+\Indp
+Get the matrix of image (image presented by matrix): $Mat matImg = image.getMatrix()$\;
+\tcp{Indicate the top left-corner of bounding box:}
+$int$ $lx = (landmark.x - tsize/2) < 0$ ? $0$ : $(landmark.x - tsize/2)$\;
+$int$ $yx = (landmark.y - tsize/2) < 0$ ? $0$ : $(landmark.y - tsize/2)$\;
+\tcp{Keep the distance from the landmark to bounding box}
+$distance.x = landmark.x - lx$\;
+$distance.y = landmark.y - ly$\;
+\tcp{Indicate the low right-corner of bounding box}
+$int$ $lx2 = (landmark.x + tsize/2) > matImg.cols$ ? $matImg.cols$ : $(landmark.x + tsize/2)$\;
+$int$ $yx2 = (landmark.y + tsize/2) < matImg.rows$ ? $matImg.rows$ : $(landmark.y + tsize/2)$\;
+\tcp{Create the bounding box around landmark}
+$Mat$ $box(matImg,Rect(lx,ly,lx2 - lx, ly2 - ly))$\;
+return the $box$;
+\caption{Algorithm to create a bounding box around a landmark}
+\end{algorithm}~\\[0.2cm]
+The below algorithm describe the method to estimate the reference landmarks on scene image by using cross-correlation. To apply the cross correlation, we have used the function $matchTemplate$\footnote{http://docs.opencv.org/modules/imgproc/doc/object\_detection.html?highlight=matchtemplate\#matchtemplate} in OpenCV library with matching method is $CV\_CCORR\_NORMED$ (cross-correlation normalize). This function allow we compare the template overlap the image and it support many different methods to match. When the template slide over each pixel on image, the coefficient between them was calculated and stored in a array.\\[0.2cm]
+After finished, to get the value and position of maximum value when we compute the coefficient, we use a function in OpenCV,  $minMaxLoc$\footnote{http://docs.opencv.org/modules/core/doc/operations\_on\_arrays.html?highlight=minmaxloc\#minmaxloc}. This method used to detect the minimum and maximum value in an array. Beside that, it also output the location where having the minimum and maximum value.\\[0.2cm]
+\begin{algorithm}[H]
+\Indm 
+\KwData{refImage (reference image), sceneImage (the scene image), lmpath (file path store the reference landmarks)}
+\KwResult{A list of landmarks on scene image}
+\Indp
+Get the reference landmarks from file and store in list $refLandmarks$\;
+Create a variable to store the new landmarks: $sceneLandmarks$\;
+\tcp{Get the matrix of scene image}
+$sceneMatrix$ = $sceneImage.getMatrix()$\;
+\For{ landmark $lm$ in $refLandmarks$}{
+	\tcp{Create a bounding box of landmark $lm$} 
+	$Mat$ $template$ = $createTemplate(refImage, lm, size, )$\;
+	Create the matrix to store the value when do the cross-correlation: $result$ \;
+	\tcp{Apply the matching and store the result into matrix $result$}
+	$cv::matchTemplate(sceneMatrix,template,result,CV\_TM\_CCORR\_NORMED$\;	
+	Get the maximum value and position in $result$ matrix\; 
+	Compute the position of landmark from maximum position\;
+	Push the landmark into the list $sceneLandmarks$\;
+}
+Return the list of landmarks\;
+\caption{Algorithm to get the position of reference landmarks in scene image}
+\label{alccross}
+\end{algorithm}~\\[0.2cm]
+
+\subsubsection{Template matching}
 
 
 
