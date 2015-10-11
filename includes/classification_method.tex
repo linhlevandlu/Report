@@ -266,7 +266,10 @@ $sceneMatrix$ = $sceneImage.getMatrix()$\;
 	Create the matrix to store the value when do the cross-correlation: $result$ \;
 	\tcp{Apply the matching and store the result into matrix $result$}
 	$cv::matchTemplate(sceneMatrix,template,result,CV\_TM\_CCORR\_NORMED$\;	
-	Get the maximum value and position in $result$ matrix\; 
+	\tcp{Get the maximum value and position in $result$ matrix}
+	$double$ $maxValue, minValue$\;
+	$Point$ $maxLoc, minLoc$\;
+	$cv::minMaxLoc(result, \&minValue, \&maxValue, \&minLoc, \&maxLoc, Mat())$\;
 	Compute the position of landmark from maximum position\;
 	Push the landmark into the list $sceneLandmarks$\;
 }
