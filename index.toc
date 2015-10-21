@@ -30,8 +30,7 @@
 \contentsline {subsection}{\numberline {4.2.4}Probabilistic Hough transform}{25}
 \contentsline {subsection}{\numberline {4.2.5}Template matching}{26}
 \contentsline {subsubsection}{Cross-correlation}{26}
-\contentsline {subsubsection}{Estimating the landmarks by applying cross-correlation}{26}
-\contentsline {subsubsection}{Template matching}{28}
+\contentsline {subsubsection}{Template matching}{26}
 \contentsline {chapter}{\numberline {5}Implementation}{29}
 \contentsline {section}{\numberline {5.1}Software architecture}{29}
 \contentsline {section}{\numberline {5.2}Image preprocessing}{30}

@@ -226,8 +226,8 @@ The value of this method when we normalized computation as below:
 R_{ccorr\_norm}(x,y) =\frac{R_{ccorr}(x,y)}{Z(x,y)} = \frac{\sum\limits_{x',y'}[T(x'.y').I(x + x', y + y')]}{\sqrt{\sum\limits_{x',y'}T(x'.y')^{2}.\sum\limits_{x',y'}I(x + x', y + y')^{2}}}
 \end{equation}
 \end{center}
-\subsubsection{Estimating the landmarks by applying cross-correlation}
-Now, back to the our problem. With a reference image and its set of landmarks. We need to find the landmarks position on a set of scene image by using cross-correlation. In this case, the template is a region around each landmark in reference image and the image is each scene image.\\[0.2cm]
+\subsubsection{Template matching}
+Now, back to the our problem. With a reference image and its set of landmarks. We need to find the landmarks position on a set of scene image by using cross-correlation. In this case, the template is a region around each landmark in reference image and the image is also a region around the Hough landmark detection in scene image. Hence, to save the time to process, before applying the cross-correlation, the scene image rotated to match with model using Hough estimate.\\[0.2cm]
 For each landmarks in reference image, we create a bounding box around the landmarks with an arbitrary size and use landmark as center point. When create the bounding box, we also need to keep the distance between left corner to the landmarks, because sometime, with the landmark position, the size of bounding box can be over the size of image. Use this box as template and do the cross-correlation with each scene image. The results obtained store the location where template match with image. From these position, we can indicate the position of each landmark of reference image on scene image. The algorithms to create the bounding box and apply the cross-correlation to detect reference landmarks in scene described follows:\\[0.2cm]
 \begin{algorithm}[H]
 \Indm 
@@ -277,8 +277,6 @@ Return the list of landmarks\;
 \caption{Algorithm to get the position of reference landmarks in scene image}
 \label{alccross}
 \end{algorithm}~\\[0.2cm]
-
-\subsubsection{Template matching}
 
 
 
