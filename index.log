@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.7.10)  22 OCT 2015 22:00
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.23)  23 OCT 2015 17:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **index.tex
 (./index.tex
 LaTeX2e <2011/06/27>
-Babel <3.9h> and hyphenation patterns for 4 languages loaded.
+Babel <3.9h> and hyphenation patterns for 78 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
@@ -543,17 +543,47 @@ File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/bx/n' in size <10.95> not available
 (Font)              Font shape `OML/cmm/b/it' tried instead on input line 53.
- [33] [34])
+ [33] [34]
 [35]
+Overfull \hbox (1.56541pt too wide) in paragraph at lines 147--148
+[]\OT1/cmr/bx/n/10.95 bhattacharyyaMetric(sceneHist: Lo-cal-His-togram, dis-tan
+ceAxis: int, an-gleAcc:
+ []
+
+[36] [37]
+Overfull \hbox (20.59248pt too wide) in paragraph at lines 186--187
+[]\OT1/cmr/bx/n/10.95 getDistanceMetric(refHist: Shape-His-togram, scene-Hist: 
+Shape-His-togram, match-
+ []
+
+
+Overfull \hbox (15.24066pt too wide) in paragraph at lines 187--188
+[]\OT1/cmr/bx/n/10.95 pghHistogramMatching(refImage: Im-age, sceneIm-age: Im-ag
+e, match-ing: Match-
+ []
+
+
+Overfull \hbox (12.75261pt too wide) in paragraph at lines 188--189
+[]\OT1/cmr/bx/n/10.95 pghHistogramDirectoryMatching(refImage: Im-age, fold-er-P
+ath: QString, match-
+ []
+
+[38] [39]
+Overfull \hbox (2.4034pt too wide) in paragraph at lines 242--243
+[]\OT1/cmr/bx/n/10.95 phtDirectory(mImage: Im-age, mlm-Path: QString, sceneDir:
+ QString, saveDir:
+ []
+
+[40]) [41]
 \openout2 = `includes/conclusion.aux'.
 
  (./includes/conclusion.tex
 Chapter 6.
-) [36
+) [42
 
 
 
-] (./index.bbl) [37
+] (./index.bbl) [43
 
 
 ] (./index.aux (./includes/cover.aux)
@@ -569,12 +599,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5080 strings out of 494985
- 75532 string characters out of 6180356
- 169199 words of memory out of 5000000
- 8145 multiletter control sequences out of 15000+600000
+ 5080 strings out of 493304
+ 75532 string characters out of 6139871
+ 173335 words of memory out of 5000000
+ 8387 multiletter control sequences out of 15000+600000
  16808 words of font info for 59 fonts, out of 8000000 for 9000
- 36 hyphenation exceptions out of 8191
+ 957 hyphenation exceptions out of 8191
  44i,26n,49p,1075b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
@@ -594,10 +624,10 @@ live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on index.pdf (42 pages, 2799267 bytes).
+Output written on index.pdf (48 pages, 2811420 bytes).
 PDF statistics:
- 233 PDF objects out of 1000 (max. 8388607)
- 153 compressed objects within 2 object streams
+ 252 PDF objects out of 1000 (max. 8388607)
+ 166 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
