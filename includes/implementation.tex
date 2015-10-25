@@ -7,7 +7,7 @@ Continue the IMP tool, all the functions for this task was saved in the \textbf{
 \caption{The class diagram of program}
 \label{fig:cdiagram}
 \end{figure}
-The class diagram\footnote{See the full image in Appendix} in \ref{fig:cdiagram} show mainly classes of my task. The \textit{mainly} methods located in the \textit{ImageViewer} class, where contains all functions of the software. To represent the information of image and preprocessing about clear the yellow grid, we use the classes such as \textit{Line}, \textit{Edge}, \textit{Landmark}, \textit{YellowGird}, \textit{Image} class. For the edge segmentation, construct the geometric histogram and landmarks detection, we have \textit{GFeatures}, \textit{LocalHistogram}, \textit{ShapeHistogram}, \textit{EdgeSegmentation}, \textit{LandmarkDection} class. All the main functions were inherated from the \textit{IExtraction} interface and used in \textit{main} class via the \textit{Sceneario} class. The aim, properties and methods in each class was discussed in below sections.
+The class diagram\footnote{See the full image in Appendix} in \ref{fig:cdiagram} show mainly classes of my task. The \textit{mainly} methods located in the \textit{ImageViewer} class, where contains all functions of the software. To represent the information of image and preprocessing about clear the yellow grid, we use the classes such as \textit{Line}, \textit{Edge}, \textit{Landmark}, \textit{YellowGird}, \textit{Image} class. For the edge segmentation, construct the pairwise geometric histogram, probabilistic hough transform and landmarks detection, we have \textit{GFeatures}, \textit{LocalHistogram}, \textit{ShapeHistogram}, \textit{EdgeSegmentation}, \textit{PHTransform} \textit{LandmarkDection} class. The main functions were inherated from the abstract classes \textit{HistogramMethod}, \textit{SegmentMethod}, \textit{HoughMethod}, \textit{LandmarkMethod} respective and used in \textit{main} class (\textit{ImageViewer}) via the \textit{Sceneario} class. The description, properties and methods in each class was discussed in below sections.
 \section{Image preprocessing}
 The \textit{Image processing} section describes the information about the classes which describe the geometric objects can be represent the image and the method to remove the yellow grid on the images.
 \subsection{Line class}
@@ -30,7 +30,7 @@ The \textit{Image processing} section describes the information about the classe
 \item\textbf{angleBetweenTwoLines(objectLine: Line)}: Compute the angle between two lines.
 \item\textbf{checkBelongPoint(point: Point)}: Check a point stay on the line or not. If the point stay on the line, the return value is true; otherwise, return false.
 \item\textbf{intersection(objectLine: Line)}: Finding the intersection point of two lines. If two lines have intersect, the method will return the coordinate of intersection point; otherwise, method will return a negative point.
-\item\textbf{interection(equation1:vector<double>, equation2: vector<doube>)}: Finding the intersection of two lines. In this case, the lines presented under $y=ax + b$, and vector input contains three coefficient of line.
+\item\textbf{interection(equation1:vector\textless double\textgreater, equation2: vector\textless double\textgreater)}: Finding the intersection of two lines. In this case, the lines presented under $y=ax + b$, and vector input contains three coefficient of line.
 \item\textbf{pairwiseHistogram(objectLine: Line)}: Finding the geometric features between two lines. The return value is an \textbf{GFeatures} object, it includes the information of angle between two lines, the distance from two endpoints of \textit{objectLine} to the reference line.
 \item\textbf{equationOfLine()}: Calculate the equation of line. 
 \item\textbf{drawing(outputImage: Mat)}: Drawing the line on the output image.
@@ -99,6 +99,8 @@ The \textbf{Edge} class used to presented for a curve and the methods with edge.
 \item\textbf{readImagesFolder(folderPath: QString)}: Read the images from a folder.
 \item\textbf{getName()}: Get name only of image.
 \end{itemize}
+\section{The abstract classes}
+The abstract classes contains the abstract methods get the actions on image such as segmentation, PGH construction,.... The methods were implemented by the inherit classes, respective and provide the way access to action for other classes. The abstract classes include: \textit{HistogramMethod} class, \textit{SegmentMethod} class, \textit{HoughMethod} class, \textit{LandmarkMethod} class.
 \section{Edge segmentation }
 This section describes the classes used for segment an image. Besides the classes construct the edge which described in previous section such as \textit{Line, Edge,...}, we also provide the access method for another classes.\\[0.2cm]
 The \textbf{EdgeSegmentation} class provides the methods such as obtain the lines from an image, presentation the result after segmentation or applying the segmentation on an images folder. The detail methods as below:
