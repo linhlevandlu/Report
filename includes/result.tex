@@ -1,14 +1,18 @@
 \chapter{Result}
 \section{Experimentations}
-The experimentation based on a machine equipped with Intel(R) Core(TM) i7-4790 CPU 3.6GHz, 16 GB of RAM. The dataset is two set of biological images: \textit{Mandibule droite and mandibule gauche}. For each dataset, it includes 293 images(3264 x 2448). 
-\subsection{The bad files}
-In some cases, program can not estimate the landmarks because the scene image is empty. The bad images showed as below:
-\begin{multicols}{2}
+The experimentation based on a machine equipped with Intel(R) Core(TM) i7-4790 CPU 3.6GHz, 16 GB of RAM. The testing data is two set of biological images: \textit{Right mandible and left mandible}. For each dataset, it includes 293 images(3264 x 2448). However, the data was filtered by suppressing the bad images in both dataset. The bad images includes the empty images and broken images (image contains the broken object). They are showed as below:
+\begin{multicols}{3}
 \begin{itemize}
-\item Md 146.JPG (empty image)
-\item Md 238.JPG (empty image)
-\item Mg 003.JPG (empty image)
-\item Mg 248.JPG (empty image)
+\item Md 004.JPG
+\item Md 146.JPG
+\item Md 238.JPG
+\item Mg 003.JPG
+\item Mg 007.JPG
+\item Mg 040.JPG
+\item Mg 066.JPG
+\item Mg 159.JPG
+\item Mg 248.JPG
+\item Mg 292.JPG
 \end{itemize} 
 \end{multicols}
 \subsection{Parameters}
@@ -33,12 +37,12 @@ The conditions to predicate two pairs of lines are similar (used in method \text
 To increase the flexible of program, all parameters was placed in the resources files (\textbf{data/resources} folder). For each group parameters, it was putted in a file, it can be easy to manage.
 \end{itemize}
 \section{Results}
-The landmarks estimated automatically based on two method: \textit{cross-corrlelation} (called method 1) and \textit{the proposed method} (called method 2). And the result obtained from the method 2 is better than the result from the method 1.
+The automated landmark identification is examined on two data sets. And the landmarks are extracted: 18 landmarks for each \textit{right mandible} image, 16 landmarks for each \textit{left mandible} image.\\[0.3cm]
 \begin{figure}[h!]
 \centering
 \subfloat[The scene image]{\label{fig:pht_1}\includegraphics[width=0.45\textwidth]{./images/md32}}~~
 \subfloat[The scene image with estimated landmarks ]{\label{fig:pht_2}\includegraphics[width=0.45\textwidth]{./images/est32}}
 \caption{Automatic identification the landmarks}
 \label{fig:figure_31}
-
 \end{figure}
+The accuracy of system can be determined by comparing the differences(in pixels) between the landmarks located by this method and the manual landmarks. Besides, this method includes several steps, the result of each step will effect on next steps. So, to evaluate the accuracy of this method, we can evaluate the result of each step.\\
