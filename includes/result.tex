@@ -1,6 +1,6 @@
-\chapter{Result}
+\chapter{Realisation}
 \section{Experimentations}
-The experimentation based on a machine equipped with Intel(R) Core(TM) i7-4790 CPU 3.6GHz, 16 GB of RAM. The testing data is two set of biological images: \textit{Right mandible and left mandible}. For each dataset, it includes 293 images(3264 x 2448). However, the data was filtered by suppressing the bad images in both dataset. The bad images includes the empty images and broken images (image contains the broken object). They are showed as below:
+The experimentation based on a machine equipped with Intel(R) Core(TM) i7-4790 CPU 3.6GHz, 16 GB of RAM. The testing data is two set of biological images: \textit{Right mandible and left mandible}. For each dataset, it includes 293 images(3264 x 2448). However, the data was filtered by suppressing the bad images in both dataset. The bad images includes the empty images and broken images (images contain the broken object). They are showed as below:
 \begin{multicols}{3}
 \begin{itemize}
 \item Md 004.JPG
@@ -37,12 +37,29 @@ The conditions to predicate two pairs of lines are similar (used in method \text
 To increase the flexible of program, all parameters was placed in the resources files (\textbf{data/resources} folder). For each group parameters, it was putted in a file, it can be easy to manage.
 \end{itemize}
 \section{Results}
-The automated landmark identification is examined on two data sets. And the landmarks are extracted: 18 landmarks for each \textit{right mandible} image, 16 landmarks for each \textit{left mandible} image.\\[0.3cm]
+The automated landmark identification is examined on two data sets. And the landmarks are extracted: 18 landmarks for each \textit{right mandible} image, 16 landmarks for each \textit{left mandible} image.\\
+The results of this internship are integrated into IPM\footnote{Image Processing for Morphometrics} software. The clients can be use this functions to segment image or automatic extraction landmarks from image.\\
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{./images/software}
+\caption{The graphic user interface of IPM software}
+\label{fig:figure_31}
+\end{figure}
+The software provides adequately functions to process on biological image. Specially, the menu \textbf{Landmarks} contains the main result of this internship. It provides clients the functions automatically estimation landmarks or analysis the result on an image or a list of images.
 \begin{figure}[h!]
 \centering
 \subfloat[The scene image]{\label{fig:pht_1}\includegraphics[width=0.45\textwidth]{./images/md32}}~~
 \subfloat[The scene image with estimated landmarks ]{\label{fig:pht_2}\includegraphics[width=0.45\textwidth]{./images/est32}}
 \caption{Automatic identification the landmarks}
 \label{fig:figure_31}
-\end{figure}
-The accuracy of system can be determined by comparing the differences(in pixels) between the landmarks located by this method and the manual landmarks. Besides, this method includes several steps, the result of each step will effect on next steps. So, to evaluate the accuracy of this method, we can evaluate the result of each step.\\
+\end{figure}~\\
+The accuracy of estimated landmarks can be determined by comparing the differences(in pixels) between the landmarks located by this method and the manual landmarks. This method has to pass several steps, the result of each step will effect on next steps. So, to evaluate the accuracy of this method, we can evaluate the result of each step.\\
+Besides, other functions also developed and integrated into IPM software, as followed:
+\begin{itemize}
+\item Image segmentation by analysing histogram (in \textbf{Segmentation} menu)
+\item Removing the yellow grid on image (in \textbf{Utilities} menu)
+\item Loading the manual landmarks (in \textbf{Utilities} menu)
+\item Computing the pairwise geometric histogram (PGH) of image (in \textbf{Utilities} menu)
+\item Computing the measure metric between PGHs by Bhattacharya, Chi-Squared or Intersection method (in \textbf{Utilities} menu)
+\end{itemize}
+
