@@ -7,7 +7,7 @@
 \contentsline {subsection}{\numberline {1.3.1}Objectives and my task}{7}
 \contentsline {subsection}{\numberline {1.3.2}Origanization of the document}{7}
 \contentsline {chapter}{\numberline {2}Background}{9}
-\contentsline {section}{\numberline {2.1}Overview about image processing}{9}
+\contentsline {section}{\numberline {2.1}An Overview about image processing}{9}
 \contentsline {section}{\numberline {2.2}Image filtering}{9}
 \contentsline {section}{\numberline {2.3}Histogram}{10}
 \contentsline {section}{\numberline {2.4}Segmentation}{11}
@@ -15,7 +15,7 @@
 \contentsline {chapter}{\numberline {3}Preprocessing image}{14}
 \contentsline {section}{\numberline {3.1}Problem}{14}
 \contentsline {section}{\numberline {3.2}Analysis}{15}
-\contentsline {subsection}{\numberline {3.2.1}Finding the limiting and the replacing point}{15}
+\contentsline {subsection}{\numberline {3.2.1}Find the limit and the replace points}{15}
 \contentsline {subsection}{\numberline {3.2.2}Replacing the grid}{17}
 \contentsline {chapter}{\numberline {4}Classification methods }{20}
 \contentsline {section}{\numberline {4.1}Preprocessing image and feature extraction}{20}
@@ -31,17 +31,17 @@
 \contentsline {subsubsection}{Estimating process}{31}
 \contentsline {subsection}{\numberline {4.2.5}Template matching}{33}
 \contentsline {subsubsection}{Cross-correlation}{33}
-\contentsline {subsubsection}{Template matching}{34}
-\contentsline {chapter}{\numberline {5}Implementation}{38}
-\contentsline {section}{\numberline {5.1}Software architecture}{38}
-\contentsline {section}{\numberline {5.2}Image preprocessing}{38}
-\contentsline {section}{\numberline {5.3}The abstract classes}{40}
-\contentsline {section}{\numberline {5.4}Edge segmentation }{40}
-\contentsline {section}{\numberline {5.5}Construct pairwise geometric histogram}{41}
-\contentsline {section}{\numberline {5.6}Estimate the global pose}{41}
-\contentsline {section}{\numberline {5.7}Refine the landmarks}{42}
-\contentsline {chapter}{\numberline {6}Realisation}{43}
-\contentsline {section}{\numberline {6.1}Experimentations}{43}
-\contentsline {subsection}{\numberline {6.1.1}Parameters}{43}
-\contentsline {section}{\numberline {6.2}Results}{44}
-\contentsline {chapter}{\numberline {7}Conclusion}{47}
+\contentsline {subsubsection}{Template matching}{35}
+\contentsline {chapter}{\numberline {5}Implementation}{39}
+\contentsline {section}{\numberline {5.1}Software architecture}{39}
+\contentsline {section}{\numberline {5.2}Image preprocessing}{39}
+\contentsline {section}{\numberline {5.3}The abstract classes}{41}
+\contentsline {section}{\numberline {5.4}Edge segmentation }{41}
+\contentsline {section}{\numberline {5.5}Construct pairwise geometric histogram}{42}
+\contentsline {section}{\numberline {5.6}Estimate the global pose}{42}
+\contentsline {section}{\numberline {5.7}Refine the landmarks}{43}
+\contentsline {chapter}{\numberline {6}Realisation}{44}
+\contentsline {section}{\numberline {6.1}Experimentation}{44}
+\contentsline {subsection}{\numberline {6.1.1}Parameters}{44}
+\contentsline {section}{\numberline {6.2}Results}{45}
+\contentsline {chapter}{\numberline {7}Conclusion}{48}
