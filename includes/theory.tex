@@ -1,5 +1,5 @@
-\chapter{Background}\section{An Overview about image processing}
-Nowadays, we have a lot of programs which used to edit photos (e.g. Photoshop, Gimp, MSPaint,...). By applying some techniques, we can effect some properties to change the images such as: scaling, blurring, rotating image,etc. Actually, an image is presented by a set of pixels. Each pixel carries a value which presents the color at that location. When combing the values of all the pixels, we obtain the image as it in the real word. The changing on image really changes the value of each pixel in an image. Behind the techniques in these programs are mathematical operations and a field that used mathematical operation to an input image,  which is \textit{image processing}. The output of the image processing process may be either an image or a set of characteristics related to the image. And most of the image processing techniques are performed on two-dimensional images. In image processing, we have a lot of operators. In this chapter, we introduce some basis operations that are often used as the object of this internship.
+\chapter{Morphometric}
+Image processing is a field that used mathematical operation to an input image. The output of the image processing process may be either an image or a set of characteristics related to the image. And most of the image processing techniques are performed on two-dimensional images. In image processing, we have a lot of operators used for measure the form of image. In this chapter, we introduce some basis operations that are often used as the object of this internship.
 \section{Image filtering}
 Image filtering is a process to modify or enhance the image's quality. This is known as a ``neighborhood" operation. The neighborhood is a set of pixels around a selected pixel. In image processing, with a pixel, we may obtain have 4-neighbors or 8-neighbors of it. Image filtering determines the value at the selected pixel by applying some operations with the values of its neighbors. One of the filtering operators is smoothing, also named blurring. This technique is used in preprocessing steps, particularly in noise reduction. With a matrix called kernel. It was sliding over the image. At each position, the output of a value at that position is calculated by meaning its neighborhoods value.
 In image processing, we have many filtering techniques. But there are 2 main types:\\[0.2cm]
@@ -44,6 +44,9 @@ The usage of colors in image processing are not limit in identifying or extracti
 \end{itemize}
 The most popular color operations in image processing fields is transformation. It is a process to convert image between the color models by using a transform expression such as BGR to HSV, HSV to BGR, BGR to Grayscale.\\[0.2cm]
 Besides, by considering a specific characteristic of each color space, allow as us classify the pixels in the image. This idea can be used to segment objects of an image. HSV model is widely used to compare the color because the range of color (Hue value) is specific.
+
+% block comment ---- \iffalse....\fi
+\iffalse
 \begin{figure}[h!]
 \centering
 \subfloat[An image in BGR mode (source image)]{\label{fig:example_1}\includegraphics[width=0.4\textwidth]{./images/lenna}}~~
@@ -51,4 +54,5 @@ Besides, by considering a specific characteristic of each color space, allow as 
 \caption{The images with color transformation from BGR to Gray}
 \label{fig:figure_31}
 \end{figure}
+\fi
 

@@ -1,18 +1,16 @@
-\chapter{Classification methods }
-In the previous chapter, we introduce a method to remove the unexpected object. In this chapter, we will implement a method to obtain the features what we are interested in and the method to detect the landmarks on the insect. This method was proposed by Palaniswamy$^{\cite{palaniswamy2010automatic}}$. The process can be discuss in the following steps:
+\chapter{Analysis}
+In this chapter, we describe a method to automatic extraction landmarks from biological images. This method was proposed by Palaniswamy$^{\cite{palaniswamy2010automatic}}$ and the process includes some steps as follows:
 \begin{enumerate}
-\item Extracting the features,
-\item Constructing and comparing the pairwise geometric histogram,
-\item Estimating the pose by the probabilistic Hough transform,
-\item Detecting the landmarks by template matching,
-\item Classifying by statistical method.
+\item Segmentation (includes preprocessing image and extracting the features),
+\item Construction and comparison the Pairwise Geometric Histogram,
+\item Estimation the global pose of object by the Probabilistic Hough Transform,
+\item Refinement the estimated landmarks by template matching.
 \end{enumerate}
-\section{Preprocessing image and feature extraction}
-To obtain a good result, before extracting the features in an image, we need to pre-process the image with an appropriate technique to reduce the noise as well as to enhance the features that we care. 
-Feature extraction is a process to extract interested features from the digital image. The expected result in this process is the list of the approximate lines which are used to construct the pairwise geometric histogram. \\[0.2cm]
-The process mainly separate into two stages: firstly, we pre-process image. In this stage, we reduce the noise in image by finding a threshold value and applying the thresholding technique to obtain the interested features. Secondly, we extract the features based on the edge segmentation. By applying the appropriate technique to obtain the step edges and broken the edges into approximate lines.
+\section{Segmentation}
+Segmentation is a process to extract interested features (lines) from the digital image. The expected result in this process is the list of the approximate lines which are used to construct the pairwise geometric histogram. \\[0.2cm]
+The process mainly separate into two stages: firstly, we pre-process image; secondly, we extract the image's features. In first stage, we reduce the noise in image by finding a threshold value and applying the thresholding technique to obtain the interested features. In second stage, we extract the features based on the edge segmentation. By applying the appropriate technique to obtain the step edges and broken the edges into approximate lines.
 \subsection{Preprocess image}
-In this application, we use the thresholding technique to pre-process the image. In thresholding technique, using a threshold value ``t", we can decrease the noise and obtain the interested features. The threshold value can be defined by the histogram analysis.\\[0.2cm]
+In this application, we use the thresholding technique to pre-process the image. In thresholding technique, using a threshold value \textbf{``t"}, we can decrease the noise and obtain the interested features. The threshold value can be defined by the histogram analysis.\\[0.2cm]
 Based on the histogram of the original image, we compute the mean and the median of this histogram. With the histogram obtained, we split it into two parts: the first part starts from the bin 0 to the limit value (the limit value is the smallest value between mean and median); the second part, starts from the limit value to the end of the histogram. For each part, we find the maximum, minimum value and calculating the mean of it. The value ``t" obtained by the mean of the two mean values in two parts of histogram.\\
 With the threshold value ``t", we apply the threshold technique to pre-process image in the CV\_THRESH\_BINARY mode (keep the pixel has value greater than threshold value).\\
 \IncMargin{1em}
@@ -114,12 +112,12 @@ Declare a variable: $distance \leftarrow 0$\;
 }
 \caption{Algorithm to segment an edge}
 \end{algorithm}\DecMargin{1em}
-\section{Pairwise geometric histogram}
-Pairwise geometric histogram(PGH)$^{\cite{evans1993use}}$ is used to encode the relative information between a line and a set of lines in an object. Therefore, an object can be represented by a set of PGH. From the set of PGH, we can reconstructed the object or compare to another object. In this section, we introduce the construction of a PGH for an object based on the geometrical relationship and compute the similar distance between two objects.
+\section{Pairwise Geometric Histogram}
+Pairwise Geometric Histogram(PGH)$^{\cite{evans1993use}}$ is used to encode the relative information between a line and a set of lines in an object. Therefore, an object can be represented by a set of PGH. From the set of PGH, we can reconstructed the object or compare to another object. In this section, we introduce the construction of a PGH for an object based on the geometrical relationship and compute the similar distance between two objects.
 
 \subsection{Local pairwise geometric histogram}
 The PGH is constructed on the geometric features between lines relative. The geometric features are characteristic which can describe the geometric shape such as angle, the length of line, perpendicular between two lines, .... For the shape representation, the relative angle and perpendicular distance is geometrical features useful. \\
-The Local PGH presented the relationship between a reference line with another lines. The proceed to construct the PGH between two lines was described in below:
+The proceed to construct the PGH between two lines was described in below:
 \begin{itemize}
 \item Choose the reference line (other lines called object lines),
 \item Compute the angle between the reference line and the object lines,
@@ -132,12 +130,12 @@ The Local PGH presented the relationship between a reference line with another l
 \subfloat[The pairwise geometric histogram ]{\label{fig:example_2}\includegraphics[width=0.3\textwidth]{./images/PGH}}
 \caption{Example about geometric features and the pairwise geometric histogram}
 \label{fig:figure_31}
-\end{figure}~\\
-The frequency of the geometric features is recorded as a two dimensional histogram with an angle axis (0 - $\pi$) and distance axis (range of perpendicular distance, $d_{max}$ is the maximum distance on all distance of two arbitrary lines). The entries on PGH describes the geometric relationship between the reference line and the object lines. The blurring of entry along the axis regarding the true position and orientation of each object lines for reference line. Following the accuracy, we can indicate the size of histogram and normalize the value to match with size of histogram.
+\end{figure}
+The local PGH presented the relationship between a reference line with other lines of shape. Thus, for an object, we can construct a local PGH for each line in object. The frequency of the geometric features is recorded as a two dimensional histogram with an angle axis (0 - $\pi$) and distance axis (range of perpendicular distance, $d_{max}$ is the maximum distance on all distance of two arbitrary lines). The entries on PGH describes the geometric relationship between the reference line and the object lines. The blurring of entry along the axis regarding the true position and orientation of each object lines for reference line. Following the accuracy, we can indicate the size of histogram and normalize the value to match with size of histogram.
 \subsection{Global pairwise histogram}
-Based on the constructor of a line in an object. The object is encoded by recording PGH for all lines within object. If the object is defined by n lines, the full shape representation will composed of n pairwise geometric histograms. This method is good when we apply some variants on the image, such as translate or rotate the image because the angle and perpendicular distance between a pair of lines are invariant.
+Based on the PGH constructor of a line in object (local PGH). The object is encoded by recording PGH for all lines within object. If the object is defined by n lines, the global pairwise histogram will composed of n local PGHs. This method is good when we apply some variants on the image, such as translate or rotate the image because the angle and perpendicular distance between a pair of lines are invariant.
 \subsection{Histogram matching}
-``The histogram matching enables robust classification of shape features by finding similarity between the scene and reference model"$^{\cite{palaniswamy2010automatic}}$. The similar between two models can obtain via the similar distance, which is computed by comparing their probability distribution on geometric histogram. In our program, each image is represented by a comprises of many geometric histograms and uses the Bhattacharya metric to determine the similar distance between the two models $^{\cite{palaniswamy2010automatic}}$. In general, we have normalize the histograms before comparing. The form of Bhattacharrya metric used to compute the degree of 2 model:
+\textbf{``The histogram matching enables robust classification of shape features by finding similarity between the scene and reference model"}$^{\cite{palaniswamy2010automatic}}$. The similar between two models can obtain via the similar distance, which is computed by comparing their probability distribution on geometric histogram. In our program, each image is represented by a comprises of many geometric histograms and uses the Bhattacharya metric to determine the similar distance between the two models $^{\cite{palaniswamy2010automatic}}$. In general, we have normalize the histograms before comparing. The form of Bhattacharrya metric used to compute the degree of 2 model:
 \begin{center}
 \begin{equation} \label{eq:1}
 d_{Bhattacharyya} (H_{i}H_{j}) = \sum\limits_{\theta}^{\pi}\sum\limits_{d}^{d_{max}}\sqrt{H_{i}(\theta,d)H_{j}(\theta,d)}
@@ -150,17 +148,7 @@ The significance of parameters in the formula \ref{eq:1}, as follows:
 \item $H_{i}(\theta,d)$ is an entry at row $\theta$ and column d in histogram of image \textit{i}
 \item $H_{j}(\theta,d)$ is an entry at row $\theta$ and column d in histogram of image \textit{j}
 \end{itemize}
-By default, the range of angle axis is from 0 to 180 degree (correspondence with 180 degree). Based on the accuracy of the program, we increase the range of the angle axis. This design allows increasing the range of angle axis to times in conformed default value. For Example, the table below shows the result when calculating Bhattacharya distance between image \textit{Md 028.JPG} and some images with different accuracy:
-\begin{center}
-\begin{tabular}{|l|l|c|c|c|c|c|c|}
-\hline
-Reference image & Scene image & 180 & 2 * 180 & 4 * 180 & 6 * 180 \\ \hline
-Md 028.JPG & Md 001.JPG & 0.977953 & 0.964167 & 0.93861 & 0.91471 \\ \hline
-Md 028.JPG & Md 005.JPG & 0.96479 & 0.943657 & 0.906444 & 0.871756  \\ \hline
-Md 028.JPG & Md 010.JPG & 0.976241 & 0.958061 & 0.925943 & 0.896445 \\ \hline
-Md 028.JPG & Md 027.JPG & 0.980728 & 0.968233 & 0.945442 & 0.92485 \\ \hline
-\end{tabular}
-\end{center}
+Based on the accuracy of the program, we can change the range of the angle and distance axis. 
 Besides the Bhattacharya metric, we may choose another metric to matching the histograms, such as: \textbf{Chi-squared} metric and \textbf{Intersection} metric. The forms are presented as below:\\
 \textbf{Chi-squared metric:}
 \begin{center}
@@ -176,8 +164,8 @@ d_{Intersection} (H_{i}H_{j}) = \sum\limits_{\theta}^{\pi}\sum\limits_{d}^{d_{ma
 \end{center}
 The significance of parameters in formula (\ref{eq:2}) and (\ref{eq:3}) are similar to formula (\ref{eq:1}). For the Bhattacharyya and Intersection metric, the perfect match is 1 and the total mismatch is 0. The result is opposite to Chi-squared metric (0 for perfect match and 1 for total mismatch).\\[0.2cm]
 Hence, depending on the purpose of the comparison subject will choose a suitable comparing method. In this program, we propose three methods to obtain a general result when matching the histograms.
-\subsection{Probabilistic Hough transform}
-The probabilistic Hough transform (PHT) is used to estimate the global shape$^{\cite{ashbrook1995robust}}$. Based on a group of features within the scene, identifying the represent of a model image in a scene image. The hypothesised location of the model in the scene is indicated based on the conditional probability that any pair scene lines agreement about a position in model.\\[0.3cm]
+\section{Probabilistic Hough transform}
+The Probabilistic Hough Transform (PHT) is used to estimate the global pose of shape$^{\cite{ashbrook1995robust}}$. Based on a group of features within the scene, identifying the represent of a model image in a scene image. The hypothesised location of the model in the scene is indicated based on the conditional probability that any pair scene lines agreement about a position in model.\\[0.3cm]
 Estimating the global shape has two main stages. Firstly, training process starts with recording the perpendicular distance and the angle from a reference point to each pair of model lines. Secondly, predicting the pose of scene different from the model, then we estimate the location of the landmarks. We create a Hough space to store value if exist a pair of scene lines matching to the entry in the training process. The peak in Hough space is assumed as the reference point of the model in the scene. From this reference point, we can estimate the reference landmarks of reference image on the scene.
 The process to estimate the global pose is described as follows:
 \begin{itemize}
@@ -192,12 +180,12 @@ The process to estimate the global pose is described as follows:
 In the example below, we apply the PHT to estimate the landmarks of the model to the scene. The image in figure \ref{fig:pht_1} as the model. In the model, the small red circle and large red circles are the reference point and the landmarks in model, respectively. The image in figure \ref{fig:pht_2} as scene. By applying the PHT, we estimate the reference point (green circle) in the scene and the location of the landmarks (the yellow circles).
 \begin{figure}[h!]
 \centering
-\subfloat[The model image]{\label{fig:pht_1}\includegraphics[width=0.35\textwidth]{./images/pht_1}}~~
-\subfloat[The scene image ]{\label{fig:pht_2}\includegraphics[width=0.35\textwidth]{./images/pht_2}}
+\subfloat[The model image]{\label{fig:pht_1}\includegraphics[width=0.45\textwidth]{./images/pht_1}}~~
+\subfloat[The scene image ]{\label{fig:pht_2}\includegraphics[width=0.45\textwidth]{./images/pht_2}}
 \caption{The landmarks estimated by probabilistic Hough transform}
 \label{fig:figure_31}
 \end{figure}
-\subsubsection{Training process}
+\subsection{Training process}
 In this step, recording the perpendicular distance and angle from each pair model lines to a reference point (called reference table). The reference point can be chosen at arbitrary position on the model image. To reduce the time complexity processing the next step, we consider the ``closet pair lines". In this application, the reference point chosen at the center of image and the closet pair lines are pair of lines have all three conditions: the length of each line greater than 60 pixels, the lines are not parallel and the distance between them is less than 5 pixels. The algorithm considers a pair of closet lines and constructs the reference table as follows:\\[0.2cm]
 \begin{algorithm}[H]
 \Indm 
@@ -230,13 +218,13 @@ Declare the reference table $refTable$ \;
 		}
 	}
 }
-return reference table \;
+return $refTable$ \;
 \caption{Algorithm to construct the reference table}
 \end{algorithm}~\\
-\subsubsection{Estimating process}
-The estimating process is duration that estimating the reference landmarks on the scene image. Firstly, we find the reference point on scene image. Secondly, we estimate the reference landmarks on the scene image from the reference point.\\[0.2cm]
+\subsection{Estimating process}
+The estimating process is duration that estimating the reference landmarks on the scene image. Firstly, we find the reference point on scene image. Secondly, we estimate the reference landmarks on the scene image from the position of reference point in the scene image.\\[0.2cm]
 By finding a pair of scene lines agree with a pair of model lines, we can detect the position of the reference point on scene image. We create an accumulator to store each agreement between the pair of scene lines and the pair of model lines. For each pair of scene lines, we find its exist in the reference table and increase the value at correspondence position in accumulator. At the end, we obtain a pair of scene lines and pair of model lines correspondence with the maximum value in accumulator. By extending the perpendicular lines of the pair of scene lines at the appropriate position, we meet the reference point at the intersection.\\[0.2cm]
-In our program, two pair lines are supposed to be agreement if the angle difference between them is less than one degree and the length scale is less than two. Two followed algorithms describe the definition between the two pair lines and finding the position of reference point in scene image.\\[0.2cm]
+In our program, two pair lines are supposed to be agreement if the angle difference between them is less than one degree, the length scale is less than 1 and the distance between two pair of lines is less than two. Two followed algorithms describe the definition between the two pair lines and finding the position of reference point in scene image.\\[0.2cm]
 \begin{algorithm}[H]
 \Indm 
 \KwData{line1 (the first reference line), line2 (the second reference line), sline1 (the first scene line), sline2 (the second scene line)}
@@ -244,7 +232,11 @@ In our program, two pair lines are supposed to be agreement if the angle differe
 \Indp
 $angle1$ $\leftarrow$ angle between $line1$ and $line2$\;
 $angle2$ $\leftarrow$ angle between $sline1$ and $sline2$\;
-\If{$abs(ange1$ - $angle2) < 1$ $and$ $abs(line1.length()/sline1.length()$ - $line2.length()/sline2.length()) < 2$}{
+$mdistance$ $\leftarrow$ sum of perpendicular distance from two endpoints of $line1$ to $line2$\;
+$sdistance$ $\leftarrow$ sum of perpendicular distance from two endpoints of $sline1$ to $sline2$\;
+\If{$abs(ange1$ - $angle2) < 1$ \\
+	$and$ $abs(line1.length()/sline1.length()$ - $line2.length()/sline2.length()) < 1$ \\
+	$and$ $abs(mdistance$ - $sdistance) < 2$}{
 	return $true$\;
 }
 return $false$ \;
@@ -253,15 +245,15 @@ return $false$ \;
 \begin{algorithm}[H]
 \Indm 
 \KwData{refTable (the reference table), slines (pair of scene lines)}
-\KwResult{The entry in reference table}
+\KwResult{The entries in reference table similar with pair of scene lines}
 \Indp
-Declare the entry in reference table $entry$ \;
+Declare the return entries in reference table $entries$ \;
 \For{ entry $et$ in $refTable$}{
 	\If{agree between lines in entry and $slines$}{
-		$entry$ $\leftarrow$ $et$\;
+		put the entry $et$ into list of entries $entries$\;
 	}
 }
-return $entry$ \;
+return $entries$ \;
 \caption{Algorithm to find the agreement of pair scene lines in model}
 \end{algorithm}~\\[0.2cm]
 \begin{algorithm}[H]
@@ -287,9 +279,9 @@ return $intersect$ \;
 \caption{Algorithm to find the reference point in scene}
 \end{algorithm}~\\[0.2cm]
 By finding the reference point, the landmarks in the scene image can be estimated by calculating the relatedness between the reference point and the reference landmarks. Besides, we also record the difference about rotation, orientation and scale between the model image and the scene image.
-\subsection{Template matching}
-Template matching is the process to refine the estimated landmarks of the scene image with an appropriate method.
-\subsubsection{Cross-correlation}
+\section{Template matching}
+Template matching is the process to refine the estimated landmarks, which was obtained by PHT of the scene image with an appropriate method.
+\subsection{Cross-correlation}
 Cross-correlation is a method of estimating the similarity between the two signals. By computing the sum of products between two signals when sliding, and choose the maximal value. It is used for searching a short signal in a longer signal. In image processing, it used to detect the present of an object (template) in a large object (image). The equation of cross-correlation is as follows (equation \ref{eq:cross-correlation}):
 \begin{center}
 \begin{equation}\label{eq:cross-correlation}
@@ -316,7 +308,7 @@ The value of this method when we normalized computation as below:
 R_{ccorr\_norm}(x,y) =\frac{R_{ccorr}(x,y)}{Z(x,y)} = \frac{\sum\limits_{x',y'}[T(x'.y').I(x + x', y + y')]}{\sqrt{\sum\limits_{x',y'}T(x'.y')^{2}.\sum\limits_{x',y'}I(x + x', y + y')^{2}}}
 \end{equation}
 \end{center}
-\subsubsection{Template matching}
+\subsection{Template matching}
 Back to our problem, with a reference image and its set of landmarks. We use the cross-correlation to refine the landmarks. In this case, the template is a region around each landmark in reference image and the image is also a region around the Hough landmark detection in scene image. Hence, to save the processing time, before applying the cross-correlation, the scene image is rotated to match with model using Hough estimate.\\[0.2cm]
 For each landmark in the reference image, we create a bounding box around the landmarks with an arbitrary size and use landmark as a center point. When create the bounding box, we need to keep the distance between left corner to the landmarks, because sometimes, with the landmark position, the size of bounding box can be over the size of image. Use this box as a template and do the cross-correlation with each scene image. The results obtained store the location where the template matches the image. From these position, we indicate the position of each landmark of reference image on scene image. The algorithm to create the bounding box around a landmark is described follows:\\[0.2cm]
 \begin{algorithm}[H]

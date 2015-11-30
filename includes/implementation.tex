@@ -1,6 +1,7 @@
- \chapter{Implementation}
+\chapter{Conception}
+This chapter describes the implementation to extract the landmarks from biological images. This work is connected to a previous one which was implemented some operations about image segmentation by NGUYEN Hoang Thao. 
 \section{Software architecture}
-Extending the IMP tool, the functions of this task are saved in the \textbf{impls\_2015} package of the program. Besides the methods created by myself, I use some methods from the OpenCV (library for image processing) and the Qt framework (framework for C++).\\[0.2cm]
+Extending the previous version of software, the functions of morphometry are saved in the \textbf{impls\_2015} package of the program. Besides the methods created by myself, I use some methods from the OpenCV (library for image processing) and the Qt framework (framework for C++).\\[0.2cm]
 \begin{figure}[p]
     \vspace*{-3cm}
     \makebox[\linewidth]{
@@ -24,7 +25,7 @@ The \texttt{EdgeSegmentation} class provides the methods such as obtaining the l
 \item Extract the approximate lines of object in an image,
 \item Extract the approximate lines of object in each image in a folder.
 \end{itemize}
-\section{Construct pairwise geometric histogram}
+\section{Pairwise Geometric Histogram}
 This section describes the classes used for PGH construction process.\\[0.2cm]
 \texttt{GFeatures} class contains the relative information of the objects in PGH such as angle, minimum distance and maximum distance. It provides the methods to get and set the relative information.\\[0.2cm]
 \texttt{LocalHistogram} class is constructed to contain the information when computing the PGH of a line in object. The chosen lines as reference lines, the local histogram is constructed based on recording the relating between reference line and other lines in object. Besides, it has the methods for the user to change the accuracy, such as the angle accuracy or the distance accuracy.\\[0.2cm]
@@ -35,7 +36,7 @@ This section describes the classes used for PGH construction process.\\[0.2cm]
 \item Compute the measured distance between the two PGHs based on \textit{Bhattacharyya}, \textit{Chi-Squared} or \textit{Intersection} metric.
 \end{itemize}
 \texttt{GeometricHistogram} class provides the access ways for other classes. By usign this class, user can compute the pairwise geometric histogram of an image and calculate the distance between the pairwise geometric histograms.
-\section{Estimate the global pose}
+\section{Estimate the global pose (Probabilistic Hough Transform)}
 This section describes the classes use probabilistic hough transform to estimate the model image from a scene image. In particular, it is estimating the reference landmarks on the scene image.\\[0.2cm]
 \texttt{HoughSpace} class contains the information about the angle and distance from a line to a reference point. These information is recorded to construct the accumulator when we apply the Probabilistic Hough Transform.\\[0.2cm]
 \texttt{PHTEntry} class presents each entry when constructing the reference table in the training process. Each entry contains the pair of lines and its information about angle and distance to a reference point.\\[0.2cm]

@@ -1,25 +1,17 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces An example about histogram\relax }}{11}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces The images with color transformation from BGR to Gray\relax }}{13}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {An image in BGR mode (source image)}}}{13}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {An image in Gray mode}}}{13}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces An example about histogram\relax }}{10}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces The input images with yellow grid\relax }}{14}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The yellow gird on the left of insect}}}{14}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The insect overlap the yellow grid}}}{14}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Example about geometric features and the pairwise geometric histogram\relax }}{19}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The geometric relationship between two lines}}}{19}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The pairwise geometric histogram }}}{19}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces The landmarks estimated by probabilistic Hough transform\relax }}{22}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The model image}}}{22}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image }}}{22}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Example about geometric features and the pairwise geometric histogram\relax }}{26}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The geometric relationship between two lines}}}{26}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The pairwise geometric histogram }}}{26}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces The landmarks estimated by probabilistic Hough transform\relax }}{30}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The model image}}}{30}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image }}}{30}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The class diagram diagram\relax }}{31}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces The class diagram diagram\relax }}{40}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces The graphic user interface of IPM software\relax }}{46}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Automatic identification of the landmarks\relax }}{46}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The scene image}}}{46}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image with estimated landmarks }}}{46}
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The graphic user interface of IPM software\relax }}{35}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Automatic identification of the landmarks\relax }}{38}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The scene image}}}{38}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image with estimated landmarks }}}{38}
