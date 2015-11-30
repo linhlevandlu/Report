@@ -1,7 +1,7 @@
 \chapter{Preprocessing image}
-Preprocessing image is a process that reducing the noises or removing the unexpected objects on image. It is used to enhance the quality of input dataset (images) when do a test for a algorithm or a method. Following the requests, we can apply one or more operations to pre-process image. In this chapter, we will discuss about a method to pre-process image within this internship. The method suggested base on the basic knowledge about the operations in image processing.
+Preprocessing image is the process that reduces the noises or removes unexpected objects from image. Preprocessing image is used to enhance the quality of input dataset (images) when doing a test of an algorithm or a method. Following the requirement, we apply one or more operations to pre-process images. In this chapter, we discuss about a method to pre-process images we applied in this internship. The method is suggested based on the basic knowledge the operations in image processing.
 \section{Problem}
-With the input dataset is a set of 293 insect images. Each image contains the parts of insect(body, head,...) and an unexpected object, specifically yellow grid (figure \ref{fig:figure_31}). To enhance the accuracy of classify method, we need to remove the grid and just keep the insect on each input image.
+With the input dataset is a set of 293 insect images. Each image contains the body parts of insect(body, head,...) and an unexpected object, specifically yellow grid (figure \ref{fig:figure_31}). To enhance the accuracy of the classify method, we need to remove the grid and just keep the insect on each input image.
 \begin{figure}[h!]
 \centering
 \subfloat[The yellow gird on the left of insect]{\label{fig:example_1}\includegraphics[width=0.4\textwidth]{./images/input1}}~~
@@ -10,17 +10,17 @@ With the input dataset is a set of 293 insect images. Each image contains the pa
 \label{fig:figure_31}
 \end{figure}
 \section{Analysis}
-Each input image contains the two objects: a part of insect (called insect) and the yellow grid (called grid). About the relative position, the grid always stayed in the left of insect, and insect can either overlap the grid. About the color, images are presented in BGR model with three main color groups: the background color, the yellow color of grid and the color of insect.\\[0.2cm]
-The method proposed to remove the grid based on the color processing. If we process the image in BGR model, the algorithm may be complex because the color at each pixel is combined of three values (blue, green, red). While HSV model has a specific channel to present the colors with clear range. We can apply this property for detecting and removing the gird. The proposed process to remove  the grid as follows:
+Each input image contains two objects: a part of an insect (named insect) and the yellow grid (named grid). About the relative position, the grid always stayed on the left of an insect, and the insect may overlap the grid. About the color, images are presented in BGR model with three main color groups: the background color, the yellow color of grid and the color of the insect.\\[0.2cm]
+The method proposed to remove the grid based on the color processing. If we process the image in BGR model, the algorithm may be complex because the color at each pixel is combined of three values (blue, green, red). Because HSV model has a specific channel to present the colors with clear range we can apply this property for detecting and removing the gird. The proposed process removes the grid as follows:
 \begin{enumerate}
-\item Find the ``\textit{limit}" point of grid: the points stay nearest outside grid.
-\item Find the ``\textit{replace}" point: location that its value used to replace for grid.
-\item Replace the grid by the value at ``\textit{replace}" point.
+\item Find the ``\textit{limit}" points of the grid: the points stay nearest outside grid.
+\item Find the ``\textit{replace}" points:  the location that its value is used to replace to the grid.
+\item Replace the grid by the value of ``\textit{replace}" point.
 \end{enumerate}
-\subsection{Finding the limiting and the replacing point}
-Browsing image to check and replace the pixels in gird need a long time. To reduce the time to do that, we should find the limit range of grid. The limit of gird is the points located out of gird and its closest. Instance of checking on all pixel, we just check the pixels stay on the left of limit points. So, The idea to find the limiting point outside of grid is finding a column that the number of \textit{yellow} points stay on this column keep within permitted level.\\
-Because the grid always stayed in the left of image and the width usually less than a two-thirds of width of image. So, to reduce the finding time, we also check from the begin of image to two-thirds of image. The result of this step is the limit points, these used for limiting the length when we check the pixels on yellow grid.\\
-\textbf{The algorithm to find the limit points are followed:}\\
+\subsection{Find the limit and the replace points}
+Browsing image to check and replace the pixels in gird needs a long time. To reduce the time complexity, we should find the limit range of the grid. The limit of the gird is defined by the points located out of the gird and its closest. Instead of checking all pixels, we check the pixels stay on the left of the limit points. The idea is to find the limiting point outside of grid is finding a column that the number of \textit{yellow} points stays on this column keep in permitted level.\\
+Because the grid always stays on the left land side of the image and the ``width" of the grid usually less than two-thirds of the width of the whole image. So, to reduce time complexity, we check from the beginning of the image to two-thirds of image. The result of this step is the limit points, these points will be used to limiting the length when we check the pixels on yellow grid.\\
+\textbf{The algorithm to find the limit points are as follows:}\\
 \begin{algorithm}[H]
 \Indm
 \KwData{$inputImage$: The input image (contains the insect and grid)}
@@ -60,9 +60,8 @@ Declare a variable $yellow\_count$ to count the number yellow points on each col
 }
 \caption{Algorithm to find the limiting points}
 \end{algorithm}~~\\
-Now, we indicate which is the color used to replace the yellow points. Hence, we choose the points having the value nearest with the background color. The histogram is ideal for choosing the position to replace, but we also have some conditions to obtain a good value.\\
-The algorithm to find the replacing points are 
-followed:\\
+Now, we indicate what is the color that used to replace the yellow points. Hence, we choose the points having the value nearest with the background color. The histogram is ideal in choosing the position to replace, but we have rules to obtain a good value.\\
+The algorithm to find the replacing points are as follows:\\
 \IncMargin{1em}
 \begin{algorithm}[H]
 \Indm 
@@ -87,9 +86,9 @@ Split the HSV image into channels\;
 \caption{Algorithm to find the replacing point}
 \end{algorithm}\DecMargin{1em}
 \subsection{Replacing the grid}
-The grid does not just contain the yellow points. It also contains the points which have the similar color with background but the brightness is difference (called \textit{miss bright} points). So, replacing the gird means replace both of yellow and \textit{miss bright} points.\\
-After having the limit and replace point, we can replace the grid by processing on all rows of image. On each row, we replace the value at each pixel by the value at replace point. This work repeated until meeting the limit points or a ``special point" (called ``break" point). It can be a point stayed on the insect or a point belong to background.\\
-For each part of the insect, the color of insect or the background also have the difference values. So, we need to define the difference special value (break point) for each part based on the file name of image.\\
+The grid does not contain only the yellow points. It also contains the points which have the similar color with the backgrounds but the brightness is difference (called \textit{miss bright} points). Thus, replacing the gird means to replace both the yellow and the \textit{miss bright} points.\\
+After having the limit and the replace point, we replace the grid by processing on all rows of image. On each row, we replace the value at each pixel by the value at replace point. This works repeatedly until meeting the limit points or a ``special point" (called ``break" point). It can be a point stays on the insect or a point belongs to the background.\\
+For each part of the insect, the color of the insect or the background also have the different values. Thus, we need to define the different special value (break point) for each parts based on the file name of the image.\\
 \IncMargin{1em}
 \begin{algorithm}[H]
 \Indm
