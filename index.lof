@@ -1,13 +1,24 @@
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces The parts of carabe\relax }}{9}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Body part of carabe}}}{9}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Pronotum part of carabe}}}{9}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Right mandible of carabe}}}{9}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Left mandible of carabe}}}{9}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Head of carabe}}}{9}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces An example about histogram\relax }}{10}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Example about noises in image\relax }}{11}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Image with noise}}}{11}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Image without noises}}}{11}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces An example about image segmentation\relax }}{13}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Original image}}}{13}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Image with line segmentation}}}{13}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Example about geometric features and the pairwise geometric histogram\relax }}{13}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The geometric relationship between two lines}}}{13}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The pairwise geometric histogram }}}{13}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces The landmarks estimated by probabilistic Hough transform\relax }}{15}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The model image}}}{15}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image }}}{15}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Example about geometric features and the pairwise geometric histogram\relax }}{19}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The geometric relationship between two lines}}}{19}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The pairwise geometric histogram }}}{19}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces The landmarks estimated by probabilistic Hough transform\relax }}{22}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The model image}}}{22}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image }}}{22}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces The class diagram diagram\relax }}{31}
 \addvspace {10\p@ }

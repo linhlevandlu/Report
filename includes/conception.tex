@@ -1,0 +1,187 @@
+\chapter{Realization}
+\section{Segmentation}
+\subsection{Pre-process image}
+
+In this application, we use the thresholding technique to pre-process the image. In thresholding technique, using a threshold value \textbf{``t"}, we can decrease the noise and obtain the interested features. The threshold value can be defined by the histogram analysis.\\[0.2cm]
+Based on the histogram of the original image, we compute the mean and the median of this histogram. With the histogram obtained, we split it into two parts: the first part starts from the bin 0 to the limit value (the limit value is the smallest value between mean and median); the second part, starts from the limit value to the end of the histogram. For each part, we find the maximum, minimum value and calculating the mean of it. The value ``t" obtained by the mean of the two mean values in two parts of histogram.\\
+With the threshold value ``t", we apply the threshold technique to pre-process image in the CV\_THRESH\_BINARY mode (keep the pixel has value greater than threshold value).\\
+\IncMargin{1em}
+\begin{algorithm}[H]
+\setstretch{1}
+\SetAlgoLined
+\Indm 
+\KwData{inputImage: the input image}
+\KwResult{outputImage: the image after processing}
+\Indp
+Convert the input image into gray scale image\;
+Calculate the histogram on gray scale image and store the result in $histogram$ variable \;
+Compute the $mean$ value and $median$ value of histogram\;
+$limit \leftarrow (mean > median$ ? $median : mean)$\;
+$limitSub \leftarrow ((limit >= 120)$ ? $(limit - 25) : (limit - 5))$\;
+Declare some variables: $int$ $imax \leftarrow -1, max \leftarrow -1$\;
+\For{$i \leftarrow$ 0 to $limitSub$}{
+	\If{$histogram[i]$ $>$ $max$}{
+		$max$ = $histogram[i]$\;
+		$imax$ = $i$\;
+	}
+}
+Declare some variables: $int$ $imin \leftarrow -1, min \leftarrow max$\;
+\For{$k \leftarrow$ imax to $limit$}{
+	\If{$histogram[k]$ $<$ $min$}{
+		$min$ = $histogram[k]$\;
+		$imin$ = $k$\;
+	}
+}
+Declare some variables: $int$ $max2 \leftarrow -1, imax2 \leftarrow -1$\;
+\For{$j \leftarrow limit $ to $end\_of\_histogram$}{
+	\If{$histogram[j]$ $>$ $max2$}{
+		$max2$ = $histogram[j]$\;
+		$imax2$ = $j$\;
+	} 
+}
+$middle1 \leftarrow (imax1 + imin)/2$ \;
+$middle2 \leftarrow (imax2 + imin)/2$ \;
+$middle \leftarrow (middle1 + middle2)/2$ \;
+Apply the threshold with threshold value is $middle$\;
+\caption{Algorithm to preprocess image}
+\end{algorithm}\DecMargin{1em}
+\subsection{Features extraction}
+
+
+
+ The threshold value used in Canny algorithm also the value used in the previous step, and the ratio between lower threshold and upper threshold is 1 : 3 (follows the article \cite{palaniswamy2010automatic} but have to be modified). In our implementation, the Canny operation used from OpenCV library\footnote{http://docs.opencv.org/modules/imgproc/doc/feature\_detection.html\#canny}, and the parameters need to be provided into Canny are:
+\begin{itemize}
+\item source: the input image (in grayscale mode)
+\item destination: the output image,
+\item low\_thresh: the first (lower) threshold value,
+\item hight\_thresh: the second (upper) threshold value,
+\item kernel\_size: size of kernel, aperture for the Sobel operator.
+\end{itemize}
+
+ The \textbf{findContours} was chosen for this goal, the result is a vector of the edges, and each edge was presented by a vector of the points. Like the Canny, the \textbf{findContours} uses OpenCV library \footnote{http://docs.opencv.org/modules/imgproc/doc/structural\_analysis\_and\_shape\_descriptors.html\#findcontours} and the parameters used in this operation are as follows:
+\begin{itemize}
+\item source: the binary input image,
+\item contours: the output. Each contours is stored in a vector of points,
+\item hierarchy: optional output vector, containing information about the image topology,
+\item mode: contours retrieve mode,
+\item method: contours approximation method,
+\item offset: optional offset by which every contour point is shifted.
+\end{itemize}
+\subsection{Edge segmentation}
+The method to segment the edges is the recursive algorithm$^{\cite{thacker1995assessing}}$ but it has some changes in the ``stop condition" of the algorithm to simplify, as follows:
+\begin{itemize}
+\item Establish a line \textit{``l"} between two endpoints of the edge.
+\item For each point on edge, we compute the perpendicular distance from it to the line l and keep the point which has the maximum perpendicular distance.
+\item If the maximum perpendicular distance from a point on edge to the line \textit{l} is greater than $\alpha$, then the edge is splited at this point. The value chosen for $\alpha$ in the program is 3 ($\alpha = 3$).
+\item Reprocess both parts which was obtained from step 3.
+\item The algorithm continues until all edges fragments are represented.
+\end{itemize}
+The algorithm is presented as follows:\\
+\IncMargin{1em}
+\begin{algorithm}[H]
+\Indm 
+\KwData{listPoints: list of points which presented the edge}
+\KwResult{Queue of ``step" points on the edge}
+\Indp
+Declare the first endpoint: $p0 \leftarrow listPoints[0]$\;
+Declare the second endpoint: $pend \leftarrow listPoints[size - 1]$, \textit{size} is the size of \textit{listPoints}\;
+Set up a straight line between the two endpoints $p0, pend$ (line $d$)\;
+Initialization the max value: $maxDistance  \leftarrow 0 $\;
+Declare a ``split point": $imax \leftarrow 0$ \; 
+Declare a variable: $distance \leftarrow 0$\;
+
+\For{ point $p$ in $listPoints$}{
+	$distance \leftarrow$ from $p$ to line $d$\;
+	\If{distance $>$ max\_distance}{
+		$maxDistance$ $\leftarrow$ $distance$\;
+		$imax$ $\leftarrow$ position of $p$\;
+	}
+}
+\If{$maxDistance$ $>$ 3 }{
+	split the list of points at $imax$ and put into 2 parts $(part1, part2)$\;
+	Pre-process on $part1$\;	
+	Pre-process on $part2$\;
+}
+\If {$p0$ does not exist in result queue}{
+	push $p0$ into queue\;\tcp{queue is a variable of class}
+}
+\If {$pend$ does not exist in result queue}{
+	push $pend$ into queue\;\tcp{queue is a variable of class}
+}
+\caption{Algorithm to segment an edge}
+\end{algorithm}\DecMargin{1em}
+\section{Pairwise Geometric Histogram}
+\subsection{PGH constructor}
+The proceed to construct the PGH between two lines was described in below:
+\begin{itemize}
+\item Choose the reference line (other lines called object lines),
+\item Compute the angle between the reference line and the object lines,
+\item Calculate the perpendicular distance from the two endpoints of an object lines to the reference line (assigned dmin and dmax),
+\item Recording the perpendicular distance and the angle relation between reference line and the object lines into the two-dimensional histogram.
+\end{itemize}
+\subsection{Histogram matching}
+Based on the accuracy of the program, we can change the range of the angle and distance axis. 
+Besides the Bhattacharya metric, we may choose another metric to matching the histograms, such as: \textbf{Chi-squared} metric and \textbf{Intersection} metric. The forms are presented as below:\\
+\textbf{Chi-squared metric:}
+\begin{center}
+\begin{equation}\label{eq:2}
+d_{Chi-squared} (H_{i}H_{j}) = \frac{\sum\limits_{\theta}^{\pi}\sum\limits_{d}^{d_{max}}(\frac{(H_{i}(\theta,d) - H_{j}(\theta,d))^{2}}{(H_{i}(\theta,d) + H_{j}(\theta,d))})}{2}
+\end{equation}
+\end{center}
+\textbf{Intersection metric}
+\begin{center}
+\begin{equation}\label{eq:3}
+d_{Intersection} (H_{i}H_{j}) = \sum\limits_{\theta}^{\pi}\sum\limits_{d}^{d_{max}}min(H_{i}(\theta,d), H_{j}(\theta,d))
+\end{equation}
+\end{center}
+The significance of parameters in formula (\ref{eq:2}) and (\ref{eq:3}) are similar to formula (\ref{eq:1}). For the Bhattacharyya and Intersection metric, the perfect match is 1 and the total mismatch is 0. The result is opposite to Chi-squared metric (0 for perfect match and 1 for total mismatch).\\[0.2cm]
+Hence, depending on the purpose of the comparison subject will choose a suitable comparing method. In this program, we propose three methods to obtain a general result when matching the histograms.
+\section{Probabilistic Hough Transform}
+ We create a Hough space to store value if exist a pair of scene lines matching to the entry in the training process. The peak in Hough space is assumed as the reference point of the model in the scene image. From this reference point, we can estimate the reference landmarks of reference image on the scene image.
+The process to estimate the global pose includes the steps as follows:
+\begin{itemize}
+\item Choose an arbitrary point in the model as a reference point,
+\item For each pair lines in the model, calculating and recording the perpendicular distance and angle from the reference point to each line,
+\item Create an two-dimensional accumulator, one dimension for the angle and the other for the perpendicular distance,
+\item For each pair lines in the scene, finding the entry correspond to the position, orientation and scale. Increasing the value at correlative cell in the accumulator (indicate by the angle and distance),
+\item Compute the maximum value in the accumulator,
+\item Indicating the pair of scene lines and the entry with maximal value of accumulator,
+\item Extending the perpendicular lines of the pair belong to scene lines at the appropriate position. The intersection of them is the location of the reference point in the scene.
+\end{itemize}
+\subsection{Training process}
+To reduce the time complexity processing the next step, we consider the ``closet pair lines". In this application, the reference point chosen at the center of image and the closet pair lines are pair of lines have all three conditions: the length of each line greater than 60 pixels, the lines are not parallel and the distance between them is less than 5 pixels. The algorithm considers a pair of closet lines and constructs the reference table as follows:\\[0.2cm]
+\begin{algorithm}[H]
+\Indm 
+\KwData{line1 (the first line), line2 (the second line)}
+\KwResult{Two line closet or not (bool)}
+\Indp
+$distance1$ $\leftarrow$ distance from the first endpoint of $line1$ to $line2$\;
+$distance2$ $\leftarrow$  distance from the second endpoint of $line1$ to $line2$\;
+\If {$line1.length() > $ 60 and $line2.length() > $60  \\
+		and $line1$ not parallel with $line2$\\
+		and ($distance1$ $<=$ 5 or $ditance2$ $<=$ 5 )}{
+	$return$ $true$\;
+}
+return $false$\;
+\caption{Algorithm to consider the closet lines}
+\end{algorithm}~\\[0.2cm]
+\begin{algorithm}[H]
+\Indm 
+\KwData{lines (a list of lines), refPoint (the reference point)}
+\KwResult{The reference table}
+\Indp
+Declare the reference table $refTable$ \;
+\For{ line $i$ in $lines.size()$}{
+	\For{line $j$ in $lines.size()$}{
+		\If{i $!=$ j and $line(i)$ closet with $line(j)$}{
+			Compute the angle and perpendicular distance from $line(i)$ to $refPoint$\;
+			Compute the angle and perpendicular distance from $line(j)$ to $refPoint$\;
+			Create an entry to store pair of lines and its information \;
+			Add the entry into reference table \;
+		}
+	}
+}
+return $refTable$ \;
+\caption{Algorithm to construct the reference table}
+\end{algorithm}~\\
+\subsection{Estimation process}
