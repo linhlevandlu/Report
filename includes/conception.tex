@@ -1,8 +1,8 @@
 \chapter{Realization}
+Previous chapter has discussed about the method which we used to estimate the landmarks on biological image. This chapter describes the realization of that method.
 \section{Segmentation}
 \subsection{Pre-process image}
-
-In this application, we use the thresholding technique to pre-process the image. In thresholding technique, using a threshold value \textbf{``t"}, we can decrease the noise and obtain the interested features. The threshold value can be defined by the histogram analysis.\\[0.2cm]
+As discuss in previous, we will use the thresholding technique to pre-process the image. As we know about thresholding technique, with a threshold value \textbf{``t"}, we can decrease the noise and obtain the interested features. The threshold value can be defined by the histogram analysis.\\[0.2cm]
 Based on the histogram of the original image, we compute the mean and the median of this histogram. With the histogram obtained, we split it into two parts: the first part starts from the bin 0 to the limit value (the limit value is the smallest value between mean and median); the second part, starts from the limit value to the end of the histogram. For each part, we find the maximum, minimum value and calculating the mean of it. The value ``t" obtained by the mean of the two mean values in two parts of histogram.\\
 With the threshold value ``t", we apply the threshold technique to pre-process image in the CV\_THRESH\_BINARY mode (keep the pixel has value greater than threshold value).\\
 \IncMargin{1em}
@@ -46,29 +46,30 @@ Apply the threshold with threshold value is $middle$\;
 \caption{Algorithm to preprocess image}
 \end{algorithm}\DecMargin{1em}
 \subsection{Features extraction}
-
-
-
- The threshold value used in Canny algorithm also the value used in the previous step, and the ratio between lower threshold and upper threshold is 1 : 3 (follows the article \cite{palaniswamy2010automatic} but have to be modified). In our implementation, the Canny operation used from OpenCV library\footnote{http://docs.opencv.org/modules/imgproc/doc/feature\_detection.html\#canny}, and the parameters need to be provided into Canny are:
+The edges extraction are finished follows two steps:
 \begin{itemize}
-\item source: the input image (in grayscale mode)
-\item destination: the output image,
-\item low\_thresh: the first (lower) threshold value,
-\item hight\_thresh: the second (upper) threshold value,
-\item kernel\_size: size of kernel, aperture for the Sobel operator.
+\item Edge extraction by applying Canny algorithm
+\item Edge retrieve by applying function to get the contours.
+\end{itemize} 
+The threshold value used in Canny algorithm also the value used in the previous step, and the ratio between lower threshold and upper threshold is 1 : 3 (follows the article \cite{palaniswamy2010automatic} but have to be modified). These operations can used from OpenCV library. The parameters need to be provided into Canny\footnote{http://docs.opencv.org/modules/imgproc/doc/feature\_detection.html\#canny} operator are:
+\begin{itemize}
+\item Source image: the input image (in grayscale mode)
+\item Destination image: the output image,
+\item Lower threshold value: the first (lower) threshold value,
+\item Upper threshold value: the second (upper) threshold value,
+\item Kernel size: size of kernel, aperture for the Sobel operator.
 \end{itemize}
-
- The \textbf{findContours} was chosen for this goal, the result is a vector of the edges, and each edge was presented by a vector of the points. Like the Canny, the \textbf{findContours} uses OpenCV library \footnote{http://docs.opencv.org/modules/imgproc/doc/structural\_analysis\_and\_shape\_descriptors.html\#findcontours} and the parameters used in this operation are as follows:
+The parameters used in \textbf{findContours}\footnote{http://docs.opencv.org/modules/imgproc/doc/structural\_analysis\_and\_shape\_descriptors.html\#findcontours} operation are as follows:
 \begin{itemize}
-\item source: the binary input image,
-\item contours: the output. Each contours is stored in a vector of points,
-\item hierarchy: optional output vector, containing information about the image topology,
-\item mode: contours retrieve mode,
-\item method: contours approximation method,
-\item offset: optional offset by which every contour point is shifted.
+\item Source: the binary input image,
+\item Contours: the output. Each contours is stored in a vector of points,
+\item Hierarchy: optional output vector, containing information about the image topology,
+\item Mode: contours retrieve mode,
+\item Method: contours approximation method,
+\item Offset: optional offset by which every contour point is shifted.
 \end{itemize}
 \subsection{Edge segmentation}
-The method to segment the edges is the recursive algorithm$^{\cite{thacker1995assessing}}$ but it has some changes in the ``stop condition" of the algorithm to simplify, as follows:
+The method to segment the edges is the recursive algorithm\cite{thacker1995assessing} but it has some changes in the ``stop condition" of the algorithm to simplify. The progresses of this algorithm are as follows:
 \begin{itemize}
 \item Establish a line \textit{``l"} between two endpoints of the edge.
 \item For each point on edge, we compute the perpendicular distance from it to the line l and keep the point which has the maximum perpendicular distance.
@@ -80,6 +81,8 @@ The algorithm is presented as follows:\\
 \IncMargin{1em}
 \begin{algorithm}[H]
 \Indm 
+\setstretch{1}
+\SetAlgoLined
 \KwData{listPoints: list of points which presented the edge}
 \KwResult{Queue of ``step" points on the edge}
 \Indp
@@ -111,6 +114,7 @@ Declare a variable: $distance \leftarrow 0$\;
 \caption{Algorithm to segment an edge}
 \end{algorithm}\DecMargin{1em}
 \section{Pairwise Geometric Histogram}
+The PGH is represented as two-dimension matrix. An axis presents for angle information and another presents for perpendicular distance information. Based on the accuracy of requirements, the range of angle and distance axis can be changed. The default, the range of angle axis and distance axis are ($0$ - $\pi$) and 500, respective.
 \subsection{PGH constructor}
 The proceed to construct the PGH between two lines was described in below:
 \begin{itemize}
@@ -120,7 +124,6 @@ The proceed to construct the PGH between two lines was described in below:
 \item Recording the perpendicular distance and the angle relation between reference line and the object lines into the two-dimensional histogram.
 \end{itemize}
 \subsection{Histogram matching}
-Based on the accuracy of the program, we can change the range of the angle and distance axis. 
 Besides the Bhattacharya metric, we may choose another metric to matching the histograms, such as: \textbf{Chi-squared} metric and \textbf{Intersection} metric. The forms are presented as below:\\
 \textbf{Chi-squared metric:}
 \begin{center}
@@ -137,7 +140,7 @@ d_{Intersection} (H_{i}H_{j}) = \sum\limits_{\theta}^{\pi}\sum\limits_{d}^{d_{ma
 The significance of parameters in formula (\ref{eq:2}) and (\ref{eq:3}) are similar to formula (\ref{eq:1}). For the Bhattacharyya and Intersection metric, the perfect match is 1 and the total mismatch is 0. The result is opposite to Chi-squared metric (0 for perfect match and 1 for total mismatch).\\[0.2cm]
 Hence, depending on the purpose of the comparison subject will choose a suitable comparing method. In this program, we propose three methods to obtain a general result when matching the histograms.
 \section{Probabilistic Hough Transform}
- We create a Hough space to store value if exist a pair of scene lines matching to the entry in the training process. The peak in Hough space is assumed as the reference point of the model in the scene image. From this reference point, we can estimate the reference landmarks of reference image on the scene image.
+We create a Hough space to store value if exist a pair of scene lines matching to the entry in the training process. The peak in Hough space is assumed as the reference point of the model in the scene image. From this reference point, we can estimate the reference landmarks of reference image on the scene image.
 The process to estimate the global pose includes the steps as follows:
 \begin{itemize}
 \item Choose an arbitrary point in the model as a reference point,
@@ -152,6 +155,8 @@ The process to estimate the global pose includes the steps as follows:
 To reduce the time complexity processing the next step, we consider the ``closet pair lines". In this application, the reference point chosen at the center of image and the closet pair lines are pair of lines have all three conditions: the length of each line greater than 60 pixels, the lines are not parallel and the distance between them is less than 5 pixels. The algorithm considers a pair of closet lines and constructs the reference table as follows:\\[0.2cm]
 \begin{algorithm}[H]
 \Indm 
+\setstretch{1}
+\SetAlgoLined
 \KwData{line1 (the first line), line2 (the second line)}
 \KwResult{Two line closet or not (bool)}
 \Indp
@@ -167,6 +172,8 @@ return $false$\;
 \end{algorithm}~\\[0.2cm]
 \begin{algorithm}[H]
 \Indm 
+\setstretch{1}
+\SetAlgoLined
 \KwData{lines (a list of lines), refPoint (the reference point)}
 \KwResult{The reference table}
 \Indp
@@ -185,3 +192,127 @@ return $refTable$ \;
 \caption{Algorithm to construct the reference table}
 \end{algorithm}~\\
 \subsection{Estimation process}
+We create an accumulator to store each agreement between the pair of scene lines and the pair of model lines. For each pair of scene lines, we find its exist in the reference table and increase the value at correspondence position in accumulator. At the end, we obtain a pair of scene lines and pair of model lines correspondence with the maximum value in accumulator. By extending the perpendicular lines of the pair of scene lines at the appropriate position, we meet the reference point at the intersection.\\[0.2cm]
+In our program, two pair lines are supposed to be agreement if the angle difference between them is less than one degree, the length scale is less than 1 and the distance between two pair of lines is less than two. Two followed algorithms describe the definition between the two pair lines and finding the position of reference point in scene image.\\[0.2cm]
+\begin{algorithm}[H]
+\Indm 
+\setstretch{1}
+\SetAlgoLined
+\KwData{line1 (the first reference line), line2 (the second reference line), sline1 (the first scene line), sline2 (the second scene line)}
+\KwResult{Two pair lines similar or not (boo)}
+\Indp
+$angle1$ $\leftarrow$ angle between $line1$ and $line2$\;
+$angle2$ $\leftarrow$ angle between $sline1$ and $sline2$\;
+$mdistance$ $\leftarrow$ sum of perpendicular distance from two endpoints of $line1$ to $line2$\;
+$sdistance$ $\leftarrow$ sum of perpendicular distance from two endpoints of $sline1$ to $sline2$\;
+\If{$abs(ange1$ - $angle2) < 1$ \\
+	$and$ $abs(line1.length()/sline1.length()$ - $line2.length()/sline2.length()) < 1$ \\
+	$and$ $abs(mdistance$ - $sdistance) < 2$}{
+	return $true$\;
+}
+return $false$ \;
+\caption{Algorithm to check the agreement between two pair lines}
+\end{algorithm}~\\[0.2cm]
+\begin{algorithm}[H]
+\Indm 
+\setstretch{1}
+\SetAlgoLined
+\KwData{refTable (the reference table), slines (pair of scene lines)}
+\KwResult{The entries in reference table similar with pair of scene lines}
+\Indp
+Declare the return entries in reference table $entries$ \;
+\For{ entry $et$ in $refTable$}{
+	\If{agree between lines in entry and $slines$}{
+		put the entry $et$ into list of entries $entries$\;
+	}
+}
+return $entries$ \;
+\caption{Algorithm to find the agreement of pair scene lines in model}
+\end{algorithm}~\\[0.2cm]
+\begin{algorithm}[H]
+\Indm 
+\setstretch{1}
+\SetAlgoLined
+\KwData{lines (a list of scene lines), refTable (reference table)}
+\KwResult{The reference table}
+\Indp
+Create an accumulator, $acc$\;
+Declare the reference table $refTable$ \;
+\For{ line $i$ in $lines.size()$}{
+	\For{line $j$ in $lines.size()$}{
+		\If{i $!=$ j and $line(i)$ closet with $line(j)$}{
+			Find the agreement of pair scene lines in mode\;
+			Increase the value in $acc$ with correspondence position\;
+			Marked the maximum value, pair of scene lines and entry in reference table\;
+		}
+	}
+}
+
+Find the intersection ($intersect$) between two perpendicular lines with pair scene lines at appropriate position\;
+\tcp{The appropriate position is correct with the distances in reference table.}
+return $intersect$ \;
+\caption{Algorithm to find the reference point in scene}
+\end{algorithm}~\\[0.2cm]
+By finding the reference point, the landmarks in the scene image can be estimated by calculating the relatedness between the reference point and the reference landmarks. Besides, we also record the difference about rotation, orientation and scale between the model image and the scene image.
+\section{Template matching}
+\subsection{Template matching}
+Back to our problem, with a reference image and its set of landmarks. We use the cross-correlation to refine the landmarks. In this case, the template is a region around each landmark in reference image and the image is also a region around the Hough landmark detection in scene image. Hence, to save the processing time, before applying the cross-correlation, the scene image is rotated to match with model using Hough estimate.\\[0.2cm]
+For each landmark in the reference image, we create a bounding box around the landmarks with an arbitrary size and use landmark as a center point. When create the bounding box, we need to keep the distance between left corner to the landmarks, because sometimes, with the landmark position, the size of bounding box can be over the size of image. Use this box as a template and do the cross-correlation with each scene image. The results obtained store the location where the template matches the image. From these position, we indicate the position of each landmark of reference image on scene image. The algorithm to create the bounding box around a landmark is described follows:\\[0.2cm]
+\begin{algorithm}[H]
+\Indm 
+\SetAlgoLined
+\KwData{image (reference image), landmark (location of a reference landmark), tsize (size of bounding box), distance (to keep the distance from the landmark to bounding box)}
+\KwResult{A matrix represented for bounding box of landmark}
+\Indp
+Get the matrix of image (image presented by matrix): $Mat matImg = image.getMatrix()$\;
+\tcp{Indicate the top left-corner of bounding box:}
+$int$ $lx = (landmark.x - tsize/2) < 0$ ? $0$ : $(landmark.x - tsize/2)$\;
+$int$ $yx = (landmark.y - tsize/2) < 0$ ? $0$ : $(landmark.y - tsize/2)$\;
+\tcp{Keep the distance from the landmark to bounding box}
+$distance.x = landmark.x - lx$\;
+$distance.y = landmark.y - ly$\;
+\tcp{Indicate the low right-corner of bounding box}
+$int$ $lx2 = (landmark.x + tsize/2) > matImg.cols$ ? $matImg.cols$ : $(landmark.x + tsize/2)$\;
+$int$ $yx2 = (landmark.y + tsize/2) < matImg.rows$ ? $matImg.rows$ : $(landmark.y + tsize/2)$\;
+\tcp{Create the bounding box around landmark}
+$Mat$ $box(matImg,Rect(lx,ly,lx2 - lx, ly2 - ly))$\;
+return the $box$;
+\caption{Algorithm to create a bounding box around a landmark}
+\end{algorithm}~\\[0.2cm]
+The belows algorithm describe a method to estimate the reference landmarks on a scene image by using cross-correlation. Before applying the cross-correlation, the scene image is rotated to match with the model. The angle used to rotate is the sum of the difference between the scene line and model line to which it matched and the difference between the two pairs of the similar lines. To apply the cross correlation, we have used the function $matchTemplate$\footnote{http://docs.opencv.org/modules/imgproc/doc/object\_detection.html?highlight=matchtemplate\#matchtemplate} in OpenCV library with matching method is $CV\_CCORR\_NORMED$ (cross-correlation normalize). This function allows us compare the template overlaping the image and it supports many different matching methods. When the template slide over each pixel on image, the coefficient between them is calculated and stored in a array.\\[0.2cm]
+After finished correlation, to get the value and the position of the maximum value when we compute the coefficient, we use a function in OpenCV,  $minMaxLoc$\footnote{http://docs.opencv.org/modules/core/doc/operations\_on\_arrays.html?highlight=minmaxloc\#minmaxloc}. This method is used to detect the minimum and maximum value in an array. Beside that, it also output the location where having the minimum and maximum value.\\[0.2cm]
+\begin{algorithm}[H]
+\Indm 
+\SetAlgoLined
+\KwData{refImage (reference image), sceneImage (the scene image), lmpath (file path store the reference landmarks)}
+\KwResult{A list of landmarks on scene image}
+\Indp
+Get the reference landmarks from file and store in list $refLandmarks$\;
+Create a variable to store the new landmarks: $sceneLandmarks$\;
+Estimate the reference landmarks ($refLandmarks$) in scene image using probabilistic Hough transform and save into a variable: $esLandmarks$\;
+\tcp{Get the matrix of scene image}
+$sceneMatrix$ = $sceneImage.getMatrix()$\;
+Rotate the scene matrix with appropriate angle\;
+\For{ variable $i$ in $esLandmarks.size()$}{
+	\tcp{Get the reference landmark}
+	$Point$ $refPoint$ = $refLandmarks.at(i)$\;
+	\tcp{Create a bounding box of reference landmark $refPoint$} 
+	$Mat$ $template$ = $createTemplate(refImage, refPoint, size )$\;
+	\tcp{Get the estimate landmark}
+	$Point$ $esPoint$ = $esLandmarks.at(i)$\;
+	\tcp{Create a bounding box of estimate landmark $esPoint$} 
+	$Mat$ $sceneImg$ = $createTemplate(sceneImage, esPoint, size )$\;
+	Create the matrix to store the value when do the cross-correlation: $result$ \;
+	\tcp{Apply the matching and store the result into matrix $result$}
+	$cv::matchTemplate(sceneMatrix,template,result,CV\_TM\_CCORR\_NORMED$\;	
+	\tcp{Get the maximum value and position in $result$ matrix}
+	$double$ $maxValue, minValue$\;
+	$Point$ $maxLoc, minLoc$\;
+	$cv::minMaxLoc(result, \&minValue, \&maxValue, \&minLoc, \&maxLoc, Mat())$\;
+	Compute the position of landmark from maximum position\;
+	Push the landmark into the list $sceneLandmarks$\;
+}
+Return the list of landmarks\;
+\caption{Algorithm to get the position of reference landmarks in scene image}
+\label{alccross}
+\end{algorithm}~\\[0.2cm]
