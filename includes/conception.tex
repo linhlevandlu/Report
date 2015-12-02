@@ -270,6 +270,7 @@ Refining landmarks is finished by apply the cross-correlation. In this case, the
 For each landmark in the reference image, we create a bounding box around the landmarks with an arbitrary size and use landmark as a center point. When create the bounding box, we need to keep the distance between left corner to the landmarks, because sometimes, with the landmark position, the size of bounding box can be over the size of image. Use this box as a template and do the cross-correlation with each scene image. The results obtained store the location where the template matches the image. From these position, we indicate the position of each landmark of reference image on scene image. The algorithm to create the bounding box around a landmark is described follows:\\[0.2cm]
 \begin{algorithm}[H]
 \Indm 
+\setstretch{1}
 \SetAlgoLined
 \KwData{image (reference image), landmark (location of a reference landmark), tsize (size of bounding box), distance (to keep the distance from the landmark to bounding box)}
 \KwResult{A matrix represented for bounding box of landmark}
@@ -293,6 +294,7 @@ The belows algorithm describe a method to estimate the reference landmarks on a 
 After finished correlation, to get the value and the position of the maximum value when we compute the coefficient, we use a function in OpenCV,  $minMaxLoc$\footnote{http://docs.opencv.org/modules/core/doc/operations\_on\_arrays.html?highlight=minmaxloc\#minmaxloc}. This method is used to detect the minimum and maximum value in an array. Beside that, it also output the location where having the minimum and maximum value.\\[0.2cm]
 \begin{algorithm}[H]
 \Indm 
+\setstretch{1}
 \SetAlgoLined
 \KwData{refImage (reference image), sceneImage (the scene image), lmpath (file path store the reference landmarks)}
 \KwResult{A list of landmarks on scene image}
