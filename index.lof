@@ -9,9 +9,9 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Example about noises in image\relax }}{11}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Image with noise}}}{11}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Image without noises}}}{11}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces An example about image segmentation\relax }}{13}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Original image}}}{13}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Image with line segmentation}}}{13}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces An example about image segmentation\relax }}{12}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Original image}}}{12}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Image with line segmentation}}}{12}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Example about geometric features and the pairwise geometric histogram\relax }}{13}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The geometric relationship between two lines}}}{13}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The pairwise geometric histogram }}}{13}
@@ -20,9 +20,10 @@
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image }}}{16}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces The class diagram diagram\relax }}{31}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The modules of program\relax }}{30}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces The class diagram diagram\relax }}{33}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces The graphic user interface of IPM software\relax }}{35}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Automatic identification of the landmarks\relax }}{38}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The scene image}}}{38}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image with estimated landmarks }}}{38}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The graphic user interface of IPM software\relax }}{36}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Automatic identification of the landmarks\relax }}{39}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The scene image}}}{39}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image with estimated landmarks }}}{39}
