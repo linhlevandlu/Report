@@ -1,28 +1,28 @@
 %\chapter{Result and Discussion}
 \section{Result}
-As presentation about our result, in this chapter we introduce about MAELab software, the parameters used in execution and the discussion about the result.
+As presentation about our result, in this section we introduce about MAELab software, the parameters used in execution and the discussion about the result.
 \subsection{New interface}
-The results of this internship are integrated into IPM\footnote{Image Processing for Morphometrics} software, but the software interface was reorganized. Besides the functions of previous version, the clients can be use new functions to segment image or automatic extraction landmarks from image.
+The results of this internship are integrated into IPM\footnote{Image Processing for Morphometrics} software, but the software interface was reorganized (figure \ref{fig:44}). Besides the functions of previous version, the clients can be use new functions to segment image or automatic extraction landmarks from image.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.7\textwidth]{./images/software}
 \caption{The graphic user interface of MAELab software}
-\label{fig:figure_31}
+\label{fig:44}
 \end{figure}~\\
 The software provides adequately functions to process on biological image. Specially, the menu \textbf{Landmarks} contains the main result of this internship. It provides clients the functions automatically estimation landmarks and analysis the result from estimated landmarks. The process can be finished on an image or a list of images.
 \begin{figure}[h!]
 \centering
 \subfloat[MAELab software]
-{\label{fig:example_11}\includegraphics[width=0.45\textwidth]{./images/software}}~~
+{\label{fig:451}\includegraphics[width=0.45\textwidth]{./images/software}}~~
 \subfloat[MAELab with Segmentation menu]
-{\label{fig:example_12}\includegraphics[width=0.45\textwidth]{./images/newiface1}}\\
-\subfloat[MAELab with Landmarks menu]{\label{fig:example_13}\includegraphics[width=0.45\textwidth]{./images/newiface2}}~~
+{\label{fig:452}\includegraphics[width=0.45\textwidth]{./images/newiface1}}\\
+\subfloat[MAELab with Landmarks menu]{\label{fig:453}\includegraphics[width=0.45\textwidth]{./images/newiface2}}~~
 \subfloat[MAELab with Utilities menu]
-{\label{fig:example_14}\includegraphics[width=0.45\textwidth]{./images/newiface3}}
+{\label{fig:454}\includegraphics[width=0.45\textwidth]{./images/newiface3}}
 \caption{The MAELab software with its menu}
-\label{fig:figure_11}
+\label{fig:45}
 \end{figure}~\\[0.2cm]
-Besides, other functions also developed and integrated into IPM software, as followed:
+Besides, the other functions developed in MAELab software are:
 \begin{itemize}
 \item Image segmentation by analysing histogram (in \textbf{Segmentation} menu)
 \item Removing the yellow grid on image (in \textbf{Utilities} menu)
@@ -104,13 +104,13 @@ To increase the flexible of program, all parameters was placed in the resources 
 The automated landmark identification is examined on two data sets: \textit{right mandible and left mandible}. And the landmarks are extracted: 18 landmarks for each \textit{right mandible} image, 16 landmarks for each \textit{left mandible} image.\\
 \begin{figure}[h!]
 \centering
-\subfloat[The scene image]{\label{fig:pht_1}\includegraphics[width=0.45\textwidth]{./images/md32}}\\
-\subfloat[The scene image with estimated landmarks by cross-correlation ]{\label{fig:pht_2}\includegraphics[width=0.45\textwidth]{./images/md32_cross}}~~
-\subfloat[The scene image with estimated landmarks (by article) ]{\label{fig:pht_2}\includegraphics[width=0.45\textwidth]{./images/est32}}
+\subfloat[The scene image]{\label{fig:461}\includegraphics[width=0.45\textwidth]{./images/md32}}\\
+\subfloat[The scene image with estimated landmarks by cross-correlation ]{\label{fig:462}\includegraphics[width=0.45\textwidth]{./images/md32_cross}}~~
+\subfloat[The scene image with estimated landmarks (by article) ]{\label{fig:463}\includegraphics[width=0.45\textwidth]{./images/est32}}
 \caption{Automatic identification of the landmarks}
-\label{fig:figure_31}
+\label{fig:46}
 \end{figure}~\\
-To have the basic evaluation about this method, we compare its result with the result from cross-correlation. Obvious, the location of landmarks obtained from method (follows article) more closer than the landmarks obtained from cross-correlation.\\
+To have the basic evaluation about this method, we compare its result with the result from \textbf{``original"} of cross-correlation method. Obvious, the location of landmarks obtained from method (follows article) more closer than the landmarks obtained from cross-correlation (see in figure \ref{fig:46}).\\
 Besides, the accuracy of the system can be determined by comparing the differences(in pixels) between the landmarks located by this method and the manual landmarks. This method has to pass several steps, the result of each step will effect on next steps. Thus, to evaluate the accuracy of this method, we can evaluate the result of each step.
 \subsection{Limits and future works}
 The method includes several steps to get the last result. At each step, we can use different ways to do. The methods proposed in this report just a part of them. Moreover, the program has use the parameters as the conditions, changing the values of parameters can effected to the accuracy of program.

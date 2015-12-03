@@ -20,16 +20,17 @@
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image }}}{16}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces The modules of program with main classes\relax }}{29}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces The packages of program\relax }}{31}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces The class diagram of program\relax }}{32}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces The graphic user interface of MAELab software\relax }}{35}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces The MAELab software with its menu\relax }}{36}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {MAELab software}}}{36}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {MAELab with Segmentation menu}}}{36}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {MAELab with Landmarks menu}}}{36}
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {MAELab with Utilities menu}}}{36}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Automatic identification of the landmarks\relax }}{39}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The scene image}}}{39}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image with estimated landmarks by cross-correlation }}}{39}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {The scene image with estimated landmarks (by article) }}}{39}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The modules of program with main classes\relax }}{30}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces The packages of program\relax }}{32}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces The class diagram of program\relax }}{33}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces The graphic user interface of MAELab software\relax }}{36}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces The MAELab software with its menu\relax }}{37}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {MAELab software}}}{37}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {MAELab with Segmentation menu}}}{37}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {MAELab with Landmarks menu}}}{37}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {MAELab with Utilities menu}}}{37}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Automatic identification of the landmarks\relax }}{40}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The scene image}}}{40}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image with estimated landmarks by cross-correlation }}}{40}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {The scene image with estimated landmarks (by article) }}}{40}
+\contentsline {figure}{\numberline {7}{\ignorespaces An example about histogram\relax }}{44}

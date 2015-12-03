@@ -8,7 +8,14 @@
 \usepackage{setspace}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \renewcommand{\baselinestretch}{1.5}
-
+\newcommand{\annexname}{Annex}
+\makeatletter
+\newcommand\annex{\par
+  \setcounter{chapter}{-1}%
+  \setcounter{section}{-1}%
+  \gdef\@chapapp{\annexname}%
+  \gdef\thechapter{\@Roman\c@chapter}}
+\makeatother
 \begin{document}
 \include{includes/cover}
 \newpage
@@ -36,4 +43,6 @@
 \bibliographystyle{plain}
 \bibliography{includes/references}
 \addcontentsline{toc}{chapter}{Bibliography}
+\annex
+\include{includes/annex}
 \end{document}

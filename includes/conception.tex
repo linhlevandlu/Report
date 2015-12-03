@@ -1,10 +1,10 @@
 \chapter{Conception}
-Previous chapter has discussed about the method which we used to estimate the landmarks on biological image. This chapter describes the conception of that method.
+Previous chapter has discussed about the method which we used to estimate the landmarks on biological image. This chapter will describe the conception of that method.
 \section{Segmentation}
 \subsection{Pre-process image}
-As discuss in previous, we will use the thresholding technique to pre-process the image. As we know about thresholding technique, with a threshold value \textbf{``t"}, we can decrease the noise and obtain the interested features. The threshold value can be defined by the histogram analysis.\\[0.2cm]
-Based on the histogram of the original image, we compute the mean and the median of this histogram. With the histogram obtained, we split it into two parts: the first part starts from the beginning to the limit value (the limit value is the smallest value between mean and median); the second part, starts from the limit value to the end of the histogram. For each part, we find the maximum, minimum value and calculating the mean of it. The threshold value \textbf{``t"} obtained by the mean of the two mean values in two parts of histogram (as algorithm \ref{al_preprocess}).\\
-With the threshold value \textbf{``t"}, we apply the threshold method (in OpenCV\footnote{http://docs.opencv.org/2.4/doc/tutorials/imgproc/threshold/threshold.html}) to pre-process image in the CV\_THRESH\_BINARY mode (keep the pixel has value greater than threshold value).\\
+As discuss in previous, we use the thresholding technique to pre-process the image. As we know about thresholding technique, with a threshold value \textbf{``t"}, we can decrease the noise and obtain the interested features. The output of this technique is a binary image, which can used to extract the features. The threshold value can be defined by the histogram analysis.\\[0.2cm]
+Based on the histogram of the original image, we compute the mean and the median of this histogram. With the histogram obtained, we split it into two parts: the first part starts from the beginning to the limit value (the limit value is the smallest value between mean and median); the second part, starts from the limit value to the end of the histogram. For each part, we find the maximum, minimum value and calculating the mean of them. The threshold value \textbf{``t"} obtained by the mean of the two mean values in two parts of histogram (as algorithm \ref{al_preprocess}).\\
+To implement the threshold technique, we apply the threshold method which provided by  OpenCV\footnote{http://docs.opencv.org/2.4/doc/tutorials/imgproc/threshold/threshold.html} library in the CV\_THRESH\_BINARY mode (keep the pixel has value greater than threshold value) to pre-process image.\\
 \IncMargin{1em}
 \begin{algorithm}[H]
 \setstretch{1}
@@ -46,6 +46,14 @@ Apply the threshold with threshold value is $middle$\;
 \caption{Algorithm to get the threshold value and pre-process image}
 \label{al_preprocess}
 \end{algorithm}\DecMargin{1em}
+The parameter provides to \textbf{threshold} method in OpenCV are:
+\begin{itemize}
+\item \textit{Input image}: the input image (in grayscale mode)
+\item \textit{Output image}: the output image
+\item \textit{Threshold value}: the value \textbf{t} used to threshold image
+\item \textit{Maximum value}: the maximum value to use with BINARY operations
+\item \textit{Threshold operation}: the operation used to threshold image (we use CV\_THRESH\_BINARY mode)
+\end{itemize}
 \subsection{Features extraction}
 The edges extraction are finished follows two steps:
 \begin{itemize}
@@ -117,15 +125,17 @@ Declare a variable: $distance \leftarrow 0$\;
 \end{algorithm}\DecMargin{1em}
 \section{Pairwise Geometric Histogram}
 The PGH is represented as two-dimension matrix. An axis presents for angle information (rows) and another presents for perpendicular distance information (columns). Based on the accuracy of requirements, the range of angle and distance axis can be changed. In default, the range of angle axis and distance axis are ($0$ - $\pi$) and 500, respectively.
-\subsection{PGH constructor}
+\subsection{Local PGH constructor}
 The proceed to construct the local PGH was described in below:
 \begin{itemize}
 \item Choose the \textbf{reference line} (other lines called \textbf{object lines}),
 \item For each object line, compute the angle between it and reference line (assigned \textbf{angle}); and the perpendicular distance from two endpoints of object line to reference line (assigned \textbf{dmin} and \textbf{dmax}),
 \item Recording the perpendicular distance and the angle relation between reference line and the object lines into the matrix (PGH histogram). The recording was finished by marking the cells at row \textbf{angle} and from column \textbf{dmin} to column \textbf{dmax}.
 \end{itemize}
+\subsection{Global PGH construct}
+The duration to construct the global PGH also similar to local PGH. Especially, the information of all local PGH are presented in the same matrix.
 \subsection{Histogram matching}
-Besides the Bhattacharya metric, we may choose another metric to find the similarity the histograms, such as: \textbf{Chi-squared} metric and \textbf{Intersection} metric. The forms are presented as below:\\
+Follows the analysis, the Bhattacharya metric used to compute the similarity between two models. However, besides the Bhattacharya metric, we may choose another metric to find the similarity the histograms, such as: \textbf{Chi-squared} metric and \textbf{Intersection} metric. The forms are presented as below:\\
 \textbf{Chi-squared metric:}
 \begin{center}
 \begin{equation}\label{eq:2}
@@ -141,16 +151,16 @@ d_{Intersection} (H_{i}H_{j}) = \sum\limits_{\theta}^{\pi}\sum\limits_{d}^{d_{ma
 The significance of parameters in formula (\ref{eq:2}) and (\ref{eq:3}) are similar to formula (\ref{eq:1}). For the Bhattacharyya and Intersection metric, the perfect match is 1 and the total mismatch is 0. The result is opposite to Chi-squared metric (0 for perfect match and 1 for total mismatch).\\[0.2cm]
 Hence, depending on the purpose of the comparison subject will choose a suitable comparing method. In this program, we propose three methods to obtain a general result when matching the histograms.
 \section{Probabilistic Hough Transform}
-The core of PHT uses vote procedure to find the model's position in the image. This process includes two stages: firstly, we record the model information by calculating the angle and perpendicular distance of each pair of model lines to an arbitrary point (called \textbf{reference point}) in model. Secondly, we estimate the model's position in image by voting procedure. We create a Hough space to store value if exist a pair of scene lines matching to the entry in the training process. The peak in Hough space (the best vote) is assumed as the reference point of the model in the scene image. From this reference point, we can find the position of model in image.\\
+The core of PHT uses vote procedure to find the model's position in the scene image. This process includes two steps: firstly, we record the model information by calculating the angle and perpendicular distance of each pair of model lines to reference point in model. Secondly, we estimate the model's position in image by voting procedure. We create a Hough space to store value if exist a pair of scene lines matching to the entry in the training process. The peak in Hough space (the best vote) is assumed as the reference point of the model in the scene image. From this reference point, we can find the position of model (landmarks) in scene image.\\
 Following that, the process to estimate the model's landmarks on scene image includes the steps as follows:
 \begin{itemize}
 \item Choose an arbitrary point in the model as a reference point,
-\item For each pair lines in the model, calculating and recording the perpendicular distance and angle from the reference point to each line,
+\item For each pair lines in the model, calculating and recording the perpendicular distance and angle from the reference point to each line. And save the information into a table,
 \item Create an two-dimensional accumulator, one dimension for the angle and the other for the perpendicular distance,
 \item For each pair lines in the scene, finding the entry correspond to the position, orientation and scale. Increasing the value at correlative cell in the accumulator (indicate by the angle and distance),
 \item Compute the maximum value in the accumulator,
 \item Indicating the pair of scene lines and the entry with maximal value of accumulator,
-\item Extending the perpendicular lines of the pair belong to scene lines at the appropriate position. The intersection of them is the location of the reference point in the scene.
+\item Extending the perpendicular lines of the pair belong to scene lines at the appropriate position. The intersection of them is the location of the model's reference point in the scene image.
 \end{itemize}
 \subsection{Training process}
 The training process starts with creating the model's \textbf{reference table}. Each entry in reference table includes pair of model lines and geometric information (angle and perpendicular distance) from each line to reference point. To reduce the time complexity processing during training process, we consider the ``closest pair lines". The algorithm considers a pair of closest lines and constructs the reference table as follows:\\[0.2cm]
@@ -266,8 +276,8 @@ Find the intersection between two parallel lines\;
 \end{algorithm}~\\[0.2cm]
 By finding the reference point, the landmarks in the scene image can be estimated by calculating the relatedness between the reference point and the reference landmarks. Besides, we also record the difference about rotation, orientation and scale between the model image and the scene image.
 \section{Template matching}
-Refining landmarks is finished by apply the cross-correlation. In this case, the template is a region around each landmark in reference image and the image is also a region around the Hough landmark detection in scene image. Hence, to save the processing time, before applying the cross-correlation, the scene image is rotated to match with model using Hough estimate.\\[0.2cm]
-For each landmark in the reference image, we create a bounding box around the landmarks with an arbitrary size and use landmark as a center point. When create the bounding box, we need to keep the distance between left corner to the landmarks, because sometimes, with the landmark position, the size of bounding box can be over the size of image. Use this box as a template and do the cross-correlation with each scene image. The results obtained store the location where the template matches the image. From these position, we indicate the position of each landmark of reference image on scene image. The algorithm to create the bounding box around a landmark is described follows:\\[0.2cm]
+Refining landmarks is finished by applying the cross-correlation. In this case, the template is a region around each landmark in model image and the image is also a region around the Hough landmark detection (the landmarks estimated in previous stage) in scene image. Hence, to save the processing time, before applying the cross-correlation, the scene image is rotated to match with model. The difference angle between the model image and the scene image obtained from Hough estimate in previous stage.\\[0.2cm]
+For each landmark in the model image, we create a bounding box around the landmarks with an arbitrary size and use landmark as a center point. When create the bounding box, we need to keep the distance between left corner to the landmarks, because sometimes, with the landmark position, the size of bounding box can be over the size of image. Use this box as a \textit{template}. Doing the same with each estimated landmarks on scene image but using a larger size to create the \textit{small image}. Then applying the cross-correlation between \textit{template} and \textit{small image}. The results obtained store the location where the template matches the image. From these position, we indicate the position of each landmark of reference image on scene image. The algorithm to create the bounding box around a landmark is described follows:\\[0.2cm]
 \begin{algorithm}[H]
 \Indm 
 \setstretch{1}
@@ -290,8 +300,9 @@ $Mat$ $box(matImg,Rect(lx,ly,lx2 - lx, ly2 - ly))$\;
 return the $box$;
 \caption{Algorithm to create a bounding box around a landmark}
 \end{algorithm}~\\[0.2cm]
-The belows algorithm describe a method to estimate the reference landmarks on a scene image by using cross-correlation. Before applying the cross-correlation, the scene image is rotated to match with the model. The angle used to rotate is the sum of the difference between the scene line and model line to which it matched and the difference between the two pairs of the similar lines. To apply the cross correlation, we have used the function $matchTemplate$\footnote{http://docs.opencv.org/modules/imgproc/doc/object\_detection.html?highlight=matchtemplate\#matchtemplate} in OpenCV library with matching method is $CV\_CCORR\_NORMED$ (cross-correlation normalize). This function allows us compare the template overlaping the image and it supports many different matching methods. When the template slide over each pixel on image, the coefficient between them is calculated and stored in a array.\\[0.2cm]
-After finished correlation, to get the value and the position of the maximum value when we compute the coefficient, we use a function in OpenCV,  $minMaxLoc$\footnote{http://docs.opencv.org/modules/core/doc/operations\_on\_arrays.html?highlight=minmaxloc\#minmaxloc}. This method is used to detect the minimum and maximum value in an array. Beside that, it also output the location where having the minimum and maximum value.\\[0.2cm]
+The below algorithm describe a method to refine the estimated landmarks on a scene image by using cross-correlation. Remember that, before applying the cross-correlation, the scene image is rotated to match with the model; and the angle used to rotate is the sum of the difference between the scene line and model line to which it matched and the difference between the two pairs of the similar lines.\\
+To apply the cross-correlation, we have used the function \textbf{$matchTemplate$}\footnote{http://docs.opencv.org/modules/imgproc/doc/object\_detection.html?highlight=matchtemplate\#matchtemplate} in OpenCV library with matching method is $CV\_CCORR\_NORMED$ (cross-correlation normalize). This function allows us compare the template overlaping the image and it supports many different matching methods. When the template slide over each pixel on image, the coefficient between them is calculated and stored in a array.\\[0.2cm]
+After finished correlation, to get the value and the position of the maximum value when we compute the coefficient, we use a function in OpenCV,  \textbf{$minMaxLoc$}\footnote{http://docs.opencv.org/modules/core/doc/operations\_on\_arrays.html?highlight=minmaxloc\#minmaxloc}. This method is used to detect the minimum and maximum value in an array. Beside that, it also output the location where having the minimum and maximum value.\\[0.2cm]
 \begin{algorithm}[H]
 \Indm 
 \setstretch{1}

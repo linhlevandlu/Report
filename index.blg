@@ -10,49 +10,63 @@ A level-1 auxiliary file: includes/classification_method.aux
 A level-1 auxiliary file: includes/conception.aux
 A level-1 auxiliary file: includes/implementation.aux
 A level-1 auxiliary file: includes/result.aux
+A level-1 auxiliary file: includes/conclusion.aux
 The style file: plain.bst
+A level-1 auxiliary file: includes/annex.aux
 Database file #1: includes/references.bib
+Too many commas in name 1 of "Gloria Bueno García, Oscar Deniz Suarez, José Luis Espinosa Aranda, Jesus Salido Tercero, Ismael Serrano Gracia, Noelia Vállez Enano" for entry oscarbook
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Gloria Bueno García, Oscar Deniz Suarez, José Luis Espinosa Aranda, Jesus Salido Tercero, Ismael Serrano Gracia, Noelia Vállez Enano" for entry oscarbook
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Gloria Bueno García, Oscar Deniz Suarez, José Luis Espinosa Aranda, Jesus Salido Tercero, Ismael Serrano Gracia, Noelia Vállez Enano" for entry oscarbook
+while executing---line 1049 of file plain.bst
 Warning--there's a number but no volume in canny1986computational
+Too many commas in name 1 of "Gloria Bueno García, Oscar Deniz Suarez, José Luis Espinosa Aranda, Jesus Salido Tercero, Ismael Serrano Gracia, Noelia Vállez Enano" for entry oscarbook
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Gloria Bueno García, Oscar Deniz Suarez, José Luis Espinosa Aranda, Jesus Salido Tercero, Ismael Serrano Gracia, Noelia Vállez Enano" for entry oscarbook
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Gloria Bueno García, Oscar Deniz Suarez, José Luis Espinosa Aranda, Jesus Salido Tercero, Ismael Serrano Gracia, Noelia Vállez Enano" for entry oscarbook
+while executing---line 1090 of file plain.bst
 Warning--empty institution in hough1962method
-You've used 9 entries,
+You've used 10 entries,
             2118 wiz_defined-function locations,
-            567 strings with 5592 characters,
-and the built_in function-call counts, 3203 in all, are:
-= -- 331
-> -- 124
+            575 strings with 5841 characters,
+and the built_in function-call counts, 3420 in all, are:
+= -- 350
+> -- 131
 < -- 4
-+ -- 51
-- -- 40
-* -- 234
-:= -- 519
-add.period$ -- 28
-call.type$ -- 9
-change.case$ -- 47
++ -- 54
+- -- 42
+* -- 242
+:= -- 559
+add.period$ -- 31
+call.type$ -- 10
+change.case$ -- 50
 chr.to.int$ -- 0
-cite$ -- 11
-duplicate$ -- 120
-empty$ -- 256
-format.name$ -- 40
-if$ -- 671
+cite$ -- 12
+duplicate$ -- 132
+empty$ -- 278
+format.name$ -- 42
+if$ -- 717
 int.to.chr$ -- 0
-int.to.str$ -- 9
-missing$ -- 8
-newline$ -- 48
-num.names$ -- 18
-pop$ -- 39
+int.to.str$ -- 10
+missing$ -- 10
+newline$ -- 53
+num.names$ -- 20
+pop$ -- 47
 preamble$ -- 1
-purify$ -- 37
+purify$ -- 40
 quote$ -- 0
-skip$ -- 88
+skip$ -- 93
 stack$ -- 0
-substring$ -- 249
-swap$ -- 30
+substring$ -- 254
+swap$ -- 31
 text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 36
+type$ -- 38
 warning$ -- 2
-while$ -- 36
-width$ -- 10
-write$ -- 103
-(There were 2 warnings)
+while$ -- 38
+width$ -- 12
+write$ -- 113
+(There were 6 error messages)
