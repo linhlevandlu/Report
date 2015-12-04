@@ -1,7 +1,7 @@
 \chapter{Conception}
 Previous chapter has discussed about the method which we used to estimate the landmarks on biological image. This chapter will describe the conception of that method.
-\section{Segmentation}
-\subsection{Pre-process image}
+\section{Features extraction}
+\subsection{Image preprocessing}
 As discuss in previous, we use the thresholding technique to pre-process the image. As we know about thresholding technique, with a threshold value \textbf{``t"}, we can decrease the noise and obtain the interested features. The output of this technique is a binary image, which can used to extract the features. The threshold value can be defined by the histogram analysis.\\[0.2cm]
 Based on the histogram of the original image, we compute the mean and the median of this histogram. With the histogram obtained, we split it into two parts: the first part starts from the beginning to the limit value (the limit value is the smallest value between mean and median); the second part, starts from the limit value to the end of the histogram. For each part, we find the maximum, minimum value and calculating the mean of them. The threshold value \textbf{``t"} obtained by the mean of the two mean values in two parts of histogram (as algorithm \ref{al_preprocess}).\\
 To implement the threshold technique, we apply the threshold method which provided by  OpenCV\footnote{http://docs.opencv.org/2.4/doc/tutorials/imgproc/threshold/threshold.html} library in the CV\_THRESH\_BINARY mode (keep the pixel has value greater than threshold value) to pre-process image.\\
@@ -54,7 +54,7 @@ The parameter provides to \textbf{threshold} method in OpenCV are:
 \item \textit{Maximum value}: the maximum value to use with BINARY operations
 \item \textit{Threshold operation}: the operation used to threshold image (we use CV\_THRESH\_BINARY mode)
 \end{itemize}
-\subsection{Features extraction}
+\subsection{Edges extraction}
 The edges extraction are finished follows two steps:
 \begin{itemize}
 \item Edge extraction by applying Canny algorithm
@@ -123,7 +123,7 @@ Declare a variable: $distance \leftarrow 0$\;
 }
 \caption{Algorithm to segment an edge into approximate lines}
 \end{algorithm}\DecMargin{1em}
-\section{Pairwise Geometric Histogram}
+\section{Features description (Pairwise Geometric Histogram)}
 The PGH is represented as two-dimension matrix. An axis presents for angle information (rows) and another presents for perpendicular distance information (columns). Based on the accuracy of requirements, the range of angle and distance axis can be changed. In default, the range of angle axis and distance axis are ($0$ - $\pi$) and 500, respectively.
 \subsection{Local PGH constructor}
 The proceed to construct the local PGH was described in below:
@@ -132,9 +132,9 @@ The proceed to construct the local PGH was described in below:
 \item For each object line, compute the angle between it and reference line (assigned \textbf{angle}); and the perpendicular distance from two endpoints of object line to reference line (assigned \textbf{dmin} and \textbf{dmax}),
 \item Recording the perpendicular distance and the angle relation between reference line and the object lines into the matrix (PGH histogram). The recording was finished by marking the cells at row \textbf{angle} and from column \textbf{dmin} to column \textbf{dmax}.
 \end{itemize}
-\subsection{Global PGH construct}
+\subsection{Global PGH constructor}
 The duration to construct the global PGH also similar to local PGH. Especially, the information of all local PGH are presented in the same matrix.
-\subsection{Histogram matching}
+\subsection{PGH matching}
 Follows the analysis, the Bhattacharya metric used to compute the similarity between two models. However, besides the Bhattacharya metric, we may choose another metric to find the similarity the histograms, such as: \textbf{Chi-squared} metric and \textbf{Intersection} metric. The forms are presented as below:\\
 \textbf{Chi-squared metric:}
 \begin{center}
@@ -150,7 +150,7 @@ d_{Intersection} (H_{i}H_{j}) = \sum\limits_{\theta}^{\pi}\sum\limits_{d}^{d_{ma
 \end{center}
 The significance of parameters in formula (\ref{eq:2}) and (\ref{eq:3}) are similar to formula (\ref{eq:1}). For the Bhattacharyya and Intersection metric, the perfect match is 1 and the total mismatch is 0. The result is opposite to Chi-squared metric (0 for perfect match and 1 for total mismatch).\\[0.2cm]
 Hence, depending on the purpose of the comparison subject will choose a suitable comparing method. In this program, we propose three methods to obtain a general result when matching the histograms.
-\section{Probabilistic Hough Transform}
+\section{Global pose estimation (Probabilistic Hough Transform)}
 The core of PHT uses vote procedure to find the model's position in the scene image. This process includes two steps: firstly, we record the model information by calculating the angle and perpendicular distance of each pair of model lines to reference point in model. Secondly, we estimate the model's position in image by voting procedure. We create a Hough space to store value if exist a pair of scene lines matching to the entry in the training process. The peak in Hough space (the best vote) is assumed as the reference point of the model in the scene image. From this reference point, we can find the position of model (landmarks) in scene image.\\
 Following that, the process to estimate the model's landmarks on scene image includes the steps as follows:
 \begin{itemize}
@@ -275,7 +275,7 @@ Find the intersection between two parallel lines\;
 \caption{Algorithm to find position of model reference point in scene image}
 \end{algorithm}~\\[0.2cm]
 By finding the reference point, the landmarks in the scene image can be estimated by calculating the relatedness between the reference point and the reference landmarks. Besides, we also record the difference about rotation, orientation and scale between the model image and the scene image.
-\section{Template matching}
+\section{Landmarks refinement}
 Refining landmarks is finished by applying the cross-correlation. In this case, the template is a region around each landmark in model image and the image is also a region around the Hough landmark detection (the landmarks estimated in previous stage) in scene image. Hence, to save the processing time, before applying the cross-correlation, the scene image is rotated to match with model. The difference angle between the model image and the scene image obtained from Hough estimate in previous stage.\\[0.2cm]
 For each landmark in the model image, we create a bounding box around the landmarks with an arbitrary size and use landmark as a center point. When create the bounding box, we need to keep the distance between left corner to the landmarks, because sometimes, with the landmark position, the size of bounding box can be over the size of image. Use this box as a \textit{template}. Doing the same with each estimated landmarks on scene image but using a larger size to create the \textit{small image}. Then applying the cross-correlation between \textit{template} and \textit{small image}. The results obtained store the location where the template matches the image. From these position, we indicate the position of each landmark of reference image on scene image. The algorithm to create the bounding box around a landmark is described follows:\\[0.2cm]
 \begin{algorithm}[H]
