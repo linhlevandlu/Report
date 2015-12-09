@@ -39,6 +39,12 @@ Paul~VC Hough.
 \newblock Method and means for recognizing complex patterns.
 \newblock Technical report, 1962.
 
+\bibitem{lowe1987three}
+David~G Lowe.
+\newblock Three-dimensional object recognition from single two-dimensional
+  images.
+\newblock {\em Artificial intelligence}, 31(3):355--395, 1987.
+
 \bibitem{palaniswamy2010automatic}
 Sasirekha Palaniswamy, Neil~A Thacker, and Christian~Peter Klingenberg.
 \newblock Automatic identification of landmarks in digital images.
