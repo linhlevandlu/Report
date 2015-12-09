@@ -3,7 +3,7 @@ Previous chapter has discussed about the method which we used to estimate the la
 \section{Features extraction}
 \subsection{Image preprocessing}
 As discuss in previous, we use the thresholding technique to pre-process the image. As we know about thresholding technique, with a threshold value \textbf{``t"}, we can decrease the noise and obtain the interested features. The output of this technique is a binary image, which can used to extract the features. The threshold value are defined by the histogram analysis.\\[0.2cm]
-Based on the histogram of the original image, we compute the mean and the median of this histogram. With the histogram obtained, we split it into two parts: the first part starts from the beginning to the limit value (the limit value is the smallest value between mean and median); the second part, starts from the limit value to the end of the histogram. For each part, we find the maximum, minimum value and calculatethe mean of them. The threshold value \textbf{``t"} obtained by the mean of the two mean values in two parts of histogram (as algorithm \ref{al_preprocess}).\\
+Based on the histogram of the original image, we compute the mean and the median of this histogram. With the histogram obtained, we split it into two parts: the first part starts from the beginning to the limit value (the limit value is the smallest value between mean and median); the second part, starts from the limit value to the end of the histogram. For each part, we find the maximum, minimum value and calculate the mean of them. The threshold value \textbf{``t"} obtained by the mean of the two mean values in two parts of histogram (as algorithm \ref{al_preprocess}).\\
 To implement the threshold technique, we apply the threshold method which provided by  OpenCV\footnote{http://docs.opencv.org/2.4/doc/tutorials/imgproc/threshold/threshold.html} library in the CV\_THRESH\_BINARY mode (keep the pixel has value greater than threshold value) to pre-process image.\\
 \IncMargin{1em}
 \begin{algorithm}[H]
@@ -45,7 +45,8 @@ $middle \leftarrow (middle1 + middle2)/2$ \;
 Apply the threshold with threshold value is $middle$\;
 \caption{Algorithm to get the threshold value and pre-process image}
 \label{al_preprocess}
-\end{algorithm}\DecMargin{1em}
+\end{algorithm}
+\DecMargin{1em}~\\
 The parameter provides to \textbf{threshold} method in OpenCV are:
 \begin{itemize}
 \item \textit{Input image}: the input image (in grayscale mode)
@@ -91,7 +92,7 @@ An the algorithm is presented as follows:\\
 \IncMargin{1em}
 \begin{algorithm}[H]
 \Indm 
-\setstretch{1}
+\setstretch{0.9}
 \SetAlgoLined
 \KwData{listPoints: list of points which presented the edge}
 \KwResult{Queue of ``step" points on the edge}
@@ -163,7 +164,7 @@ $double$ $distance, distance1, distance2$\;
 }
 \caption{Algorithm to compute the measure metric between 2 PGH using Bhattacharya}
 \end{algorithm}
-\DecMargin{1em}
+\DecMargin{1em}~\\
 Besides the Bhattacharya metric, we may choose another metric to find the similarity the histograms, such as: \textbf{Chi-squared} metric and \textbf{Intersection} metric. The forms are presented as below:\\
 \textbf{Chi-squared metric:}
 \begin{center}
@@ -180,8 +181,7 @@ d_{Intersection} (H_{i}H_{j}) = \sum\limits_{\theta}^{\pi}\sum\limits_{d}^{d_{ma
 The significance of parameters in formula (\ref{eq:2}) and (\ref{eq:3}) are similar to formula (\ref{eq:1}). For the Bhattacharyya and Intersection metric, the perfect match is 1 and the total mismatch is 0. The result is opposite to Chi-squared metric (0 for perfect match and 1 for total mismatch).\\[0.2cm]
 Hence, depending on the purpose of the comparison subject will choose a suitable comparing method. In this program, we propose three methods to obtain a general result when matching the histograms.
 \section{Global pose estimation (Probabilistic Hough Transform)}
-The core of PHT uses vote procedure to find the model's position in the scene image. This process includes two steps: firstly, we record the model information by calculating the angle and perpendicular distance of each pair of model lines to reference point in model. Secondly, we estimate the model's position in image by voting procedure. We create a Hough space to store value if exist a pair of scene lines matching to the entry in the training process. The peak in Hough space (the best vote) is assumed as the reference point of the model in the scene image. From this reference point, we can find the position of model (landmarks) in scene image.\\
-Following that, the process to estimate the model's landmarks on scene image includes the steps as follows:
+The core of PHT uses vote procedure to find the model's position in the scene image. The process to estimate the model's landmarks on scene image includes the steps as follows:
 \begin{itemize}
 \item Choose an arbitrary point in the model as a reference point,
 \item For each pair lines in the model, calculating and recording the perpendicular distance and angle from the reference point to each line. And save the information into a table,
@@ -231,7 +231,7 @@ Declare the reference table $refTable$ \;
 return $refTable$ \;
 \caption{Algorithm to construct the reference table}
 \end{algorithm}~\\
-The training process is finished by finding a pair of scene lines agree with a pair of model lines. An accumulator was created to store each agreement between the pair of scene lines and the pair of model lines. For each pair of scene lines, we find its exist in the reference table and increase the value at correspondence position in accumulator. At the end, we obtain a pair of scene lines and pair of model lines correspondence with the maximum value in accumulator. The below algorithms describe the steps to finish the training process:\\
+The training process is finished by finding a pair of scene lines agree with a pair of model lines. An accumulator was created to store each agreement between the pair of scene lines and the pair of model lines. For each pair of scene lines, we find its exist in the reference table and increase the value at correspondence position in accumulator. At the end, we obtain a pair of scene lines and pair of model lines correspondence with the maximum value in accumulator. The below algorithms describe the steps to finish the training process:\\[0.2cm]
 \begin{algorithm}[H]
 \Indm 
 \setstretch{1}
