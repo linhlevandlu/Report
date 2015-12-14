@@ -10,7 +10,7 @@ In this chapter, we describe a method to automatic extraction landmarks from bio
 Segmentation is a process to extract interested features from the digital image. The expected result in this stage is the list of approximate lines which are presented for the image's features.\\
 The process mainly separate into two steps: firstly, we pre-process image to reduce the noise and enhance the quality of features in image. Secondly, we extract the image's features (edges) and present it as list of approximate lines.
 \subsection{Pre-process image}
-To finish the pre-processing step, we apply the \textbf{threshold} method. This way is different with the suggested method in the article\cite{palaniswamy2010automatic} (DoG filter) to pre-process image. Usually, the threshold value might indicated follows two ways: manually and automatically. In my way, the threshold value was indicated by analysing the image histogram. This method will be focused in next chapter.
+To finish the pre-processing step, we apply the \textbf{threshold} method. This way is different with the suggested method in the article\cite{palaniswamy2010automatic} (DoG filter) to pre-process image. Usually, the threshold value might indicated follows two ways: manually and automatically. In our case, the threshold value was indicated by analysing the image histogram. This method will be focused in next chapter.
 \begin{figure}[h!]
 \centering
 \subfloat[Image with noise]{\label{fig:seg_211}\includegraphics[width=0.45\textwidth]{./images/md019n}}~~
