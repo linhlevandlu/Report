@@ -30,16 +30,16 @@
 \contentsline {subsection}{\numberline {3.3.2}Estimation process}{27}
 \contentsline {section}{\numberline {3.4}Landmarks refinement}{27}
 \contentsline {chapter}{\numberline {4}Realisation and Result}{30}
-\contentsline {section}{\numberline {4.1}General model of software}{30}
-\contentsline {subsection}{\numberline {4.1.1}Segmentation module}{31}
-\contentsline {subsection}{\numberline {4.1.2}PGH module}{31}
-\contentsline {subsection}{\numberline {4.1.3}PHT module}{31}
-\contentsline {subsection}{\numberline {4.1.4}Landmark detection module}{31}
-\contentsline {section}{\numberline {4.2}Software architecture and the packages}{32}
-\contentsline {subsection}{\numberline {4.2.1}Edge segmentation }{34}
-\contentsline {subsection}{\numberline {4.2.2}Pairwise Geometric Histogram}{34}
-\contentsline {subsection}{\numberline {4.2.3}Estimate the global pose (Probabilistic Hough Transform)}{35}
-\contentsline {subsection}{\numberline {4.2.4}Refine the landmarks}{35}
+\contentsline {section}{\numberline {4.1}Software architecture and the packages}{30}
+\contentsline {section}{\numberline {4.2}The modules of software}{31}
+\contentsline {subsection}{\numberline {4.2.1}Segmentation module}{32}
+\contentsline {subsection}{\numberline {4.2.2}PGH module}{32}
+\contentsline {subsection}{\numberline {4.2.3}PHT module}{33}
+\contentsline {subsection}{\numberline {4.2.4}Landmark detection module}{33}
+\contentsline {subsection}{\numberline {4.2.5}Edge segmentation }{34}
+\contentsline {subsection}{\numberline {4.2.6}Pairwise Geometric Histogram}{34}
+\contentsline {subsection}{\numberline {4.2.7}Estimate the global pose (Probabilistic Hough Transform)}{35}
+\contentsline {subsection}{\numberline {4.2.8}Refine the landmarks}{35}
 \contentsline {section}{\numberline {4.3}Result}{36}
 \contentsline {subsection}{\numberline {4.3.1}New interface}{36}
 \contentsline {subsection}{\numberline {4.3.2}Experimentation}{37}

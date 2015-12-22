@@ -1,6 +1,14 @@
 \chapter{Realisation and Result}
-This chapter describes the model, the architecture and the modules of MAELab (Morphometry automatically extraction LaBRI) software. The first part is description about model as well as the modules of software. Then, we give the software architecture, class diagram and explain about it.
-\section{General model of software}
+This chapter describes the model, the architecture and the modules of MAELAB (Morphometric with Automatically Extraction of Landmarks) software. The first part is description about model as well as the packages in program. Then, we give the modules in program, class diagram and explain about it.
+\section{Software architecture and the packages}
+The MAELAB software mainly includes two packages: \textbf{MAgIS} package and \textbf{Morphometry} package. The \textbf{MAgIS} package contains the methods to segment images and construct the interface of program. This package was finished by NGUYEN Hoang Thao. The \textbf{Morphometry} package is the new one, it contains the implementations to estimate landmarks automatically. Besides, we also use the method provides by OpenCV library(OpenCV library) and Qt framework (Qt Framework package) (see in figure \ref{fig:42}).
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{./images/packages}
+\caption{The packages of program}
+\label{fig:42}
+\end{figure}~\\
+\section{The modules of software}
 The software includes four main modules corresponding to four processes to estimate the landmarks: segmentation module, pairwise geometric histogram (PGH) module, probabilistic Hough transform (PHT) module and landmark detection module. Besides, the environment module provides the common classes. The classes in environment module can be used in all modules of software (figure \ref{fig:41}).
 \begin{figure}[h!]
 \centering
@@ -18,22 +26,14 @@ The PGH module provides the ways to implement the constructor of PGH and compute
 PHT module finishes the works in estimation stage. The main methods of PHT module stay in \texttt{PHoughTransform} class. It is a class extended from \texttt{HoughTransform} class, an abstract class. Besides the method extends from abstract class, \texttt{PHoughTransform} also implements the methods when we apply the probabilistic Hough transform as described in previous chapters.
 \subsection{Landmark detection module}
 The landmark detection module used to implement the methods to refine the estimated landmarks from estimation stage. It includes an abstract class, \texttt{LandmarkMethod}, and an implement class which extends from abstract class, \texttt{LandmarkDetection} class. \texttt{LandmarkDetection} class implements the methods to refine the estimated landmarks and compare the accuracy between the estimated landmarks and manual landmarks.
-\section{Software architecture and the packages}
-The MAELab software mainly includes two packages: \textbf{MAgIS} package and \textbf{Morphometry} package. The \textbf{MAgIS} package contains the methods to segment images and construct the interface of program. This package was finished by NGUYEN Hoang Thao. The \textbf{Morphometry} package contains the implementations to estimate landmarks automatically. Besides, we also use the method provides by OpenCV library(OpenCV library) and Qt framework (Qt Framework package) (see in figure \ref{fig:42}).
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\textwidth]{./images/packages}
-\caption{The packages of program}
-\label{fig:42}
-\end{figure}~\\
+
+The figure \ref{fig:43} shows class diagram of this software. The \textbf{main} methods located in the \texttt{ImageViewer} class, where contains all functions of the software and connects with the \textbf{MAgIS} package. The connecting between the software and the modules made via \texttt{Scenario} class. To represent the information of image, we use the classes: \texttt{Line}, \texttt{Edge}, \texttt{Image}. For each main modules in program, we have the abstract classes, implementation classes and the support classes. \\
 \begin{figure}[h!]
 \centering
 \includegraphics[width=1.1\textwidth]{./images/main}
 \caption{The class diagram of program}
 \label{fig:43}
 \end{figure}
-
-The figure \ref{fig:43} shows class diagram of this software. The \textbf{main} methods located in the \texttt{ImageViewer} class, where contains all functions of the software and connects with the \textbf{MAgIS} package. The connecting between the software and the modules made via \texttt{Scenario} class. To represent the information of image, we use the classes: \texttt{Line}, \texttt{Edge}, \texttt{Image}. For each main modules in program, we have the abstract classes, implementation classes and the support classes. They are described in the below subsections.
 \subsection*{Environment classes}
 The \textit{environment classes} describes information about the classes which describe the geometric objects that can be represent the image and the method to remove the yellow grid on the images.
 
