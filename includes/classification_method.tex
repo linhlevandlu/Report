@@ -1,5 +1,5 @@
 \chapter{Analysis}
-In this chapter, we describe a method to automatic extraction landmarks from biological images. The process includes some steps as follows:
+In this chapter, we present some generic concept of image processing and the Palaniswamy's method to automatic extraction landmarks from biological images. The method is based on 4 steps:
 \begin{enumerate}
 \item Segmentation (includes preprocessing image and extracting the features),
 \item Construction and comparison the Pairwise Geometric Histogram,
@@ -30,8 +30,7 @@ After reducing the noise from input image in pre-processing step, we can extract
 In Canny algorithm, the important parameters are the two threshold values (\textit{lower threshold} and \textit{upper threshold}) because it will decide which pixels are kept. Normally, the value of lower threshold and upper threshold are determined according to a certain rate. \\
 Actually, the Canny algorithm is not aware of the actual edges, the edge detecting process was based on the Sobel operator, extracted with non-maximal suppression. To obtain the expecting result, we need to apply another technique to obtain the step edges. In this case, we can use the technique to analysis the structure of topology to get the edges. This technique was proposed by Suzuki\cite{suzuki1985topological}.
 \subsection{Edge segmentation}
-The geometric relation of an object could not be constructed from edges, it is always constructed from the relation of basic geometric objects, such as the lines.  In fact, any arbitrary edge can be represented by a set of approximate lines. This presentation is useful when we want to describe the relationship between the edges in an object. The method used to fragment the edge into a list of approximate lines is the recursive algorithm\cite{thacker1995assessing}, it is similar with the method proposed by Lowe\cite{lowe1987three} except the stop condition changed
-. An example about edge segmentation is presented in figure \ref{fig:figure_22}.
+The geometric relation of an object could not be constructed from edges, it is always constructed from the relation of basic geometric objects, such as the lines.  In fact, any arbitrary edge can be represented by a set of approximate lines. This presentation is useful when we want to describe the relationship between the edges in an object. The method used to fragment the edge into a list of approximate lines is the recursive algorithm\cite{thacker1995assessing}, it is similar with the method proposed by Lowe\cite{lowe1987three} except the stop condition changed. An example about edge segmentation is presented in figure \ref{fig:figure_22}.
 \begin{figure}[h!]
 \centering
 \subfloat[Original image]{\label{fig:seg_221}\includegraphics[width=0.45\textwidth]{./images/md019no}}~~
