@@ -35,16 +35,12 @@
 \contentsline {subsection}{\numberline {4.2.1}Segmentation module}{32}
 \contentsline {subsection}{\numberline {4.2.2}PGH module}{32}
 \contentsline {subsection}{\numberline {4.2.3}PHT module}{33}
-\contentsline {subsection}{\numberline {4.2.4}Landmark detection module}{33}
-\contentsline {subsection}{\numberline {4.2.5}Edge segmentation }{34}
-\contentsline {subsection}{\numberline {4.2.6}Pairwise Geometric Histogram}{34}
-\contentsline {subsection}{\numberline {4.2.7}Estimate the global pose (Probabilistic Hough Transform)}{35}
-\contentsline {subsection}{\numberline {4.2.8}Refine the landmarks}{35}
-\contentsline {section}{\numberline {4.3}Result}{36}
-\contentsline {subsection}{\numberline {4.3.1}New interface}{36}
-\contentsline {subsection}{\numberline {4.3.2}Experimentation}{37}
-\contentsline {subsection}{\numberline {4.3.3}Parameters}{38}
-\contentsline {subsection}{\numberline {4.3.4}Results}{39}
-\contentsline {subsection}{\numberline {4.3.5}Limits and future works}{41}
-\contentsline {chapter}{Conclusion}{42}
-\contentsline {chapter}{Bibliography}{44}
+\contentsline {subsection}{\numberline {4.2.4}Landmark detection module}{34}
+\contentsline {section}{\numberline {4.3}Result}{34}
+\contentsline {subsection}{\numberline {4.3.1}New interface}{34}
+\contentsline {subsection}{\numberline {4.3.2}Experimentation}{35}
+\contentsline {subsection}{\numberline {4.3.3}Parameters}{36}
+\contentsline {subsection}{\numberline {4.3.4}Results}{38}
+\contentsline {subsection}{\numberline {4.3.5}Limits and future works}{39}
+\contentsline {chapter}{Conclusion}{40}
+\contentsline {chapter}{Bibliography}{42}
