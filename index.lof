@@ -23,13 +23,8 @@
 \contentsline {figure}{\numberline {4.1}{\ignorespaces The packages of program\relax }}{30}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces The modules of program with main classes\relax }}{31}
 \contentsline {figure}{\numberline {4.3}{\ignorespaces The graphic user interface of MAELab software\relax }}{35}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces The MAELab software with its menu\relax }}{36}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {MAELab software}}}{36}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {MAELab with Segmentation menu}}}{36}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {MAELab with Landmarks menu}}}{36}
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {MAELab with Utilities menu}}}{36}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Automatic identification of the landmarks\relax }}{38}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Automatic identification of the landmarks\relax }}{38}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The scene image}}}{38}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image with estimated landmarks by cross-correlation }}}{38}
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {The scene image with estimated landmarks (by article) }}}{38}
-\contentsline {figure}{\numberline {6}{\ignorespaces An example about histogram\relax }}{43}
+\contentsline {figure}{\numberline {5}{\ignorespaces An example about histogram\relax }}{42}

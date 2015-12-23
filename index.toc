@@ -36,11 +36,11 @@
 \contentsline {subsection}{\numberline {4.2.2}PGH module}{32}
 \contentsline {subsection}{\numberline {4.2.3}PHT module}{33}
 \contentsline {subsection}{\numberline {4.2.4}Landmark detection module}{34}
-\contentsline {section}{\numberline {4.3}Result}{34}
+\contentsline {section}{\numberline {4.3}Examination}{34}
 \contentsline {subsection}{\numberline {4.3.1}New interface}{34}
 \contentsline {subsection}{\numberline {4.3.2}Experimentation}{35}
 \contentsline {subsection}{\numberline {4.3.3}Parameters}{36}
-\contentsline {subsection}{\numberline {4.3.4}Results}{38}
-\contentsline {subsection}{\numberline {4.3.5}Limits and future works}{39}
-\contentsline {chapter}{Conclusion}{40}
-\contentsline {chapter}{Bibliography}{42}
+\contentsline {subsection}{\numberline {4.3.4}Results}{37}
+\contentsline {subsection}{\numberline {4.3.5}Limits and future works}{38}
+\contentsline {chapter}{Conclusion}{39}
+\contentsline {chapter}{Bibliography}{41}
