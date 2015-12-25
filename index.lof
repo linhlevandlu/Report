@@ -27,4 +27,7 @@
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The scene image}}}{38}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image with estimated landmarks by cross-correlation }}}{38}
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {The scene image with estimated landmarks (by article) }}}{38}
-\contentsline {figure}{\numberline {5}{\ignorespaces An example about histogram\relax }}{42}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces The chart presents the accuracy between manual and automated landmarks\relax }}{38}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The chart presents the accuracy between manual and automated landmarks on right mandible}}}{38}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The chart presents the accuracy between manual and automated landmarks on left mandible}}}{38}
+\contentsline {figure}{\numberline {6}{\ignorespaces An example about histogram\relax }}{43}

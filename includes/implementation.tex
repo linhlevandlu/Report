@@ -8,6 +8,7 @@ The MAELAB software mainly includes two packages: \textbf{MAgIS} package and \te
 \caption{The packages of program}
 \label{fig:42}
 \end{figure}~\\
+
 \section{The modules of software}
 The software includes four main modules corresponding to four processes to estimate the landmarks: segmentation module, pairwise geometric histogram (PGH) module, probabilistic Hough transform (PHT) module and landmark detection module. Besides, the environment module provides the common classes. The classes in environment module can be used in all modules of software (figure \ref{fig:41}).
 \begin{figure}[h!]
@@ -86,11 +87,11 @@ All parts of the new code are integrated into MorphoEcol\footnote{Morphometry in
 \end{figure}~\\
 In the new interface of program, the users can find the functions in MAELAB software are:
 \begin{itemize}
-\item Menu \textbf{File} contains the functions to open the source image, print the image, save the image and close the program.
-\item Menu \textbf{View} contains the functions to change the view modes of image in program
-\item Menu \textbf{Segmentation} contains the functions to segment image.
-\item Menu \textbf{Landmarks} contains the functions to estimate and to analysis the landmarks 
-\item Menu \textbf{Utilities} contains the supporting functions on image such as convert image to binary mode, compute the PGH of image or compare the the PHG of the images by the other metrics, etc.
+\item Menu \textbf{File} contains the functions to open the source image, print the image, save the image and close the program,
+\item Menu \textbf{View} contains the functions to change the view modes of image in program,
+\item Menu \textbf{Segmentation} contains the functions to segment image,
+\item Menu \textbf{Landmarks} contains the functions to estimate and to analysis the landmarks ,
+\item Menu \textbf{Utilities} contains the supporting functions on image such as convert image to binary mode, compute the PGH of image or compare the the PHG of the images by the other metrics, etc,
 \item Menu \textbf{Help} describes the information about the software.
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -190,11 +191,14 @@ The automated landmark identification is examined on two data sets: \textit{righ
 \label{fig:46}
 \end{figure}~\\
 To have the basic evaluation about this method, we compare its result with the result from \textbf{``original"} of cross-correlation method. Obvious, the location of landmarks obtained from method (follows article) more closer than the landmarks obtained from cross-correlation (see in figure \ref{fig:46}).\\
-Besides, the accuracy of the system can be determined by comparing the differences(in pixels) between the landmarks located by this method and the manual landmarks. This method has to pass several steps, the result of each step will effect on next steps. Thus, to evaluate the accuracy of this method, we can evaluate the result of each step.\\
-The chart in the image below show the comparison between the manual and automated results. The \textbf{blue} line describes the size of the manual landmarks, which was indicated by the biologist. The \textbf{red} line presents for the size of the automated landmarks by software. It clear that the automated landmarks is ....(compare about result)
-
-insert hinh cho nay
-
+\begin{figure}[h!]
+\centering
+\subfloat[The chart presents the accuracy between manual and automated landmarks on right mandible]{\label{fig:471}\includegraphics[width=0.45\textwidth]{./images/MdChart}}~~
+\subfloat[The chart presents the accuracy between manual and automated landmarks on left mandible]{\label{fig:472}\includegraphics[width=0.45\textwidth]{./images/MgChart}}
+\caption{The chart presents the accuracy between manual and automated landmarks}
+\label{fig:47}
+\end{figure}~\\
+Besides, the accuracy of the system can be determined by comparing the differences(in pixels) between the landmarks located by this method and the manual landmarks. The charts in the image \ref{fig:47} show the comparison between the manual and automated landmarks on two sets of data (\textit{right mandible, left mandible}). The \textbf{blue} line describes the size of the manual landmarks on set of images, which was indicated manually by the biologist. The \textbf{orange} line presents for the size of the automated landmarks by software. It is clearly that the automated landmarks is near with the manual landmarks (about 25\% is exactly). This method has to pass several steps, the result of each step will effect on next steps. Thus, to evaluate the accuracy of this method, we can evaluate the result of each step.
 \subsection{Limits and future works}
 The method includes several steps to get the last result. At each step, we can use different ways to do. The methods proposed in this report just a part of them. Moreover, the program has use the parameters as the conditions, changing the values of parameters can effected to the accuracy of program.
 Currently, the work finishes on two sets of data: \textit{right mandible} and \textit{left mandible}. In the future, we can evaluate and improve this method. Then applying this method on other dataset of biological images.
