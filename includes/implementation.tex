@@ -78,13 +78,7 @@ The abstract classes contains the abstract methods correspondence with the main 
 \section{Examination}
 As presentation about our result, this section introduces MAELAB software, the parameters used in execution and the discussion about the result. All these results have been obtained with the set of left mandibles and right mandibles of the beetle (each set includes 293 images).
 \subsection{New interface}
-All parts of the new code are integrated into MorphoEcol\footnote{Morphometry in Ecologie} software. To focus on the main functions available to compute landmarks, we reface the interface of program to dedicate the methods that we have presented (figure \ref{fig:44}).
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.7\textwidth]{./images/software}
-\caption{The graphic user interface of MAELab software}
-\label{fig:44}
-\end{figure}~\\
+All parts of the new code are integrated into MorphoEcol\footnote{Morphometry in Ecologie} software. To focus on the main functions available to compute landmarks, we refactor the interface of program to dedicate the methods that we have presented (figure \ref{fig:44}).
 In the new interface of program, the users can find the functions in MAELAB software are:
 \begin{itemize}
 \item Menu \textbf{File} contains the functions to open the source image, print the image, save the image and close the program,
@@ -94,6 +88,12 @@ In the new interface of program, the users can find the functions in MAELAB soft
 \item Menu \textbf{Utilities} contains the supporting functions on image such as convert image to binary mode, compute the PGH of image or compare the the PHG of the images by the other metrics, etc,
 \item Menu \textbf{Help} describes the information about the software.
 \end{itemize}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.7\textwidth]{./images/software}
+\caption{The graphic user interface of MAELab software}
+\label{fig:44}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \iffalse
 \begin{figure}[h!]
@@ -116,7 +116,7 @@ The experimentation is deployed on two machines with difference equipment:
 \item Machine 1: Intel(R) Core(TM) 2 Duo CPU T8100 2.1GHz, 2 GB of RAM
 \item Machine 2: Intel(R) Core(TM) i7-4790 CPU 3.6GHz, 16 GB of RAM
 \end{itemize}
-The testing data is two set of biological images: \textit{Right mandible and left mandible}. Each dataset includes 293 images(3264 x 2448). However, the data was filtered by suppressing the bad images in the both datasets. The bad images includes the empty images and broken images (images contain the broken object). They are showed as below:
+The testing data is two set of biological images: \textit{right mandible and left mandible}. Each dataset includes 293 images(3264 x 2448). However, the data was filtered by suppressing the bad images in the both datasets. The bad images includes the empty images and broken images (images contain the broken object). They are showed as below:
 \begin{multicols}{3}
 \begin{itemize}
 \item Md 004.JPG
@@ -197,8 +197,8 @@ To have the basic evaluation about this method, we compare its result with the r
 \subfloat[The chart presents the accuracy between manual and automated landmarks on left mandible]{\label{fig:472}\includegraphics[width=0.45\textwidth]{./images/MgChart}}
 \caption{The chart presents the accuracy between manual and automated landmarks}
 \label{fig:47}
-\end{figure}~\\
-Besides, the accuracy of the system can be determined by comparing the differences(in pixels) between the landmarks located by this method and the manual landmarks. The charts in the image \ref{fig:47} show the comparison between the manual and automated landmarks on two sets of data (\textit{right mandible, left mandible}). The \textbf{blue} line describes the size of the manual landmarks on set of images, which was indicated manually by the biologist. The \textbf{orange} line presents for the size of the automated landmarks by software. It is clearly that the automated landmarks is near with the manual landmarks (about 25\% is exactly). This method has to pass several steps, the result of each step will effect on next steps. Thus, to evaluate the accuracy of this method, we can evaluate the result of each step.
+\end{figure}
+Besides, the accuracy of the system can be determined by comparing the differences(in pixels) between the landmarks located by this method and the manual landmarks which was indicated manually by the biologist. The charts in the image \ref{fig:47} show the comparison between the manual and automated landmarks on two sets of data (\textit{right mandible, left mandible}). The \textbf{blue} line describes the size of the manual landmarks on set of images. The \textbf{orange} line presents for the size of the automated landmarks by software. It is clearly that the automated landmarks is near with the manual landmarks (about 5\% is exactly, 75\% is near and 20\% is far). Based on the processes, this method has to pass several steps, the result of each step will effect on next steps. Thus, to evaluate the accuracy of this method, we can evaluate the result of each step.
 \subsection{Limits and future works}
 The method includes several steps to get the last result. At each step, we can use different ways to do. The methods proposed in this report just a part of them. Moreover, the program has use the parameters as the conditions, changing the values of parameters can effected to the accuracy of program.
 Currently, the work finishes on two sets of data: \textit{right mandible} and \textit{left mandible}. In the future, we can evaluate and improve this method. Then applying this method on other dataset of biological images.
