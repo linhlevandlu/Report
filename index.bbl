@@ -11,6 +11,11 @@ Dana~H Ballard.
 \newblock Generalizing the hough transform to detect arbitrary shapes.
 \newblock {\em Pattern recognition}, 13(2):111--122, 1981.
 
+\bibitem{bookstein1997morphometric}
+Fred~L Bookstein.
+\newblock {\em Morphometric tools for landmark data: geometry and biology}.
+\newblock Cambridge University Press, 1997.
+
 \bibitem{canny1986computational}
 John Canny.
 \newblock A computational approach to edge detection.

@@ -1,11 +1,13 @@
-\chapter{Analysis}
-In this chapter, we present some generic concept of image processing and the Palaniswamy's method to automatic extraction landmarks from biological images. The method is based on 4 steps:
+\chapter{Automatic Extraction of Landmarks: Analysis}
+In this chapter, we present some generic concepts of image processing and the Palaniswamy's method to automatic extraction landmarks from biological images. This method is based on 4 steps:
 \begin{enumerate}
-\item Segmentation (includes preprocessing image and extracting the features),
+\item Segmentation: including preprocessing image and extracting the features,
 \item Construction and comparison the Pairwise Geometric Histogram,
 \item Estimation the global pose of object by the Probabilistic Hough Transform,
 \item Refinement the estimated landmarks by template matching.
 \end{enumerate}
+\section{Landmarks}
+\textit{``Morphological landmarks are points that can be located precisely and establish an ambiguous one-to-one correspondence among all the specimens and are widely used in shape analysis"}\cite{bookstein1997morphometric}. The fields of shape analysis by landmarks are increasing, especially it really useful in biological and medical field. From the position of the landmarks, we can estimate the size of the object and classify the object into groups. The anatomical landmarks can be collected in two dimensions image. The coordinate of landmarks are usually obtained by manually. This work can take a long time. To solve this problems, we focused on a method to automatic extraction of landmarks.
 \section{Segmentation}
 Segmentation is a process to extract interested features from the digital image. The expected result in this stage is the list of approximate lines which are presented for the image's features.\\
 The process mainly separate into two steps: firstly, we pre-process image to reduce the noise and enhance the quality of features in image. Secondly, we extract the image's features (edges) and present it as list of approximate lines.
@@ -39,22 +41,22 @@ The geometric relation of an object could not be constructed from edges, it is a
 \label{fig:figure_22}
 \end{figure}
 \section{Pairwise Geometric Histogram}
-Pairwise Geometric Histogram(PGH)\cite{evans1993use} is used to encode the relative information between a line and a set of lines in an object. Therefore, an object can be represented by a set of PGH. From the set of PGH, we can reconstructed the object or compare to another object. In this section, we introduce the construction of a PGH for an object based on the geometrical relationship and compute the similar distance between two objects. The object is described by set of approximate lines which were obtained in the previous stage.\\
-The PGH is constructed on the geometric features between lines relative. The geometric features are characteristic which can describe the geometric shape such as angle, the length of line, perpendicular distance between two lines, etc. For the shape representation, the relative angle and perpendicular distance is geometrical features useful.\\
+Pairwise Geometric Histogram(PGH)\cite{evans1993use} is used to encode the relative information between a line and a set of lines in an object. Therefore, an object can be represented by a set of PGHs. From the set of PGHs, we can reconstruct the object or compare it to another object. In this section, we introduce the construction of a PGH for an object based on the geometrical relationship and compute the similar distance between two objects. The object is described by set of approximate lines which were obtained in the previous stage.\\
+The PGH is constructed on the geometric features between lines relative. The geometric features are characteristics which can describe the geometric shape such as angle, the length of line, perpendicular distance between two lines, etc. For the shape representation, the relative angle and perpendicular distance is geometrical features useful.\\
 \begin{figure}[h!]
 \centering
 \subfloat[The geometric relationship between two lines]{\label{fig:231}\includegraphics[width=0.4\textwidth]{./images/PGH_geo}}~~
 \subfloat[The pairwise geometric histogram ]{\label{fig:232}\includegraphics[width=0.4\textwidth]{./images/PGH}}
-\caption{Example about geometric features and the pairwise geometric histogram}
+\caption{Example about geometric features and the pairwise geometric histogram\cite{palaniswamy2010automatic}}
 \label{fig:figure_23}
 \end{figure}
 As example in figure \ref{fig:figure_23}\footnote{Image extracts from the article}, the figure \ref{fig:231} represents the geometric relationship between two lines \textbf{L1, L2}. The figure \ref{fig:232} represents the PGH between them when using line \textbf{L1} as reference line and line \textbf{L2} as object line.
 \subsection{Local pairwise geometric histogram}
 The local PGH presented the relationship between a reference line with other lines of the object. Thus, for each line in object, we can construct a local PGH for it. The frequency of the geometric features is recorded as a two dimensional histogram with an angle axis and distance axis. The entries on PGH describes the geometric relationship between the reference line and the object lines. \textit{``The blurring of entry along the axis regarding the true position and orientation of each object lines for reference line"}\cite{palaniswamy2010automatic}. Following the accuracy, we can indicate the size of histogram and normalize the value to match with size of histogram.
 \subsection{Global pairwise geometric histogram}
-Based on local PGH constructor, global PGH is combined of all local PGHs of all lines belong to the object. It means if the object is defined by n lines, the global PGH will composed of n local PGHs. This method is good when we apply some variants on the image, such as translate or rotate the image because the angle and perpendicular distance between a pair of lines are invariant.
+Based on local PGH constructor, global PGH is combined of all local PGHs of all lines belong to the object. It means if the object is defined by $n$ lines, the global PGH will composed of $n$ local PGHs. This method fitwell when we apply some variants on the image, such as translate or rotate the image because the angle and perpendicular distance between a pair of lines are invariant.
 \subsection{Histogram matching}
-\textit{``The histogram matching enables robust classification of shape features by finding similarity between the scene and reference model"}\cite{palaniswamy2010automatic}. The similar between two models can obtain via the similar distance, which is computed by comparing their probability distribution on geometric histogram. To solve it, each model is represented by a global PGH and uses the Bhattacharya\cite{thacker1995assessing} metric to determine the similar distance between the two models \cite{palaniswamy2010automatic}. In general, we can be normalize the PGH before comparing. The form of Bhattacharrya metric used to compute the similarities between two models is:
+\textit{``The histogram matching enables robust classification of shape features by finding similarity between the scene and reference model"}\cite{palaniswamy2010automatic}. The similarity between two models can be obtained via the similar distance, which is computed by comparing their probability distribution on geometric histogram. To solve it, each model is represented by a global PGH and uses the Bhattacharya\cite{thacker1995assessing} metric to determine the similar distance between the two models \cite{palaniswamy2010automatic}. In general, we normalize the PGH before comparing. The form of Bhattacharrya metric used to compute the similarities between two models is:
 \begin{center}
 \begin{equation} \label{eq:1}
 d_{Bhattacharyya} (H_{i}H_{j}) = \sum\limits_{\theta}^{\pi}\sum\limits_{d}^{d_{max}}\sqrt{H_{i}(\theta,d)H_{j}(\theta,d)}
@@ -68,8 +70,8 @@ The significance of parameters in the formula \ref{eq:1}, as follows:
 \item $H_{j}(\theta,d)$ is an entry at row $\theta$ and column $d$ in PGH of image \textit{j}
 \end{itemize}
 \section{Probabilistic Hough Transform}
-\textbf{Hough transform} is a technique used to find the exists of an object in another object. The main idea of this method based on the \textit{``vote"} procedure. The Hough transform was originally developed to recognize the line\cite{hough1962method} and after, it has extended to apply on arbitrary shape\cite{duda1972use}.\\[0.2cm]
-The \textbf{generalised Hough transform}\cite{ballard1981generalizing} (GHT) is the modification of Hough transform. It can used to detect an object described with its model. The problem solved with GHT is finding the model's position in the image. Like \textbf{Hough transform}, GHT also use the vote procedure to solve the problem. Following the similarity metric (by Bhattacharya), the hypothesised matches can used as input in pose estimation algorithm such as the generalised Hough transform. But in this case, it do not apply. Instead, the probabilistic Hough transform (PHT) is used to estimate the global pose of the object\cite{ashbrook1995robust} in object.\\[0.3cm]
+\textbf{Hough transform} is a technique used to find the presence of an object in another one. The main idea of this method is based on the \textit{``vote"} procedure. The Hough transform was originally developed to recognize a line\cite{hough1962method} and after, it has extended to apply on arbitrary shape\cite{duda1972use}.\\[0.2cm]
+It exist a \textbf{Generalised Hough Transform}\cite{ballard1981generalizing} (GHT) which is the extension of Hough transform. It can be used to detect an object described with its model. The problem solved with GHT is finding the model's position in the image. Like \textbf{Hough transform}, GHT also use the vote procedure to solve the problem. Following the similarity metric (by Bhattacharya), the hypothesised matches can be used as input in pose estimation algorithm. But in the Palaniswamy's method, it is not used. They choose to use Probabilistic Hough Transform to estimate the global pose of the object\cite{ashbrook1995robust}.\\[0.3cm]
 Based on a group of features within the scene image, identifying the represent of a model image in a scene image. The hypothesised location of the model image in the scene image is indicated based on the conditional probability that any pair scene lines agreement about a position in model image.\\[0.3cm]
 Estimating the global pose of the object has two main steps. Firstly, training process starts with recording the perpendicular distance and the angle from a reference point to each pair of model lines, then finding the similar pairs between model image and scene image. Secondly, estimating process starts as predicting the pose of scene image different from the model image, then we estimate the location of the model landmarks on scene image.
 \subsection{Training process}
