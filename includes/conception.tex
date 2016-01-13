@@ -1,12 +1,26 @@
-\chapter{Conception}
-Previous chapter has discussed about the method which we used to estimate the landmarks on biological image. This chapter describe different algorithms inside this method.
+\chapter{Algorithm to implement Palaniswamy's method}
+In previous chapter has presented the method which we have used to estimate the landmarks on biological image based on the article of Palaniswamy. This chapter describe the implementation of the algorithms and additional operations that we have had to use to support for extraction of landmarks.
 \section{Features extraction}
 \subsection{Image preprocessing}
-As discuss in previous, we use the thresholding technique to pre-process the image. As we know about thresholding technique, with a threshold value \textbf{``t"}, we can decrease the noise and obtain the interested features. The output of this technique is a binary image, which can used to extract the features. The threshold value are defined by the histogram analysis.\\[0.2cm]
+As discuss in previous, we use the thresholding technique to pre-process the image. As we know about thresholding technique, with a threshold value \textbf{``t"}, we can decrease the noise and obtain the interested features. The output of this technique is a binary image, which is generally used used to extract the features. The threshold value is defined by the histogram analysis (see figure \ref{fig:31}).
+\begin{figure}[h!]
+\centering
+\subfloat[Image with noise]{\label{fig:seg_211}\includegraphics[width=0.4\textwidth]{./images/md019n}}~~
+\subfloat[Image without noises]{\label{fig:seg_212}\includegraphics[width=0.4\textwidth]{./images/md019no}}
+\caption{Example about noises in image}
+\label{fig:31}
+\end{figure}~\\
 Based on the histogram of the original image, we compute the mean and the median of this histogram. With the histogram obtained, we split it into two parts: the first part starts from the beginning to the limit value (the limit value is the smallest value between mean and median); the second part, starts from the limit value to the end of the histogram. For each part, we find the maximum, minimum value and calculate the mean of them. The threshold value \textbf{``t"} obtained by the mean of the two mean values in two parts of histogram (as algorithm \ref{al_preprocess}).\\
-To implement the threshold technique, we apply the threshold method with  \textit{BINARY} mode (keep the pixel has value greater than threshold value) to pre-process image.\\
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{./images/hist}
+\caption{Analysis the histogram of image}
+\label{fig:32}
+\end{figure}~\\
+Figure \ref{fig:32} present the histogram of an image. In this histogram, the threshold value (blue point) is indicated by mean of two means value of two parts (red and green point). This value is used in the method to pre-process image and to extract the edge from image.\\
 \IncMargin{1em}
 \begin{algorithm}[H]
+\fontsize{10pt}{10pt}\selectfont
 \setstretch{1}
 \SetAlgoLined
 \Indm 
@@ -46,15 +60,7 @@ Apply the threshold with threshold value is $middle$\;
 \caption{Algorithm to get the threshold value and pre-process image}
 \label{al_preprocess}
 \end{algorithm}
-\DecMargin{1em}~\\
-The parameter provides to \textbf{threshold} method are:
-\begin{itemize}
-\item \textit{Input image}: the input image (in grayscale mode)
-\item \textit{Output image}: the output image
-\item \textit{Threshold value}: the value \textbf{t} used to threshold image
-\item \textit{Maximum value}: the maximum value to use with BINARY operations
-\item \textit{Threshold operation}: the operation used to threshold image (we use \textit{BINARY} mode)
-\end{itemize}
+\DecMargin{1em}
 \subsection{Edges extraction}
 The edges extraction are finished follows two steps:
 \begin{itemize}
@@ -66,15 +72,16 @@ The threshold value used in Canny algorithm is the value used in the previous st
 \iffalse
  This operation used from OpenCV library. The values provide for the parameters in Canny\footnote{http://docs.opencv.org/modules/imgproc/doc/feature\_detection.html\#canny} operator are:
  \fi 
-The value of parameters in Canny algorithm are:
+ 
+An implementation of Canny algorithm is available in the OpenCV library\footnote{http://docs.opencv.org/modules/imgproc/doc/feature\_detection.html\#canny}, the different parameters required by the method are:
 \begin{itemize}
 \item Source image: the input image after pre-processing (in grayscale mode),
 \item Destination image: the output image,
 \item Lower threshold value: the lower threshold value (\textit{t}),
 \item Upper threshold value: the upper threshold value (\textit{3t}),
-\item Kernel size: size of kernel, aperture for the Sobel operator (five pixels).
+\item Kernel size: size of kernel, aperture for the Sobel operator (5 pixels).
 \end{itemize}
-To retrieve the contours after applying the Canny algorithm, we apply the method to analysis the structure of topology to get the edges. This method will return to a list of the edges, and each edge was presented by a list of the points. 
+To retrieve the contours after applying the Canny algorithm, we apply the method to analysis the structure of topology to get the edges. This method also provided by OpenCV library(\textbf{findContours} function). It will return a list of the edges, and each edge was presented by a list of points. 
 The parameters used in find contours method are as follows:
 \begin{itemize}
 \item Source: the binary input image (output of Canny algorithm),
@@ -89,7 +96,7 @@ The steps of the method used to fragment the edges as follows:
 \begin{itemize}
 \item Establish a line \textit{``l"} between two endpoints of the edge.
 \item For each point on edge, we compute the perpendicular distance from it to the line \textit{``l"} and keep the point which has the maximum perpendicular distance.
-\item If the maximum perpendicular distance from a point on edge to the line \textit{``l"} is greater than $\alpha$, then the edge is splited at this point. The value chosen for $\alpha$ in the program is 3 ($\alpha = 3$).
+\item If the maximum perpendicular distance from a point on edge to the line \textit{``l"} is greater than $\alpha$, then the edge is splitted at this point. The value chosen for $\alpha$ in the program is 3 ($\alpha = 3$) because this value is enough minimum for stop fragmenting the edge.
 \item Reprocess both parts which was obtained from step 3.
 \item The algorithm continues until all edges fragments are represented.
 \end{itemize}
@@ -132,17 +139,20 @@ Declare a variable: $distance \leftarrow 0$\;
 \end{algorithm}\DecMargin{1em}
 \section{Features description (Pairwise Geometric Histogram)}
 The PGH is represented as two-dimension matrix. An axis presents for angle information (rows) and another presents for perpendicular distance information (columns). Based on the accuracy of requirements, the range of angle and distance axis can be changed. In default, the range of angle axis and distance axis are ($0$ - $\pi$) and 500, respectively.
-\subsection{Local PGH constructor}
-The proceed to construct the local PGH was described in below:
+\subsection{PGH constructor}
+The proceed to construct the PGH was described in below:
 \begin{itemize}
 \item Choose the \textbf{reference line} (other lines called \textbf{object lines}),
 \item For each object line, compute the angle between it and reference line (assigned \textbf{angle}); and the perpendicular distance from two endpoints of object line to reference line (assigned \textbf{dmin} and \textbf{dmax}),
 \item Recording the perpendicular distance and the angle relation between reference line and the object lines into the matrix (PGH histogram). The recording was finished by marking the cells at row \textbf{angle} and from column \textbf{dmin} to column \textbf{dmax}.
 \end{itemize}
+The construction of local PGH and global PGH is the same, the only difference is the global PGH includes many local PGH and they are presented on the same matrix.
+\iffalse
 \subsection{Global PGH constructor}
 The duration to construct the global PGH also similar to local PGH. Especially, the information of all local PGH are presented in the same matrix.
+\fi
 \subsection{PGH matching}
-Follows the analysis, the Bhattacharya metric used to compute the similarity between two models. The models were presented by the global PGH which should be have the same size (width and height). The algorithm to compute the Bhattacharya metric between two models is described as below:\\
+Follows the analysis, the Bhattacharya metric used to compute the similarity between two models. The models were presented by the global PGH which should be have the same size (width and height). The algorithm to compute the Bhattacharya metric between two models is described as below (algorithm \ref{al_bhattacharya}):\\
 \IncMargin{1em}
 \begin{algorithm}[H]
 \Indm 
@@ -169,9 +179,10 @@ $double$ $distance, distance1, distance2$\;
 	}
 }
 \caption{Algorithm to compute the measure metric between 2 PGH using Bhattacharya}
+\label{al_bhattacharya}
 \end{algorithm}
 \DecMargin{1em}~\\
-Besides the Bhattacharya metric, we may choose another metric to find the similarity the histograms, such as: \textbf{Chi-squared} metric and \textbf{Intersection} metric. The forms are presented as below:\\
+Besides the Bhattacharya metric, we may choose another metric to find the similarity the histograms, such as: \textbf{Chi-squared} metric and \textbf{Intersection} metric. The forms are presented as below:\\[0.5cm]
 \textbf{Chi-squared metric:}
 \begin{center}
 \begin{equation}\label{eq:2}
@@ -185,7 +196,7 @@ d_{Intersection} (H_{i}H_{j}) = \sum\limits_{\theta}^{\pi}\sum\limits_{d}^{d_{ma
 \end{equation}
 \end{center}
 The significance of parameters in formula (\ref{eq:2}) and (\ref{eq:3}) are similar to formula (\ref{eq:1}). For the Bhattacharyya and Intersection metric, the perfect match is 1 and the total mismatch is 0. The result is opposite to Chi-squared metric (0 for perfect match and 1 for total mismatch).\\[0.2cm]
-Hence, depending on the purpose of the comparison subject will choose a suitable comparing method. In this program, we propose three methods to obtain a general result when matching the histograms.
+These are two other ways to define metric but as no better result has been obtained. We choose to keep the Bhattacharya metric to match histograms.
 \section{Global pose estimation (Probabilistic Hough Transform)}
 The core of PHT uses vote procedure to find the model's position in the scene image. The process to estimate the model's landmarks on scene image includes the steps as follows:
 \begin{itemize}
@@ -239,7 +250,7 @@ return $refTable$ \;
 \caption{Algorithm to construct the reference table}
 \label{al_refTable}
 \end{algorithm}~\\
-The training process is finished by finding a pair of scene lines agree with a pair of model lines. An accumulator was created to store each agreement between the pair of scene lines and the pair of model lines. For each pair of scene lines, we find its exist in the reference table and increase the value at correspondence position in accumulator. At the end, we obtain a pair of scene lines and pair of model lines correspondence with the maximum value in accumulator. The below algorithms describe the steps to finish the training process (algorithm \ref{al_agreelines}, \ref{al_findalines}, \ref{al_similarlines}):\\[0.2cm]
+The training process is finished by finding a pair of scene lines agree with a pair of model lines. An accumulator was created to store each agreement between the pair of scene lines and the pair of model lines. For each pair of scene lines, we find its exist in the reference table and increase the value at correspondence position in accumulator. At the end, we obtain a pair of scene lines and pair of model lines correspondence with the maximum value in accumulator. The below algorithms describe the steps to finish the training process (algorithm \ref{al_agreelines},  \ref{al_similarlines}):\\[0.2cm]
 \begin{algorithm}[H]
 \Indm 
 \setstretch{1}
@@ -260,6 +271,7 @@ return $false$ \;
 \caption{Algorithm to check the agreement between two pair lines}
 \label{al_agreelines}
 \end{algorithm}~\\[0.2cm]
+\iffalse
 \begin{algorithm}[H]
 \Indm 
 \setstretch{1}
@@ -277,6 +289,7 @@ return $entries$ \;
 \caption{Algorithm to find the agreement of pair scene lines in model}
 \label{al_findalines}
 \end{algorithm}~\\[0.2cm]
+\fi
 \begin{algorithm}[H]
 \Indm 
 \setstretch{1}
@@ -317,7 +330,7 @@ Find the intersection between two parallel lines\;
 \end{algorithm}~\\[0.2cm]
 By finding the reference point, the landmarks in the scene image can be estimated by calculating the relatedness between the reference point and the reference landmarks. Besides, we also record the difference about rotation, orientation and scale between the model image and the scene image.
 \section{Landmarks refinement}
-Refining landmarks is finished by applying the cross-correlation. In this case, the template is a region around each landmark in model image and the image is also a region around the Hough landmark detection (the landmarks estimated in previous stage) in scene image. Hence, to save the processing time, before applying the cross-correlation, the scene image is rotated to match with model. The difference angle between the model image and the scene image obtained from Hough estimate in previous stage.\\[0.2cm]
+Refining landmarks is finished by applying the cross-correlation. In this case, the template is a region around each landmark in model image and the image is also a region around the Hough landmark detection (the landmarks estimated in previous stage) in scene image. Hence, to save the processing time, before applying the cross-correlation, the scene image is rotated to match with model. The angle difference between the model image and the scene image is obtained from Hough estimation in the previous stage.\\[0.2cm]
 For each landmark in the model image, we create a bounding box around the landmarks with an arbitrary size and use landmark as a center point. When create the bounding box, we need to keep the distance between left corner to the landmarks, because sometimes, with the landmark position, the size of bounding box can be over the size of image. Use this box as a \textit{template}. Doing the same with each estimated landmarks on scene image but using a larger size to create the \textit{small image}. Then applying the cross-correlation between \textit{template} and \textit{small image}. The results obtained store the location where the template matches the image. From these position, we indicate the position of each landmark of reference image on scene image. The algorithm to create the bounding box around a landmark is described follows (algorithm \ref{al_boundingbox}):\\[0.2cm]
 \begin{algorithm}[H]
 \Indm 
@@ -342,9 +355,9 @@ return the $box$;
 \caption{Algorithm to create a bounding box around a landmark}
 \label{al_boundingbox}
 \end{algorithm}~\\[0.2cm]
-The below algorithm (algorithm \ref{al_ccross}) describe a method to refine the estimated landmarks on a scene image by using cross-correlation. Remember that, before applying the cross-correlation, the scene image is rotated to match with the model; and the angle used to rotate is the sum of the difference between the scene line and model line to which it matched and the difference between the two pairs of the similar lines.\\
+The below algorithm (algorithm \ref{al_ccross}) describe a method to refine the estimated landmarks on a scene image by using cross-correlation. Remember that, before applying the cross-correlation, the scene image is rotated to match with the model; and the angle used to rotate is the sum of the angle difference between the scene line and model line to which it matched and the angle difference between the two pairs of the similar lines.\\
 Cross correlation method allows us compare the template overlapping the image. When the template slide over each pixel on image, the coefficient between them is calculated and stored in a array.\\[0.2cm]
-After finished correlation, to get the value and the position of the maximum value when we compute the coefficient. This method is used to detect the minimum and maximum value in an array. Beside that, it also output the location where having the minimum and maximum value.\\[0.2cm]
+After finished correlation, we get the value and the position of the maximum value.\\[0.2cm]
 \begin{algorithm}[H]
 \Indm 
 \setstretch{1}
@@ -380,4 +393,6 @@ Rotate the scene matrix with appropriate angle\;
 Return the list of landmarks\;
 \caption{Algorithm to get the position of reference landmarks in scene image}
 \label{al_ccross}
-\end{algorithm}~\\[0.2cm]
+\end{algorithm}~\\
+\section{Summary}
+This chapter has presented the algorithms to implement the Palaniswamy's method. Besides the new operations, we have used the method from OpenCV library. The value of parameters are indicated by experiment. In the next chapter, we describe about the software and our examination based on the two datasets.

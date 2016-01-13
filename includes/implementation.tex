@@ -1,84 +1,58 @@
-\chapter{Realisation and Result}
-This chapter describes the model, the architecture and the modules of MAELAB (Morphometric with Automatically Extraction of Landmarks) software. The first part is description about model as well as the packages in program. Then, we give the modules in program, class diagram and explain about it.
+\chapter{A new software version for Morphometry: MAELAB}
+This chapter describes the model, the architecture and the modules of MAELAB (Morphometry with Automatically Extraction of Landmarks) software. The first part is description about model as well as the packages in program. Then, we give the modules in program, class diagram and explain about it.
 \section{Software architecture and the packages}
-The MAELAB software mainly includes two packages: \textbf{MAgIS} package and \textbf{Morphometry} package. The \textbf{MAgIS} package contains the methods to segment images and construct the interface of program. This package was finished by NGUYEN Hoang Thao. The \textbf{Morphometry} package is the new one, it contains the implementations to estimate landmarks automatically. Besides, we also use the method provides by OpenCV library(OpenCV library) and Qt framework (Qt Framework package) (see in figure \ref{fig:42}).
+The MAELAB software mainly includes two packages: \textbf{MAgIS} package and \textbf{Morphometry} package. The \textbf{MAgIS} package contains the methods to segment images and construct the interface of program. This package was finished by NGUYEN Hoang Thao. The \textbf{Morphometry} package is the new one, it contains the implementations to estimate landmarks automatically. Besides, we also use the methods which are provided by OpenCV library(OpenCV library) and Qt framework (Qt Framework package) (see in figure \ref{fig:42}).
+\section{The hierarchy of software}
+The software includes four main groups of classes corresponding to four processes to estimate the landmarks: \texttt{segmentation}, construction of \texttt{Pairwise Geometric Histogram (PGH)},  construct the \texttt{Probabilistic Hough Transform (PHT)} and \texttt{landmark refinement}. Besides, we have the classes to present the image which used as common classes. Figure \ref{fig:41} shows the hierarchy of classes that used in software (figure \ref{fig:41}).\\
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{./images/packages}
+\includegraphics[width=0.7\textwidth]{./images/packages}
 \caption{The packages of program}
 \label{fig:42}
 \end{figure}~\\
-
-\section{The modules of software}
-The software includes four main modules corresponding to four processes to estimate the landmarks: segmentation module, pairwise geometric histogram (PGH) module, probabilistic Hough transform (PHT) module and landmark detection module. Besides, the environment module provides the common classes. The classes in environment module can be used in all modules of software (figure \ref{fig:41}).
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\textwidth]{./images/modules}
-\caption{The modules of program with main classes}
+\caption{Architecture of Morphometry module}
 \label{fig:41}
 \end{figure}
-\subsection*{Environment module}
+\subsection*{Common classes}
 Environment module contains the classes used to describe the information presented for object in image: \texttt{Image}, \texttt{Edge}, \texttt{Line}. The classes in this module can be used for all modules in MAELAB.
 \begin{itemize}
 \item The \texttt{Line} class descibes the information of a straight line and its method, such as: get the length of line, compute the perpendicular distance from a point to line, find the intersection between two lines, compute the angle between two lines, find the parallel line with this line.
 \item The \texttt{Edge} class uses to present a curve and the methods with edge. An edge can be presented by a list of lines or a list of points. The important methods in \texttt{Edge} class are \texttt{breakEdge()} and \texttt{segment()} method. It used to break the edge into approximate lines based on the list of point constructed edge.
 \item The \texttt{Image} class presents the information of an image such as file name, list of edge extracted from it. Besides, \texttt{Image} class also provides the methods to get the file name of image, compute the histogram of image, get the PGH of image, read its landmarks from a file, etc.
 \end{itemize}
-\subsection{Segmentation module}
-The segmentation module implements the pre-process image and extracts the edges from image. The main classes in this module includes \texttt{SegmentMethod} class and \texttt{EdgeSegmentation} class. \texttt{SegmentMethod} class is designed as an abstract class of segmentation, this is the connecting port between this module and other modules. Class \texttt{EdgeSegmentation} extends from \texttt{SegmentMethod}, it implements the method to pre-process and extract the features from image by using the support methods from the \textit{environment} classes. Besides, \texttt{EdgeSegmentation} class also provide the access methods for other classes. The methods in \texttt{Edge segmentation} includes:
-\begin{itemize}
-\item Extract the approximate lines of object in an image,
-\item Extract the approximate lines of object in each image in a folder.
-\end{itemize}
-\subsection{PGH module}
-The PGH module provides the ways to implement the constructor of PGH and compute the measure metric between PGHs. In PGH module, class \texttt{HistogramMethod} is a abstract class, it provides the method to construct the PGH of an image. Its methods was implemented in \texttt{GeometricHistogram} class (\texttt{GeometricHistogram} extends from \texttt{HistogramMethod}). Basically, the method to construct the PGH come from other classes. Class \texttt{GeometricHistogram} uses these methods to finish the implementation from abstract class. In addition, \texttt{GeometricHistogram} also provides different methods in PGH such as: compute the measure metric by Bhattacharya metric, Chi-squared metric or Intersection metric; change the accuracy of PGH.\\
+\subsection{Segmentation classes}
+The segmentation module implements the pre-process image and extracts the edges from image. The main classes in this module includes \texttt{SegmentMethod} class and \texttt{EdgeSegmentation} subclass. \texttt{SegmentMethod} class is designed as an abstract class of segmentation, this is the connecting port between this module and other modules. Class \texttt{EdgeSegmentation} extends from \texttt{SegmentMethod}, it implements the method to pre-process and extract the features from image by using the support methods from the \textit{environment} classes. The methods in \texttt{Edge segmentation} is able to treat one image or all images over in a folder.
+\subsection{Pairwise Geometric Histogram classes}
+The PGH module provides the ways to construct the PGH and compute the measure metric between PGHs. In PGH module, class \texttt{HistogramMethod} is a abstract class, it provides the method to construct the PGH of an image. Its methods was implemented in \texttt{GeometricHistogram} class (\texttt{GeometricHistogram} extends from \texttt{HistogramMethod}). \texttt{GeometricHistogram} class also provides different methods such as: compute the measure metric by Bhattacharya metric, Chi-squared metric or Intersection metric; change the accuracy of PGH.\\
 In detail, the classes used to construct the PGH and compare the measurement of them includes:
 \begin{itemize}
-\item \texttt{GFeatures} class contains the relative information of the objects in PGH such as angle, minimum distance and maximum distance. It provides the methods to get and set the relative information.
-\item \texttt{LocalHistogram} class is constructed to contain the information when computing the PGH of a line in object. The chosen lines as reference lines, the local histogram is constructed based on recording the relating between reference line and other lines in object. Besides, it has the methods for the user to change the accuracy, such as the angle accuracy or the distance accuracy.
-\item \texttt{ShapeHistogram} class constructs the PGH for an object. It is constructed by on combing all PGH of the lines in an object. It also provides the methods to compute the measured distance between the pairwise geometric histograms by a matching method. The methods in this class includes:
+\item \texttt{GFeatures} class contains the relative information of the objects in PGH such as angle, minimum distance and maximum distance.
+\item \texttt{LocalHistogram} class is constructed to contain the information when computing the PGH of a line in object. The local histogram is constructed based on recording the relating between reference line and other lines in object. Besides, it has the methods for the user to change the accuracy, such as the angle accuracy or the distance accuracy.
+\item \texttt{ShapeHistogram} class constructs the PGH for an object. It is constructed by on combining all PGHs of the lines in an object. It also provides the methods to compute the measured distance between the pairwise geometric histograms by a matching method. The methods in this class include:
 \begin{itemize}
 \item Construct the PGH for an image,
 \item Construct the matrix to save the PGH result,
 \item Compute the measured distance between the two PGHs based on \textit{Bhattacharyya}, \textit{Chi-Squared} or \textit{Intersection} metric.
 \end{itemize}
-\item \texttt{GeometricHistogram} class provides the access ways for other classes. By usign this class, user can compute the pairwise geometric histogram of an image and calculate the distance between the pairwise geometric histograms.
+\item \texttt{GeometricHistogram} class provides the access ways for other classes. By using this class, user can compute the pairwise geometric histogram of an image and calculate the distance between the pairwise geometric histograms.
 \end{itemize}
-\subsection{PHT module}
-PHT module finishes the works in estimation stage. The main methods of PHT module stay in \texttt{PHoughTransform} class. It is a class extended from \texttt{HoughTransform} class, an abstract class. Besides the method extends from abstract class, \texttt{PHoughTransform} also implements the methods when we apply the probabilistic Hough transform as described in previous chapters.\\
+\subsection{Probabilistic Hough Transform classes}
+PHT module finishes the works in estimation stage. The main methods of PHT module stay in \texttt{PHoughTransform} class. It is a class extended from \texttt{HoughMethod} class, an abstract class. Besides the method extends from abstract class, \texttt{PHoughTransform} also implements the methods when we apply the probabilistic Hough transform as described in previous chapters.\\
 The classes use PHT to estimate the model image from a scene image as follow:
 \begin{itemize}
 \item \texttt{HoughSpace} class contains the information about the angle and distance from a line to a reference point. These information is recorded to construct the accumulator when we apply the Probabilistic Hough Transform.
 \item \texttt{PHTEntry} class presents each entry when constructing the reference table in the training process. Each entry contains the pair of lines and its information about angle and distance to a reference point.
-\item \texttt{PHoughTransform} class describes the main process when we apply the probabilistic hough transform to estimate the landmarks. It includes the methods to construct the reference table, find the reference point in scene image and estimate the landmarks. Besides, it also provides the methods to estimated the landmarks of an image on the directory of images.
+\item \texttt{PHoughTransform} class describes the main process when we apply the probabilistic hough transform to estimate the landmarks. It includes the methods to construct the reference table, find the reference point in scene image and estimate the landmarks.
 \end{itemize}
-\subsection{Landmark detection module}
-The landmark detection module used to implement the methods to refine the estimated landmarks from estimation stage. It includes an abstract class, \texttt{LandmarkMethod}, and an implement class which extends from abstract class, \texttt{LandmarkDetection} class. \texttt{LandmarkDetection} class implements the methods to refine the estimated landmarks and compare the accuracy between the estimated landmarks and manual landmarks.
+\subsection{Landmark refinement classes}
+The landmark detection module used to implement the methods to refine the estimated landmarks from estimation stage. It includes an abstract class, \texttt{LandmarkMethod}, and an implement class which extends from abstract class, \texttt{LandmarkDetection} class. \texttt{LandmarkDetection} class implements the methods to refine the estimated landmarks and to evaluate compare the accuracy between the estimated landmarks and manual landmarks.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\iffalse
-The figure \ref{fig:43} shows class diagram of this software. The \textbf{main} methods located in the \texttt{ImageViewer} class, where contains all functions of the software and connects with the \textbf{MAgIS} package. The connecting between the software and the modules made via \texttt{Scenario} class. To represent the information of image, we use the classes: \texttt{Line}, \texttt{Edge}, \texttt{Image}. For each main modules in program, we have the abstract classes, implementation classes and the support classes. \\
-\begin{figure}[h!]
-\centering
-\includegraphics[width=1.1\textwidth]{./images/main}
-\caption{The class diagram of program}
-\label{fig:43}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{The abstract classes}
-The abstract classes contains the abstract methods correspondence with the main modules of program. They provide the abstract methods which was implemented in the inherit classes. As introduce in previous section, the abstract classes include: \texttt{HistogramMethod} class, \texttt{SegmentMethod} class, \texttt{HoughMethod} class, \texttt{LandmarkMethod} class.
-
-\subsection{Pairwise Geometric Histogram}
-
-\subsection{Estimate the global pose (Probabilistic Hough Transform)}
-
-\subsection{Refine the landmarks}
-\texttt{LandmarkDetection} class provides the methods to refine the estimated landmarks by probabilistic Hough transform. It also implements the cross-correlation technique to match the model and the image and provides the methods to compare the estimated result with the original result (by comparing distance between the landmarks).
-\fi
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Examination}
-As presentation about our result, this section introduces MAELAB software, the parameters used in execution and the discussion about the result. All these results have been obtained with the set of left mandibles and right mandibles of the beetle (each set includes 293 images).
-\subsection{New interface}
-All parts of the new code are integrated into MorphoEcol\footnote{Morphometry in Ecologie} software. To focus on the main functions available to compute landmarks, we refactor the interface of program to dedicate the methods that we have presented (figure \ref{fig:44}).
+\subsection{MAELAB interface}
+As presentation about our result, this section introduces MAELAB software, the parameters used in execution and the discussion about the result. All these results have been obtained with the set of left mandibles and right mandibles of the beetle (each set includes 293 images).\\
+All parts of the new code are integrated into IPM\footnote{Image Processing for Morphometrics} software. To focus on the main functions available to compute landmarks, we refactor the interface of program to dedicate the methods that we have presented (figure \ref{fig:44}).
 In the new interface of program, the users can find the functions in MAELAB software are:
 \begin{itemize}
 \item Menu \textbf{File} contains the functions to open the source image, print the image, save the image and close the program,
@@ -110,13 +84,13 @@ In the new interface of program, the users can find the functions in MAELAB soft
 \end{figure}
 \fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Experimentation}
+\section{Experimentation}
 The experimentation is deployed on two machines with difference equipment:
 \begin{itemize}
 \item Machine 1: Intel(R) Core(TM) 2 Duo CPU T8100 2.1GHz, 2 GB of RAM
 \item Machine 2: Intel(R) Core(TM) i7-4790 CPU 3.6GHz, 16 GB of RAM
 \end{itemize}
-The testing data is two set of biological images: \textit{right mandible and left mandible}. Each dataset includes 293 images(3264 x 2448). However, the data was filtered by suppressing the bad images in the both datasets. The bad images includes the empty images and broken images (images contain the broken object). They are showed as below:
+The testing data is two set of biological images: \textit{right mandible and left mandible}. Each dataset includes 293 images(3264 x 2448). However, the data was filtered by suppressing the bad images in the both datasets. The bad images includes the empty images and broken images (images contain the broken object). This is the list of non-considered images:
 \begin{multicols}{3}
 \begin{itemize}
 \item Md 004.JPG
@@ -131,34 +105,22 @@ The testing data is two set of biological images: \textit{right mandible and lef
 \item Mg 292.JPG
 \end{itemize} 
 \end{multicols}
-Because the estimation method has several steps, we decide focus on some steps of method, such as segmentation and estimation. For each step, we compute the execution time on one image and a list of images. Then we compare the runtime between two examination systems (see in table \ref{table_runtime1} and table \ref{table_runtime2}).
-
-Machine 1:
+So, we have 290 right mandible and 286 left mandible images available. Because the implementation of method has several steps, we decide focus on some steps of method, such as segmentation and estimation. For each step, we compute the execution time on one image and a list of images. Then we compare the runtime between two examination systems (see in table \ref{table_runtime}).
 \begin{table}[h]
 	\centering
-	\begin{tabular}{|c|c|c|}
+	\begin{tabular}{|c|c|c|c|}
 		\hline
-		No of images & Segmentation(second) & Estimation(second) \\ \hline
-		1 & 0.844 & 31.4245   \\ \hline
-		290 & 571.576 & 13000.9131   \\ \hline
+		Machine & No of images & Segmentation(second) & Estimation(second) \\ \hline
+		Machine 1 & 1 & 0.844 & 31.4245   \\ \hline
+		Machine 2 & 1 & 0.27782 & 10.4392 \\ \hline
+		Machine 1 & 290 & 571.576 & 13000.9131   \\ \hline
+		Machine 2 & 286 & 171.589 & 4665.79\\ \hline
 	\end{tabular}	
-	\caption{The runtime of program on machine 1}		
-	\label{table_runtime1}
+	\caption{The runtime of program on two machine}		
+	\label{table_runtime}
 \end{table}
-
-Machine 2:
-\begin{table}[h]
-	\centering
-	\begin{tabular}{|c|c|c|}
-		\hline
-		No of images & Segmentation(second) & Estimation(second) \\ \hline
-		1 & 0.27782 & 10.4392   \\ \hline
-		286 & 171.589 & 4665.79   \\ \hline
-	\end{tabular}
-	\caption{The runtime of program on machine 2}
-	\label{table_runtime2}
-\end{table}
-Based on the runtime tables, the most of runtime stays in stage of estimation. This is the time to execute two steps: estimated landmarks (by PHT) and refine landmarks (by template matching). Hence, it also depend on the configuration of system.
+The segmentation and estimation are two main stages in the method. Based on its runtime, we can improve the program to enhance the speed of program. Based on the runtime tables, the most of runtime stays in stage of estimation. This is the time to execute two steps: estimated landmarks (by PHT) and refine landmarks (by template matching). With a list of 290 images, if we indicate the landmarks manually, it will take a bit of time. But when we use the program, we save the time to indicate the landmarks on the images. Hence, it also depend on the configuration of system.\\[0.2cm]
+Besides calculating the runtime, we also evaluate the accuracy of software by compare the centroid size between the manual landmarks and automated landmarks. The manual landmarks have indicated by the biologist. They indicated 18 landmarks for each right mandible and 16 landmarks for left mandible.
 \subsection{Parameters}
 In our program, we use these parameters for the methods:
 \begin{itemize}
@@ -181,24 +143,34 @@ The conditions to predicate two pairs of lines are similar (used in method \text
 To increase the flexible of program, all parameters was placed in the resources files (\textbf{data/resources} folder). For each group of parameters, the parameters are put in a file.
 \end{itemize}
 \subsection{Results}
-The automated landmark identification is examined on two data sets: \textit{right mandible and left mandible}. And the landmarks are extracted: 18 landmarks for each \textit{right mandible} image, 16 landmarks for each \textit{left mandible} image.
+The automated landmark identification is examined on two data sets: \textit{right mandible and left mandible}. And the landmarks are extracted: 18 landmarks for each \textit{right mandible} image, 16 landmarks for each \textit{left mandible} image. The automated landmarks are indicated based on the learning from the manual landmarks of model image.
 \begin{figure}[h!]
 \centering
-\subfloat[The scene image]{\label{fig:461}\includegraphics[width=0.45\textwidth]{./images/md32}}\\
-\subfloat[The scene image with estimated landmarks by cross-correlation ]{\label{fig:462}\includegraphics[width=0.45\textwidth]{./images/md32_cross}}~~
-\subfloat[The scene image with estimated landmarks (by article) ]{\label{fig:463}\includegraphics[width=0.45\textwidth]{./images/est32}}
-\caption{Automatic identification of the landmarks}
+\includegraphics[width=0.7\textwidth]{./images/est32}
+\caption{Automated landmarks indicated by Palaniswamy's method}
 \label{fig:46}
 \end{figure}~\\
-To have the basic evaluation about this method, we compare its result with the result from \textbf{``original"} of cross-correlation method. Obvious, the location of landmarks obtained from method (follows article) more closer than the landmarks obtained from cross-correlation (see in figure \ref{fig:46}).\\
+Figure \ref{fig:46} shows an result after applying the Palaniswamy's method to indicate the landmarks automatically. In this example, we use image \textit{Md 028.JPG} as the model image and image \textit{Md 032.JPG} used as the scene image.\\
 \begin{figure}[h!]
 \centering
-\subfloat[The chart presents the accuracy between manual and automated landmarks on right mandible]{\label{fig:471}\includegraphics[width=0.45\textwidth]{./images/MdChart}}~~
-\subfloat[The chart presents the accuracy between manual and automated landmarks on left mandible]{\label{fig:472}\includegraphics[width=0.45\textwidth]{./images/MgChart}}
-\caption{The chart presents the accuracy between manual and automated landmarks}
-\label{fig:47}
+\includegraphics[width=0.7\textwidth]{./images/md32_cross}
+\caption{Automated landmarks indicated by cross-correlation method}
+\label{fig:461}
 \end{figure}
-Besides, the accuracy of the system can be determined by comparing the differences(in pixels) between the landmarks located by this method and the manual landmarks which was indicated manually by the biologist. The charts in the image \ref{fig:47} show the comparison between the manual and automated landmarks on two sets of data (\textit{right mandible, left mandible}). The \textbf{blue} line describes the size of the manual landmarks on set of images. The \textbf{orange} line presents for the size of the automated landmarks by software. It is clearly that the automated landmarks is near with the manual landmarks (about 5\% is exactly, 75\% is near and 20\% is far). Based on the processes, this method has to pass several steps, the result of each step will effect on next steps. Thus, to evaluate the accuracy of this method, we can evaluate the result of each step.
-\subsection{Limits and future works}
-The method includes several steps to get the last result. At each step, we can use different ways to do. The methods proposed in this report just a part of them. Moreover, the program has use the parameters as the conditions, changing the values of parameters can effected to the accuracy of program.
-Currently, the work finishes on two sets of data: \textit{right mandible} and \textit{left mandible}. In the future, we can evaluate and improve this method. Then applying this method on other dataset of biological images.
+To have the basic evaluation about this method, we compare its result with the result from \textbf{``original"} of cross-correlation method. Obvious, the location of landmarks obtained from method (follows article) more closer than the landmarks obtained from cross-correlation (see in figure \ref{fig:461}).
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.85\textwidth]{./images/MdChart}
+\caption{The chart presents the accuracy between manual and automated landmarks on right mandible}
+\label{fig:47}
+\end{figure}~\\
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.85\textwidth]{./images/MgChart}
+\caption{The chart presents the accuracy between manual and automated landmarks on left mandible}
+\label{fig:48}
+\end{figure}~\\
+Besides, the accuracy of the system can be determined by comparing the differences(in pixels) between the landmarks located by this method and the manual landmarks which was indicated manually by the biologist. The charts in the image \ref{fig:47} and \ref{fig:48} show the comparison between the manual and automated landmarks on two sets of data (\textit{right mandible, left mandible}). The \textbf{blue} line describes the size of the manual landmarks on set of images. The \textbf{orange} line presents for the size of the automated landmarks by software. It is clearly that the automated landmarks is near with the manual landmarks (about 5\% is exactly, 75\% is near and 20\% is far). Based on the processes, this method has to pass several steps, the result of each step will effect on next steps. Thus, to evaluate the accuracy of this method, we can evaluate the result of each step.
+\section{Summary}
+This chapter has presented the implementation and examination of MAELAB on two list of images \textit{(left mandible and right mandible)}. The obtaining results can be replace for the manual landmarks to compute the centroid of the image and classify the images. However, in some case, the location of automated landmarks is so far to the location of manual landmarks.\\[0.2cm]
+The method includes several steps to obtain the last result. At each step, we can use different ways to do. The methods proposed in this report just a part of them. Moreover, the program has use the parameters as the conditions, changing the values of parameters can effected to the accuracy of program.

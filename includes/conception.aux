@@ -1,44 +1,53 @@
 \relax 
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Conception}{19}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Algorithm to implement Palaniswamy's method}{19}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}Features extraction}{19}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Image preprocessing}{19}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Algorithm to get the threshold value and pre-process image\relax }}{20}}
-\newlabel{al_preprocess}{{1}{20}}
+\newlabel{fig:seg_211}{{3.1a}{20}}
+\newlabel{sub@fig:seg_211}{{(a)}{a}}
+\newlabel{fig:seg_212}{{3.1b}{20}}
+\newlabel{sub@fig:seg_212}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Example about noises in image\relax }}{20}}
+\newlabel{fig:31}{{3.1}{20}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Image with noise}}}{20}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Image without noises}}}{20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Analysis the histogram of image\relax }}{20}}
+\newlabel{fig:32}{{3.2}{20}}
 \citation{palaniswamy2010automatic}
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Algorithm to get the threshold value and pre-process image\relax }}{21}}
+\newlabel{al_preprocess}{{1}{21}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Edges extraction}{21}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Edge fragmentation}{22}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Algorithm to segment an edge into approximate lines\relax }}{22}}
-\newlabel{app_lines}{{2}{22}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Algorithm to segment an edge into approximate lines\relax }}{23}}
+\newlabel{app_lines}{{2}{23}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Features description (Pairwise Geometric Histogram)}{23}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Local PGH constructor}{23}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Global PGH constructor}{23}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}PGH matching}{23}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}PGH constructor}{23}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}PGH matching}{24}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {3}{\ignorespaces Algorithm to compute the measure metric between 2 PGH using Bhattacharya\relax }}{24}}
-\newlabel{eq:2}{{3.1}{24}}
-\newlabel{eq:3}{{3.2}{24}}
+\newlabel{al_bhattacharya}{{3}{24}}
+\newlabel{eq:2}{{3.1}{25}}
+\newlabel{eq:3}{{3.2}{25}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}Global pose estimation (Probabilistic Hough Transform)}{25}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Training process}{25}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Training process}{26}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {4}{\ignorespaces Algorithm to consider the closest lines\relax }}{26}}
 \newlabel{al_closestlines}{{4}{26}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {5}{\ignorespaces Algorithm to construct the reference table\relax }}{26}}
 \newlabel{al_refTable}{{5}{26}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {6}{\ignorespaces Algorithm to check the agreement between two pair lines\relax }}{27}}
 \newlabel{al_agreelines}{{6}{27}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {7}{\ignorespaces Algorithm to find the agreement of pair scene lines in model\relax }}{27}}
-\newlabel{al_findalines}{{7}{27}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {8}{\ignorespaces Algorithm to find similar pairs between model image and scene image\relax }}{27}}
-\newlabel{al_similarlines}{{8}{27}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Estimation process}{28}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {9}{\ignorespaces Algorithm to find position of model reference point in scene image\relax }}{28}}
-\newlabel{al_refPointScene}{{9}{28}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {7}{\ignorespaces Algorithm to find similar pairs between model image and scene image\relax }}{27}}
+\newlabel{al_similarlines}{{7}{27}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Estimation process}{27}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {8}{\ignorespaces Algorithm to find position of model reference point in scene image\relax }}{28}}
+\newlabel{al_refPointScene}{{8}{28}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.4}Landmarks refinement}{28}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {10}{\ignorespaces Algorithm to create a bounding box around a landmark\relax }}{29}}
-\newlabel{al_boundingbox}{{10}{29}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {11}{\ignorespaces Algorithm to get the position of reference landmarks in scene image\relax }}{30}}
-\newlabel{al_ccross}{{11}{30}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {9}{\ignorespaces Algorithm to create a bounding box around a landmark\relax }}{29}}
+\newlabel{al_boundingbox}{{9}{29}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {10}{\ignorespaces Algorithm to get the position of reference landmarks in scene image\relax }}{30}}
+\newlabel{al_ccross}{{10}{30}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Summary}{30}}
 \@setckpt{includes/conception}{
 \setcounter{page}{31}
 \setcounter{equation}{2}
@@ -46,22 +55,22 @@
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
 \setcounter{enumiv}{0}
-\setcounter{footnote}{0}
+\setcounter{footnote}{1}
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
 \setcounter{chapter}{3}
-\setcounter{section}{4}
+\setcounter{section}{5}
 \setcounter{subsection}{0}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{0}
+\setcounter{figure}{2}
 \setcounter{table}{0}
 \setcounter{AM@survey}{0}
 \setcounter{AlgoLine}{26}
-\setcounter{algocfline}{11}
-\setcounter{algocfproc}{11}
-\setcounter{algocf}{11}
+\setcounter{algocfline}{10}
+\setcounter{algocfproc}{10}
+\setcounter{algocf}{10}
 \setcounter{ALC@unique}{0}
 \setcounter{ALC@line}{0}
 \setcounter{ALC@rem}{0}

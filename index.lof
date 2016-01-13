@@ -15,19 +15,20 @@
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Example about geometric features and the pairwise geometric histogram\cite {palaniswamy2010automatic}\relax }}{13}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The geometric relationship between two lines}}}{13}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The pairwise geometric histogram }}}{13}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces The landmarks estimated by probabilistic Hough transform\relax }}{16}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces The landmarks estimated by Probabilistic Hough Transform\relax }}{16}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The model image}}}{16}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image }}}{16}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Example about noises in image\relax }}{20}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Image with noise}}}{20}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Image without noises}}}{20}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Analysis the histogram of image\relax }}{20}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces The packages of program\relax }}{31}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces The modules of program with main classes\relax }}{32}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The packages of program\relax }}{32}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Architecture of Morphometry module\relax }}{32}
 \contentsline {figure}{\numberline {4.3}{\ignorespaces The graphic user interface of MAELab software\relax }}{36}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Automatic identification of the landmarks\relax }}{39}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The scene image}}}{39}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The scene image with estimated landmarks by cross-correlation }}}{39}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {The scene image with estimated landmarks (by article) }}}{39}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces The chart presents the accuracy between manual and automated landmarks\relax }}{39}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The chart presents the accuracy between manual and automated landmarks on right mandible}}}{39}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The chart presents the accuracy between manual and automated landmarks on left mandible}}}{39}
-\contentsline {figure}{\numberline {6}{\ignorespaces An example about histogram\relax }}{44}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Automated landmarks indicated by Palaniswamy's method\relax }}{39}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Automated landmarks indicated by cross-correlation method\relax }}{39}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces The chart presents the accuracy between manual and automated landmarks on right mandible\relax }}{40}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces The chart presents the accuracy between manual and automated landmarks on left mandible\relax }}{40}
+\contentsline {figure}{\numberline {8}{\ignorespaces An example about histogram\relax }}{45}
