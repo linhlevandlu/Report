@@ -42,6 +42,6 @@
 \contentsline {section}{\numberline {4.3}Experimentation}{35}
 \contentsline {subsection}{\numberline {4.3.1}Parameters}{37}
 \contentsline {subsection}{\numberline {4.3.2}Results}{38}
-\contentsline {section}{\numberline {4.4}Summary}{40}
+\contentsline {section}{\numberline {4.4}Summary}{41}
 \contentsline {chapter}{Conclusion}{42}
 \contentsline {chapter}{Bibliography}{44}
