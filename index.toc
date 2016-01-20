@@ -11,13 +11,13 @@
 \contentsline {subsection}{\numberline {2.2.3}Edge segmentation}{12}
 \contentsline {section}{\numberline {2.3}Pairwise Geometric Histogram}{12}
 \contentsline {subsection}{\numberline {2.3.1}Local pairwise geometric histogram}{13}
-\contentsline {subsection}{\numberline {2.3.2}Global pairwise geometric histogram}{13}
+\contentsline {subsection}{\numberline {2.3.2}Global pairwise geometric histogram}{14}
 \contentsline {subsection}{\numberline {2.3.3}Histogram matching}{14}
 \contentsline {section}{\numberline {2.4}Probabilistic Hough Transform}{14}
 \contentsline {subsection}{\numberline {2.4.1}Training process}{15}
 \contentsline {subsection}{\numberline {2.4.2}Estimating process}{15}
 \contentsline {section}{\numberline {2.5}Template matching}{16}
-\contentsline {section}{\numberline {2.6}Summary}{17}
+\contentsline {section}{\numberline {2.6}Summary}{18}
 \contentsline {chapter}{\numberline {3}Algorithm to implement Palaniswamy's method}{19}
 \contentsline {section}{\numberline {3.1}Features extraction}{19}
 \contentsline {subsection}{\numberline {3.1.1}Image preprocessing}{19}

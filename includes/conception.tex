@@ -67,7 +67,7 @@ The edges extraction are finished follows two steps:
 \item Edge extraction by applying Canny algorithm
 \item Edge retrieve by applying function to get the contours.
 \end{itemize} 
-The threshold value used in Canny algorithm is the value used in the previous step (pre-process image), and the ratio between lower threshold and upper threshold is 1 : 3 (follows the article \cite{palaniswamy2010automatic} but have to be modified).
+The threshold value used in Canny algorithm is the value used in the previous step (pre-process image), and the ratio between lower threshold and upper threshold is 1 : 3 (follows Canny recommended a lower and upper ratio, this value is different with the suggest value in the article).
 
 \iffalse
  This operation used from OpenCV library. The values provide for the parameters in Canny\footnote{http://docs.opencv.org/modules/imgproc/doc/feature\_detection.html\#canny} operator are:
